@@ -22,18 +22,9 @@ Built with [whiskers](https://whiskers.catppuccin.com): the palette is a
 `--color-overrides` file applied to the upstream `mocha` slot of each port's
 template, so ports stay in sync with Catppuccin upstream and only the colors change.
 
-<!-- S17 — loud-vs-right: same file in bat, upstream Mocha vs Nebelung (assets/loud-vs-right.webp) -->
-<div align="center">
-<img src="./assets/loud-vs-right.webp" alt="the same Rust file in bat: upstream Catppuccin Mocha (blue-tinted neutrals) beside Nebelung (silver-grey neutrals, calmed accents)" width="900">
-<br>
-<sub>the same file in <code>bat</code> — upstream <b>Catppuccin Mocha</b> (blue in every neutral) beside <b>Nebelung</b> (pure neutral grey, calmed accents).</sub>
-</div>
-
 ## Preview
 
-[![the nebelung palette — 14 calmed accents, the pure-grey neutral ramp, and editor + terminal mockups](./assets/preview.png)](https://htmlpreview.github.io/?https://github.com/nebelhaus/nebelung/blob/main/preview/nebelung.html)
-
-<sub>▶ **[open the interactive preview](https://htmlpreview.github.io/?https://github.com/nebelhaus/nebelung/blob/main/preview/nebelung.html)** — the live swatch board + editor/terminal mockups, rendered straight from [`preview/nebelung.html`](preview/nebelung.html).</sub>
+▶ **[open the interactive preview](https://htmlpreview.github.io/?https://github.com/nebelhaus/nebelung/blob/main/preview/nebelung.html)** — the live swatch board + editor/terminal mockups, rendered straight from [`preview/nebelung.html`](preview/nebelung.html).
 
 ## Layout
 
