@@ -30,6 +30,20 @@
         builtins.fromJSON (builtins.readFile ./palette/nebelung.hex.json)
       );
 
+      # Every variant, by name, in the same name -> "#hex" shape. `palette`
+      # above stays the default one so existing consumers are untouched; a
+      # consumer that wants to follow a contrast setting reads from here.
+      # Rendered port files live under the matching subdir of the themes
+      # package (dist/ for the default, dist/high-contrast/ for the variant).
+      palettes = {
+        nebelung = builtins.mapAttrs (_: v: "#${v}") (
+          builtins.fromJSON (builtins.readFile ./palette/nebelung.hex.json)
+        );
+        nebelung-high-contrast = builtins.mapAttrs (_: v: "#${v}") (
+          builtins.fromJSON (builtins.readFile ./palette/nebelung-high-contrast.hex.json)
+        );
+      };
+
       # `nix flake check` runs these — the same palette unit tests + shellcheck
       # that CI's `unit` job runs, so local check == CI without pushing.
       checks = forSystems (
@@ -85,7 +99,7 @@
               mkdir -p "$out/preview"
               cp -R dist/. "$out/"
               cp preview/nebelung.html "$out/preview/"
-              cp palette/nebelung.json palette/nebelung.hex.json "$out/"
+              cp palette/nebelung*.json "$out/"
               runHook postInstall
             '';
           };

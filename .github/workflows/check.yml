@@ -24,7 +24,7 @@ jobs:
           done < <(cd dist && find . -type f)
           while IFS= read -r f; do
             [ -f "dist/$f" ] || { echo "::error::dist/$f is missing (rendered but not committed)"; fail=1; }
-          done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung.json' -not -name 'nebelung.hex.json')
+          done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung*.json')
           [ "$fail" = 0 ] && echo "dist/ is in sync"
           exit "$fail"
 

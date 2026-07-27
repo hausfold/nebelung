@@ -1,0 +1,128 @@
+
+themes {
+    nebelung {
+        text_unselected {
+            base "#ffffff"
+            background "#040404"
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            // emphasis_2 is the key-letter color in the mode keybind rows (the
+            // row after ctrl+p): yellow to match the ribbon key accent.
+            emphasis_2 "#f7e2b5"
+            emphasis_3 "#f2c4e5"
+        }
+        text_selected {
+            base "#ffffff"
+            background "#575757"
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        ribbon_selected {
+            base "#040404"
+            background "#abe1a6"
+            emphasis_0 "#ed8fa9"
+            emphasis_1 "#f5b58e"
+            emphasis_2 "#f2c4e5"
+            emphasis_3 "#8db4f3"
+        }
+        ribbon_unselected {
+            // Every inactive ribbon pill in the status bar — the left mode
+            // indicators (lock/pane/tab/…), the keybind-row labels, AND the
+            // bottom-right quick hints — reads the same greyed-out look as the
+            // inactive top tabs: dark text on a medium-grey fill, with a yellow
+            // key letter (emphasis_0) that stays readable on the grey.
+            base "#040404"
+            background "#737373"
+            emphasis_0 "#f7e2b5"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        table_title {
+            base "#abe1a6"
+            background 0
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        table_cell_selected {
+            base "#ffffff"
+            background "#575757"
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        table_cell_unselected {
+            base "#ffffff"
+            background "#040404"
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        list_selected {
+            base "#ffffff"
+            background "#575757"
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        list_unselected {
+            base "#ffffff"
+            background "#040404"
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#abe1a6"
+            emphasis_3 "#f2c4e5"
+        }
+        frame_selected {
+            base "#abe1a6"
+            background 0
+            emphasis_0 "#f5b58e"
+            emphasis_1 "#91dbe8"
+            emphasis_2 "#f2c4e5"
+            emphasis_3 0
+        }
+        frame_highlight {
+            base "#f5b58e"
+            background 0
+            emphasis_0 "#f2c4e5"
+            emphasis_1 "#f5b58e"
+            emphasis_2 "#f5b58e"
+            emphasis_3 "#f5b58e"
+        }
+        exit_code_success {
+            base "#abe1a6"
+            background 0
+            emphasis_0 "#91dbe8"
+            emphasis_1 "#040404"
+            emphasis_2 "#f2c4e5"
+            emphasis_3 "#8db4f3"
+        }
+        exit_code_error {
+            base "#ed8fa9"
+            background 0
+            emphasis_0 "#f7e2b5"
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
+        multiplayer_user_colors {
+            player_1 "#f2c4e5"
+            player_2 "#8db4f3"
+            player_3 0
+            player_4 "#f7e2b5"
+            player_5 "#91dbe8"
+            player_6 0
+            player_7 "#ed8fa9"
+            player_8 0
+            player_9 0
+            player_10 0
+        }
+    }
+}

@@ -26,22 +26,29 @@ fi
 # templates) don't wipe each other.
 rm -rf dist
 
-count=0
-while IFS='|' read -r name template outdir; do
-  name="$(echo "$name" | xargs)"
-  [[ -z "$name" || "$name" == \#* ]] && continue
-  template="$ROOT/$(echo "$template" | xargs)"
-  outdir="dist/$(echo "$outdir" | xargs)"
+# render_ports <palette-file> <dist-root>
+render_ports() {
+  local palette="$1" root_out="$2" name template outdir produced
+  count=0
+  while IFS='|' read -r name template outdir; do
+    name="$(echo "$name" | xargs)"
+    [[ -z "$name" || "$name" == \#* ]] && continue
+    template="$ROOT/$(echo "$template" | xargs)"
+    outdir="$root_out/$(echo "$outdir" | xargs)"
 
-  if [[ ! -f "$template" ]]; then
-    echo "✗ $name: template not found ($template) — skipping"; continue
-  fi
-  mkdir -p "$outdir"
-  ( cd "$outdir" && whiskers "$template" -f "$FLAVOR" --color-overrides "$PALETTE" >/dev/null )
-  produced="$(find "$outdir" -type f | sed "s|^$outdir/||" | paste -sd' ' - | cut -c1-80)"
-  echo "✓ $name → $outdir/ ($produced)"
-  count=$((count + 1))
-done < ports.conf
+    if [[ ! -f "$template" ]]; then
+      echo "✗ $name: template not found ($template) — skipping"; continue
+    fi
+    mkdir -p "$outdir"
+    ( cd "$outdir" && whiskers "$template" -f "$FLAVOR" --color-overrides "$palette" >/dev/null )
+    produced="$(find "$outdir" -type f | sed "s|^$outdir/||" | paste -sd' ' - | cut -c1-80)"
+    echo "✓ $name → $outdir/ ($produced)"
+    count=$((count + 1))
+  done < ports.conf
+}
+
+count=0
+render_ports "$PALETTE" "dist"
 
 # VS Code / Cursor: native catppuccin.colorOverrides snippet (no whiskers).
 node scripts/gen-vscode.mjs
@@ -54,3 +61,16 @@ whiskers templates/preview.html.tera -f "$FLAVOR" --color-overrides "$PALETTE" >
 echo "✓ preview → preview/nebelung.html"
 
 echo "rendered $count port(s) against the nebelung palette"
+
+# Extra palette variants render ALONGSIDE the default, into dist/<variant>/.
+# Deliberately not dist/nebelung/ + dist/high-contrast/: moving the default
+# would break every consumer path for the sake of symmetry.
+for extra in "$ROOT"/palette/nebelung-*.json; do
+  [[ -e "$extra" ]] || continue
+  case "$extra" in *.hex.json) continue ;; esac
+  variant="$(basename "$extra" .json)"      # nebelung-high-contrast
+  short="${variant#nebelung-}"              # high-contrast
+  echo "→ variant: $short"
+  render_ports "$extra" "dist/$short"
+  echo "rendered $count port(s) against the $short palette"
+done
