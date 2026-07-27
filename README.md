@@ -19,27 +19,64 @@ identical, then **calms the 14 accents** (chroma ×0.9) so they sit comfortably
 against true grey instead of a slightly-blue base.
 
 Built with [whiskers](https://whiskers.catppuccin.com): the palette is a
-`--color-overrides` file applied to the upstream `mocha` slot of each port's
+`--color-overrides` file applied to the upstream flavor slot of each port's
 template, so ports stay in sync with Catppuccin upstream and only the colors change.
+
+## Variants
+
+Those two rules never mention "dark", so they work in either polarity. Point them
+at **Latte** instead of Mocha and you get the same theme as a light one — light
+mode here is a different *source* palette, not an inverted dark palette. Crossed
+with a contrast axis, that's four variants:
+
+| variant | source | `dist/` subdir | text on base |
+| --- | --- | --- | --- |
+| `nebelung` | Mocha | *(the root)* | 11.3:1 |
+| `nebelung-high-contrast` | Mocha | `high-contrast/` | 19.9:1 |
+| `nebelung-latte` | Latte | `latte/` | 7.0:1 |
+| `nebelung-latte-high-contrast` | Latte | `latte-high-contrast/` | 9.9:1 |
+
+The default variant keeps the tree root, so every path that existed before
+variants did still resolves. The rest nest inside it.
+
+Two things are load-bearing rather than cosmetic:
+
+- **Each variant renders as its own catppuccin flavor** (`whiskers -f latte`).
+  Templates branch on `flavor.dark` — Ghostty's ANSI 0/7/8/15, Kitty's tab
+  colors, Zen's `prefers-color-scheme` — and name their output after the flavor.
+  A Latte palette rendered as `-f mocha` would emit light colors wearing
+  dark-mode structure, under Mocha's filenames.
+- **The two contrast boosts differ, on purpose.** A boost pushes the ramp
+  outward from its midpoint, and Mocha has ~0.2 of OKLCH headroom below `base`
+  where Latte has only ~0.04 above its. Pushed as hard as Mocha, Latte's
+  `base`/`mantle`/`crust` clamp into one white and the ramp loses a step. The
+  tests assert all twelve steps stay distinct, so the numbers can't be "tidied"
+  into agreement.
 
 ## Preview
 
-▶ **[open the interactive preview](https://htmlpreview.github.io/?https://github.com/nebelhaus/nebelung/blob/main/preview/nebelung.html)** — the live swatch board + editor/terminal mockups, rendered straight from [`preview/nebelung.html`](preview/nebelung.html).
+▶ **[open the interactive preview](https://htmlpreview.github.io/?https://github.com/nebelhaus/nebelung/blob/main/preview/nebelung.html)** — the live swatch board + editor/terminal mockups, rendered straight from [`preview/nebelung.html`](preview/nebelung.html). One per variant: [`nebelung-latte.html`](preview/nebelung-latte.html) is light mode.
 
 ## Layout
 
 ```
 palette/
+  variants.json       # name → { flavor, dir } (generated; the render manifest)
   nebelung.json       # whiskers --color-overrides file (generated)
   nebelung.hex.json   # flat name→hex map (generated; what the flake reads)
+  nebelung-*.json     # …and the same pair per variant
 scripts/
-  generate-palette.mjs# regenerates the palette via OKLCH color math
+  generate-palette.mjs# regenerates every variant via OKLCH color math
 templates/            # vendored upstream port .tera templates
-dist/                 # rendered themes, ready to install
-preview/nebelung.html # visual swatch + mockup, rendered through whiskers
+dist/                 # rendered themes, ready to install (variants in subdirs)
+preview/*.html        # visual swatch + mockup per variant, through whiskers
 ports.conf            # port manifest: name | template | output | extra args
-build.sh              # render every port into dist/
+build.sh              # render every port, for every variant, into dist/
 ```
+
+Adding or retuning a variant is one entry in `VARIANTS` in
+`scripts/generate-palette.mjs`: it writes the palette pair, the `variants.json`
+manifest `build.sh` renders from, and the flake's `palettes` output all follow.
 
 ## Usage
 
@@ -49,6 +86,10 @@ build.sh              # render every port into dist/
 ```
 
 ## Ports
+
+Paths below are the default (Mocha) variant. A variant's files sit under its
+`dist/` subdir and are named after ITS flavor — Ghostty's light-mode theme is
+`dist/latte/ghostty/themes/catppuccin-latte.conf`.
 
 | Port | Output in `dist/` | Install |
 | --- | --- | --- |
@@ -88,13 +129,21 @@ rice themes everything:
 inputs.nebelung.url = "github:nebelhaus/nebelung";
 ```
 
-Three outputs:
+Outputs:
 
 - `packages.<system>.default` — the whole `dist/` tree, built reproducibly
   (no committed artifacts involved). Source files from
-  `${nebelung.packages.<system>.default}/<port>/…`.
-- `palette` — the raw `name → "#hex"` attrset, for configs Nix generates
-  itself (a starship palette table, pounce's baked-in colors).
+  `${nebelung.packages.<system>.default}/<port>/…`, or
+  `…/<variants.<name>.dir>/<port>/…` for a variant.
+- `palette` — the raw `name → "#hex"` attrset for the default variant, for
+  configs Nix generates itself (a starship palette table, pounce's baked-in
+  colors).
+- `palettes` — the same shape for every variant, keyed by variant name. What a
+  consumer following a light-mode or contrast setting reads.
+- `variants` — `name → { flavor, dir }`. `flavor` is the catppuccin flavor the
+  variant rendered as, which is what a consumer needs to build the flavor-named
+  paths whiskers emits (`catppuccin-latte.conf` vs `catppuccin-mocha.conf`);
+  `dir` is its subdirectory, `""` for the default.
 - `checks.<system>` — `nix flake check` runs the palette unit tests +
   `build.sh` shellcheck (the same as CI's `unit` job), so `nix flake check`
   == CI without pushing.

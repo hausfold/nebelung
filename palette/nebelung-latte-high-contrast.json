@@ -1,0 +1,30 @@
+{
+  "latte": {
+    "text": "434343",
+    "subtext1": "555555",
+    "subtext0": "686868",
+    "overlay2": "7b7b7b",
+    "overlay1": "8d8d8d",
+    "overlay0": "a1a1a1",
+    "surface2": "b4b4b4",
+    "surface1": "c7c7c7",
+    "surface0": "dadada",
+    "base": "ffffff",
+    "mantle": "f9f9f9",
+    "crust": "eeeeee",
+    "rosewater": "d78d7d",
+    "flamingo": "d77c7c",
+    "pink": "e47cc7",
+    "mauve": "8545e3",
+    "red": "ca2a40",
+    "maroon": "de5059",
+    "peach": "f66d2d",
+    "yellow": "d99137",
+    "green": "4a9e3a",
+    "teal": "2f9197",
+    "sky": "30a4de",
+    "sapphire": "379eb1",
+    "blue": "2a6ae8",
+    "lavender": "7589f3"
+  }
+}

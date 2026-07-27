@@ -1,0 +1,18 @@
+{
+  "nebelung": {
+    "flavor": "mocha",
+    "dir": ""
+  },
+  "nebelung-high-contrast": {
+    "flavor": "mocha",
+    "dir": "high-contrast"
+  },
+  "nebelung-latte": {
+    "flavor": "latte",
+    "dir": "latte"
+  },
+  "nebelung-latte-high-contrast": {
+    "flavor": "latte",
+    "dir": "latte-high-contrast"
+  }
+}
