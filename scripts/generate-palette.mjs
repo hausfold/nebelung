@@ -19,6 +19,23 @@ export const CONFIG = {
 	neutralChroma: 0, // pure neutral grey (R=G=B); hue is irrelevant at 0
 	// Accents: multiply OKLCH chroma. 0.90 = 10% calmer. Range 0.85–0.95.
 	accentChromaScale: 0.9,
+	// Neutral contrast. 0 = the ramp Mocha ships. Above 0, push each neutral's
+	// OKLCH lightness AWAY from the ramp's midpoint, so text gets lighter and
+	// backgrounds darker while every step keeps its order and spacing. Done in
+	// OKLCH rather than sRGB so the result is perceptually even instead of
+	// crushing the dark end.
+	contrastBoost: 0,
+};
+
+// Palette variants. `nebelung` is the theme as it has always been, and stays
+// byte-identical — its files keep their paths, so nothing downstream moves.
+// Additional variants render alongside it rather than replacing it.
+export const VARIANTS = {
+	nebelung: CONFIG,
+	// For anyone who needs the interface to separate cleanly from its
+	// background: same hues, same accents, a ramp pulled apart. Verified against
+	// WCAG AAA in the tests rather than tuned by eye.
+	"nebelung-high-contrast": { ...CONFIG, contrastBoost: 0.35 },
 };
 
 // Canonical Catppuccin Mocha palette (source of truth we override from).
@@ -143,11 +160,23 @@ export function buildOverrides(config = CONFIG) {
 	const out = {};
 	const table = [];
 
+	// Midpoint of the neutral ramp, so a boost expands symmetrically instead of
+	// dragging the whole ramp lighter or darker.
+	const ramp = NEUTRALS.map((n) => hexToLch(MOCHA[n])[0]);
+	const mid = (Math.min(...ramp) + Math.max(...ramp)) / 2;
+	const boost = config.contrastBoost ?? 0;
+
 	for (const name of NEUTRALS) {
-		const [L] = hexToLch(MOCHA[name]);
+		const [L0] = hexToLch(MOCHA[name]);
+		const L = Math.min(1, Math.max(0, mid + (L0 - mid) * (1 + boost)));
 		const hex = lchToHex([L, config.neutralChroma, warmHueRad]);
 		out[name] = hex;
-		table.push([name, MOCHA[name], hex, "neutral→warm grey"]);
+		table.push([
+			name,
+			MOCHA[name],
+			hex,
+			boost ? `neutral→warm grey, contrast ×${1 + boost}` : "neutral→warm grey",
+		]);
 	}
 	for (const name of ACCENTS) {
 		const [L, C, h] = hexToLch(MOCHA[name]);
@@ -171,19 +200,24 @@ const isMain =
 	realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
 
 if (isMain) {
-	const { out, table } = buildOverrides();
-	const overrides = { mocha: out };
-
 	const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-	writeFileSync(
-		join(root, "palette", "nebelung.json"),
-		JSON.stringify(overrides, null, 2) + "\n",
-	);
-	// Also a flat hex map for docs/reference.
-	writeFileSync(
-		join(root, "palette", "nebelung.hex.json"),
-		JSON.stringify(out, null, 2) + "\n",
-	);
+
+	// One pair of files per variant. `nebelung` keeps its existing filenames, so
+	// every downstream path stays exactly where it was.
+	for (const [variant, cfg] of Object.entries(VARIANTS)) {
+		const { out: vOut } = buildOverrides(cfg);
+		writeFileSync(
+			join(root, "palette", `${variant}.json`),
+			JSON.stringify({ mocha: vOut }, null, 2) + "\n",
+		);
+		// Also a flat hex map for docs/reference.
+		writeFileSync(
+			join(root, "palette", `${variant}.hex.json`),
+			JSON.stringify(vOut, null, 2) + "\n",
+		);
+	}
+
+	const { out, table } = buildOverrides();
 
 	// Pretty console preview with true-color swatches.
 	const swatch = (hex) => {

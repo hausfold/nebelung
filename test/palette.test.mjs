@@ -19,6 +19,7 @@ import {
 	MOCHA,
 	NEUTRALS,
 	ACCENTS,
+	VARIANTS,
 	CONFIG,
 } from "../scripts/generate-palette.mjs";
 
@@ -107,4 +108,68 @@ test("committed palette/nebelung.json matches generator output (drift guard)", (
 		readFileSync(new URL("../palette/nebelung.json", import.meta.url)),
 	);
 	assert.deepEqual(committed, { mocha: buildOverrides().out });
+});
+
+// ---------------------------------------------------------------------------
+// Palette variants. The high-contrast variant exists to be measurably more
+// legible, so it's asserted against WCAG rather than eyeballed — a contrast
+// theme that merely *looks* punchier is the kind of thing that ships broken.
+// ---------------------------------------------------------------------------
+
+// WCAG 2.x relative luminance + contrast ratio (sRGB, not OKLCH: the standard
+// is defined in sRGB and we're checking conformance, not perceptual intent).
+const relLuminance = (hex) => {
+	const [r, g, b] = hexToRgb(hex).map((c) => {
+		const s = c / 255;
+		return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+	});
+	return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const contrastRatio = (a, b) => {
+	const [hi, lo] = [relLuminance(a), relLuminance(b)].sort((x, y) => y - x);
+	return (hi + 0.05) / (lo + 0.05);
+};
+
+test("high-contrast variant clears WCAG AAA for body text", () => {
+	const { out } = buildOverrides(VARIANTS["nebelung-high-contrast"]);
+	const ratio = contrastRatio(out.text, out.base);
+	assert.ok(
+		ratio >= 7,
+		`text on base is ${ratio.toFixed(2)}:1, below the 7:1 AAA floor this variant promises`,
+	);
+});
+
+test("high-contrast is actually higher contrast than the default", () => {
+	const base = buildOverrides(VARIANTS.nebelung).out;
+	const hi = buildOverrides(VARIANTS["nebelung-high-contrast"]).out;
+	assert.ok(
+		contrastRatio(hi.text, hi.base) > contrastRatio(base.text, base.base),
+		"the high-contrast variant must beat the default it is derived from",
+	);
+});
+
+test("boosting contrast does not collapse the neutral ramp", () => {
+	// The failure mode that matters: clamping at the light end merging `text`
+	// into `subtext1`, silently costing the theme a step of hierarchy.
+	for (const [name, cfg] of Object.entries(VARIANTS)) {
+		const { out } = buildOverrides(cfg);
+		const ramp = NEUTRALS.map((n) => out[n]);
+		assert.equal(
+			new Set(ramp).size,
+			ramp.length,
+			`${name}: neutral ramp has duplicate steps — ${ramp.join(" ")}`,
+		);
+	}
+});
+
+test("every variant keeps the accents identical", () => {
+	// Contrast is a property of the NEUTRALS. If a variant moved the accents too,
+	// it would be a different theme rather than the same theme, read more easily.
+	const base = buildOverrides(VARIANTS.nebelung).out;
+	for (const [name, cfg] of Object.entries(VARIANTS)) {
+		const { out } = buildOverrides(cfg);
+		for (const a of ACCENTS) {
+			assert.equal(out[a], base[a], `${name}: accent ${a} drifted from the default palette`);
+		}
+	}
 });
