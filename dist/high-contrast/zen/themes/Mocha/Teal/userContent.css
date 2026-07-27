@@ -1,0 +1,158 @@
+/* Catppuccin Mocha Teal userContent.css*/
+
+@media (prefers-color-scheme: dark) {
+
+  /* Common variables affecting all pages */
+  @-moz-document url-prefix("about:") {
+    :root {
+      --in-content-page-color: #ffffff !important;
+      --color-accent-primary: #9be0d5 !important;
+      --color-accent-primary-hover: rgb(176, 230, 221) !important;
+      --color-accent-primary-active: rgb(156, 218, 224) !important;
+      background-color: #090909 !important;
+      --in-content-page-background: #090909 !important;
+    }
+
+  }
+
+  /* Variables and styles specific to about:newtab and about:home */
+  @-moz-document url("about:newtab"), url("about:home") {
+
+    :root {
+      --newtab-background-color: #090909 !important;
+      --newtab-background-color-secondary: #222222 !important;
+      --newtab-element-hover-color: #222222 !important;
+      --newtab-text-primary-color: #ffffff !important;
+      --newtab-wordmark-color: #ffffff !important;
+      --newtab-primary-action-background: #9be0d5 !important;
+    }
+
+    .icon {
+      color: #9be0d5 !important;
+    }
+
+    .search-wrapper .logo-and-wordmark .logo {
+      background: url("zen-logo-mocha.svg"), url("https://raw.githubusercontent.com/IAmJafeth/zen-browser/main/themes/Mocha/Teal/zen-logo-mocha.svg") no-repeat center !important;
+      display: inline-block !important;
+      height: 82px !important;
+      width: 82px !important;
+      background-size: 82px !important;
+    }
+
+    @media (max-width: 609px) {
+      .search-wrapper .logo-and-wordmark .logo {
+        background-size: 64px !important;
+        height: 64px !important;
+        width: 64px !important;
+      }
+    }
+
+    .card-outer:is(:hover, :focus, .active):not(.placeholder) .card-title {
+      color: #9be0d5 !important;
+    }
+
+    .top-site-outer .search-topsite {
+      background-color: #8db4f3 !important;
+    }
+
+    .compact-cards .card-outer .card-context .card-context-icon.icon-download {
+      fill: #abe1a6 !important;
+    }
+  }
+
+  /* Variables and styles specific to about:preferences */
+  @-moz-document url-prefix("about:preferences") {
+    :root {
+      --zen-colors-tertiary: #040404 !important;
+      --in-content-text-color: #ffffff !important;
+      --link-color: #9be0d5 !important;
+      --link-color-hover: rgb(176, 230, 221) !important;
+      --zen-colors-primary: #222222 !important;
+      --in-content-box-background: #222222 !important;
+      --zen-primary-color: #9be0d5 !important;
+    }
+
+    groupbox , moz-card{
+      background: #090909 !important;
+    }
+
+    button,
+    groupbox menulist {
+      background: #222222 !important;
+      color: #ffffff !important;
+    }
+
+    .main-content {
+      background-color: #010101 !important;
+    }
+
+    .identity-color-blue {
+      --identity-tab-color: #8aadf4 !important;
+      --identity-icon-color: #8aadf4 !important;
+    }
+
+    .identity-color-turquoise {
+      --identity-tab-color: #8bd5ca !important;
+      --identity-icon-color: #8bd5ca !important;
+    }
+
+    .identity-color-green {
+      --identity-tab-color: #a6da95 !important;
+      --identity-icon-color: #a6da95 !important;
+    }
+
+    .identity-color-yellow {
+      --identity-tab-color: #eed49f !important;
+      --identity-icon-color: #eed49f !important;
+    }
+
+    .identity-color-orange {
+      --identity-tab-color: #f5a97f !important;
+      --identity-icon-color: #f5a97f !important;
+    }
+
+    .identity-color-red {
+      --identity-tab-color: #ed8796 !important;
+      --identity-icon-color: #ed8796 !important;
+    }
+
+    .identity-color-pink {
+      --identity-tab-color: #f5bde6 !important;
+      --identity-icon-color: #f5bde6 !important;
+    }
+
+    .identity-color-purple {
+      --identity-tab-color: #c6a0f6 !important;
+      --identity-icon-color: #c6a0f6 !important;
+    }
+  }
+
+  /* Variables and styles specific to about:addons */
+  @-moz-document url-prefix("about:addons") {
+    :root {
+      --zen-dark-color-mix-base: #040404 !important;
+      --background-color-box: #090909 !important;
+    }
+  }
+
+  /* Variables and styles specific to about:protections */
+  @-moz-document url-prefix("about:protections") {
+    :root {
+      --zen-primary-color: #090909 !important;
+      --social-color: #c9a8f1 !important;
+      --coockie-color: #91dbe8 !important;
+      --fingerprinter-color: #f7e2b5 !important;
+      --cryptominer-color: #b5bff8 !important;
+      --tracker-color: #abe1a6 !important;
+      --in-content-primary-button-background-hover: rgb(74, 74, 74) !important;
+      --in-content-primary-button-text-color-hover: #ffffff !important;
+      --in-content-primary-button-background: #3d3d3d !important;
+      --in-content-primary-button-text-color: #ffffff !important;
+    }
+
+
+    .card {
+      background-color: #222222 !important;
+    }
+  }
+}
