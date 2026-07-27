@@ -1,7 +1,6 @@
 <div align="center">
 
-<!-- palette-first hero: animated accent ramp, sorted by hue (assets/swatch-cascade.webp) — static fallback: assets/palette.png -->
-<img src="./assets/swatch-cascade.webp" alt="the nebelung accent palette, sorted by hue" width="720">
+<img src="./assets/nebelung-banner.png" alt="nebelung" width="720">
 
 A custom [Catppuccin](https://catppuccin.com) flavor — **Mocha with the blue stripped out**.
 
