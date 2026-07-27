@@ -21,6 +21,12 @@ Built with [whiskers](https://whiskers.catppuccin.com): the palette is a
 `--color-overrides` file applied to the upstream flavor slot of each port's
 template, so ports stay in sync with Catppuccin upstream and only the colors change.
 
+<div align="center">
+
+<img src="./assets/loud-vs-right.webp" alt="the same code in Catppuccin Mocha vs Nebelung — blue neutrals vs warm graphite" width="820">
+
+</div>
+
 ## Variants
 
 Those two rules never mention "dark", so they work in either polarity. Point them
