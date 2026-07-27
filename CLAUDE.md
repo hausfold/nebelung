@@ -27,6 +27,21 @@ colored.
   `palette` output; consumers inject it directly (e.g. a starship `[palettes.*]` table).
 - `templates/` → whiskers templates, one per tool (bat, delta, ghostty, zellij, …).
 - `ports.conf` → which ports get rendered.
+- **Variants** (`VARIANTS` in `scripts/generate-palette.mjs`) → the flavor axis
+  (mocha = dark, latte = light) crossed with the contrast axis. Adding or retuning
+  one is a single entry there; the palette pair, the `palette/variants.json`
+  manifest `build.sh` renders from, and the flake's `palettes`/`variants` outputs
+  all follow. Two things that look cosmetic and aren't: each variant renders as
+  **its own catppuccin flavor** (templates branch on `flavor.dark` and name their
+  output after it, so `-f mocha` on a latte palette emits light colours with
+  dark-mode structure), and the per-variant `contrastBoost` values **differ on
+  purpose** — Latte has ~0.04 of OKLCH headroom above `base` where Mocha has ~0.2
+  below its, so Mocha's boost melts Latte's base/mantle/crust into one white. The
+  tests assert all twelve ramp steps stay distinct; don't "tidy" the numbers into
+  agreement.
+- The default variant owns the `dist/` **root**; every other variant nests in a
+  subdir. Never give `nebelung` a subdir — that would move every consumer path in
+  the family at once (there's a test pinning it).
 - `packages.<system>.default` → the built theme tree (every port rendered), consumed by
   `nebelhaus` via `${nebelung.packages.${system}.default}/<tool>/...`.
 - `checks.<system>` → `nix flake check` runs the palette unit tests + `build.sh`

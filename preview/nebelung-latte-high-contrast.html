@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nebelung — Latte preview</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px;
+    background: #eeeeee;
+    color: #434343;
+    font: 14px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #686868; margin-bottom: 28px; }
+  .grid { display: grid; gap: 8px; }
+  .accents { grid-template-columns: repeat(7, 1fr); margin-bottom: 28px; }
+  .ramp { grid-template-columns: repeat(12, 1fr); margin-bottom: 28px; }
+  .sw { border-radius: 8px; padding: 10px; height: 64px; display: flex;
+        flex-direction: column; justify-content: flex-end; font-size: 11px; }
+  .sw small { opacity: .85; }
+  .panel { background: #ffffff; border: 1px solid #dadada;
+           border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+  .titlebar { background: #f9f9f9; padding: 10px 14px;
+              border-bottom: 1px solid #dadada;
+              color: #555555; display: flex; gap: 8px; align-items: center; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .code { padding: 16px 18px; white-space: pre; }
+  .ln { color: #a1a1a1; user-select: none; margin-right: 16px; }
+  .kw { color: #8545e3; }
+  .fn { color: #2a6ae8; }
+  .str { color: #4a9e3a; }
+  .num { color: #f66d2d; }
+  .cmt { color: #8d8d8d; font-style: italic; }
+  .ty { color: #d99137; }
+  .op { color: #30a4de; }
+  .sel { background: #c7c7c7; }
+  .term { background: #ffffff; }
+  .prompt .a { color: #4a9e3a; } .prompt .b { color: #2a6ae8; }
+  .prompt .c { color: #2f9197; }
+</style>
+</head>
+<body>
+  <h1>Nebelung</h1>
+  <div class="sub">Latte base, blue stripped → warm graphite · accents calmed</div>
+
+  <div class="grid accents">
+    <div class="sw" style="background:#d78d7d; color:#eeeeee">rosewater<small>#d78d7d</small></div>
+    <div class="sw" style="background:#d77c7c; color:#eeeeee">flamingo<small>#d77c7c</small></div>
+    <div class="sw" style="background:#e47cc7; color:#eeeeee">pink<small>#e47cc7</small></div>
+    <div class="sw" style="background:#8545e3; color:#eeeeee">mauve<small>#8545e3</small></div>
+    <div class="sw" style="background:#ca2a40; color:#eeeeee">red<small>#ca2a40</small></div>
+    <div class="sw" style="background:#de5059; color:#eeeeee">maroon<small>#de5059</small></div>
+    <div class="sw" style="background:#f66d2d; color:#eeeeee">peach<small>#f66d2d</small></div>
+    <div class="sw" style="background:#d99137; color:#eeeeee">yellow<small>#d99137</small></div>
+    <div class="sw" style="background:#4a9e3a; color:#eeeeee">green<small>#4a9e3a</small></div>
+    <div class="sw" style="background:#2f9197; color:#eeeeee">teal<small>#2f9197</small></div>
+    <div class="sw" style="background:#30a4de; color:#eeeeee">sky<small>#30a4de</small></div>
+    <div class="sw" style="background:#379eb1; color:#eeeeee">sapphire<small>#379eb1</small></div>
+    <div class="sw" style="background:#2a6ae8; color:#eeeeee">blue<small>#2a6ae8</small></div>
+    <div class="sw" style="background:#7589f3; color:#eeeeee">lavender<small>#7589f3</small></div>
+    </div>
+
+  <div class="grid ramp">
+    <div class="sw" style="background:#eeeeee; color:#434343; border:1px solid #dadada"><small>crust</small></div>
+    <div class="sw" style="background:#f9f9f9; color:#434343; border:1px solid #dadada"><small>mantle</small></div>
+    <div class="sw" style="background:#ffffff; color:#434343; border:1px solid #dadada"><small>base</small></div>
+    <div class="sw" style="background:#dadada; color:#434343; border:1px solid #dadada"><small>surface0</small></div>
+    <div class="sw" style="background:#c7c7c7; color:#434343; border:1px solid #dadada"><small>surface1</small></div>
+    <div class="sw" style="background:#b4b4b4; color:#434343; border:1px solid #dadada"><small>surface2</small></div>
+    <div class="sw" style="background:#a1a1a1; color:#434343; border:1px solid #dadada"><small>overlay0</small></div>
+    <div class="sw" style="background:#8d8d8d; color:#434343; border:1px solid #dadada"><small>overlay1</small></div>
+    <div class="sw" style="background:#7b7b7b; color:#434343; border:1px solid #dadada"><small>overlay2</small></div>
+    <div class="sw" style="background:#686868; color:#434343; border:1px solid #dadada"><small>subtext0</small></div>
+    <div class="sw" style="background:#555555; color:#434343; border:1px solid #dadada"><small>subtext1</small></div>
+    <div class="sw" style="background:#434343; color:#434343; border:1px solid #dadada"><small>text</small></div>
+    </div>
+
+  <div class="panel">
+    <div class="titlebar">
+      <span class="dot" style="background:#ca2a40"></span>
+      <span class="dot" style="background:#d99137"></span>
+      <span class="dot" style="background:#4a9e3a"></span>
+      <span style="margin-left:6px">nebelung.rs</span>
+    </div>
+    <div class="code"><span class="ln">1</span><span class="cmt">// strip the blue, keep the cat</span>
+<span class="ln">2</span><span class="kw">use</span> catppuccin<span class="op">::</span><span class="ty">Flavor</span>;
+<span class="ln">3</span>
+<span class="ln">4</span><span class="kw">pub fn</span> <span class="fn">neutralize</span>(c<span class="op">:</span> <span class="ty">Color</span>) <span class="op">-></span> <span class="ty">Color</span> {
+<span class="ln">5</span>    <span class="kw">let</span> warm <span class="op">=</span> <span class="num">70.0</span>; <span class="cmt">// hue°</span>
+<span class="ln">6</span><span class="sel">    c.with_hue(warm).with_chroma(<span class="num">0.008</span>)</span>
+<span class="ln">7</span>}
+<span class="ln">8</span>
+<span class="ln">9</span><span class="kw">let</span> name <span class="op">=</span> <span class="str">"nebelung"</span>;</div>
+  </div>
+
+  <div class="panel term">
+    <div class="code"><span class="prompt"><span class="a">~/code/nebelung</span> <span class="b">git:(</span><span class="c">main</span><span class="b">)</span></span> just build
+<span style="color:#4a9e3a">✓</span> rendered <span style="color:#d99137">7</span> ports against the nebelung palette
+<span style="color:#8d8d8d">→</span> dist/ updated</div>
+  </div>
+</body>
+</html>

@@ -7,36 +7,67 @@
 //   2. Accents       -> keep hue + lightness, scale chroma down so they sit
 //      calmly against true-neutral greys instead of the slightly-blue base.
 //
+// The strategy is polarity-agnostic, which is what makes light mode possible at
+// all: it never assumes "text is light, base is dark", only that the neutrals
+// form a ramp. Point it at Latte instead of Mocha and the same two rules produce
+// the same theme in the other polarity.
+//
 // Knobs live in CONFIG below — tweak and re-run; everything downstream rebuilds.
 
 // ---------------------------------------------------------------------------
 // CONFIG
 // ---------------------------------------------------------------------------
 export const CONFIG = {
+	// Which Catppuccin flavor to strip the blue out of — a key of FLAVORS below.
+	// This is also the whiskers flavor the variant renders as (`whiskers -f`), so
+	// its templates take the right light/dark branches and name their output
+	// files after it (catppuccin-latte.conf vs catppuccin-mocha.conf).
+	flavor: "mocha",
 	// Warm grey: hue in degrees (≈70° = warm, between orange and yellow) and a
 	// small constant chroma. Bigger chroma => more obvious tint.
 	neutralHue: 70,
 	neutralChroma: 0, // pure neutral grey (R=G=B); hue is irrelevant at 0
 	// Accents: multiply OKLCH chroma. 0.90 = 10% calmer. Range 0.85–0.95.
 	accentChromaScale: 0.9,
-	// Neutral contrast. 0 = the ramp Mocha ships. Above 0, push each neutral's
-	// OKLCH lightness AWAY from the ramp's midpoint, so text gets lighter and
-	// backgrounds darker while every step keeps its order and spacing. Done in
+	// Neutral contrast. 0 = the ramp the source flavor ships. Above 0, push each
+	// neutral's OKLCH lightness AWAY from the ramp's midpoint, so text and
+	// backgrounds separate while every step keeps its order and spacing. Done in
 	// OKLCH rather than sRGB so the result is perceptually even instead of
 	// crushing the dark end.
 	contrastBoost: 0,
 };
 
-// Palette variants. `nebelung` is the theme as it has always been, and stays
+// Palette variants: the FLAVOR axis (mocha = dark, latte = light) crossed with
+// the CONTRAST axis. `nebelung` is the theme as it has always been, and stays
 // byte-identical — its files keep their paths, so nothing downstream moves.
-// Additional variants render alongside it rather than replacing it.
+// Every other variant renders alongside it rather than replacing it.
+//
+// The two contrast boosts differ ON PURPOSE, and it isn't a tuning whim: a boost
+// pushes the ramp outward from its midpoint, and Mocha has ~0.2 of OKLCH
+// headroom below its `base` while Latte has only ~0.04 above its. Pushed by
+// 0.35, Latte's base/mantle/crust all clamp into the same white — the ramp
+// silently loses a step of hierarchy. 0.20 is the most Latte takes while keeping
+// all twelve steps distinct; the tests assert both properties rather than
+// trusting these numbers.
 export const VARIANTS = {
 	nebelung: CONFIG,
 	// For anyone who needs the interface to separate cleanly from its
 	// background: same hues, same accents, a ramp pulled apart. Verified against
 	// WCAG AAA in the tests rather than tuned by eye.
 	"nebelung-high-contrast": { ...CONFIG, contrastBoost: 0.35 },
+	// Light mode. Not a transform of the dark palette — a different SOURCE
+	// palette (Catppuccin Latte) run through the identical two rules.
+	"nebelung-latte": { ...CONFIG, flavor: "latte" },
+	"nebelung-latte-high-contrast": { ...CONFIG, flavor: "latte", contrastBoost: 0.2 },
 };
+
+// Where each variant's rendered ports live inside the themes package, relative
+// to its root. The default variant keeps the root itself so every path that
+// existed before any variant did still resolves. MIRRORED in two places that
+// must agree with this one: `render_ports` in build.sh (which reads the
+// generated palette/variants.json) and nebelhaus's modules/lib/nebelung.nix
+// (which builds the same subdir from nebelhaus.theme.flavor/contrast).
+export const variantDir = (name) => (name === "nebelung" ? "" : name.replace(/^nebelung-/, ""));
 
 // Canonical Catppuccin Mocha palette (source of truth we override from).
 export const MOCHA = {
@@ -68,7 +99,45 @@ export const MOCHA = {
 	crust: "11111b",
 };
 
-// The neutral ramp (everything that carries the ~240° blue). Order = light→dark.
+// Canonical Catppuccin Latte palette — the light-mode source. Same 26 slot
+// names, the ramp running the other way (`text` is the dark end, `base` the
+// light one). Read out of whiskers itself rather than transcribed from docs, so
+// it is the same data the templates render against.
+export const LATTE = {
+	rosewater: "dc8a78",
+	flamingo: "dd7878",
+	pink: "ea76cb",
+	mauve: "8839ef",
+	red: "d20f39",
+	maroon: "e64553",
+	peach: "fe640b",
+	yellow: "df8e1d",
+	green: "40a02b",
+	teal: "179299",
+	sky: "04a5e5",
+	sapphire: "209fb5",
+	blue: "1e66f5",
+	lavender: "7287fd",
+	text: "4c4f69",
+	subtext1: "5c5f77",
+	subtext0: "6c6f85",
+	overlay2: "7c7f93",
+	overlay1: "8c8fa1",
+	overlay0: "9ca0b0",
+	surface2: "acb0be",
+	surface1: "bcc0cc",
+	surface0: "ccd0da",
+	base: "eff1f5",
+	mantle: "e6e9ef",
+	crust: "dce0e8",
+};
+
+// The source flavors a variant can be built from, by `config.flavor`.
+export const FLAVORS = { mocha: MOCHA, latte: LATTE };
+
+// The neutral ramp (everything that carries the ~240° blue). Order is Mocha's
+// light→dark; Latte runs the other way. Nothing below depends on the direction —
+// the contrast transform works off the ramp's min/max, not its order.
 export const NEUTRALS = [
 	"text",
 	"subtext1",
@@ -156,33 +225,40 @@ export const lchToHex = (lch) => rgbToHex(oklabToRgb(lchToOklab(lch)));
 // tests can call it directly and the CLI block below writes what it returns.
 // ---------------------------------------------------------------------------
 export function buildOverrides(config = CONFIG) {
+	const flavor = config.flavor ?? "mocha";
+	const source = FLAVORS[flavor];
+	if (!source) {
+		throw new Error(`unknown source flavor "${flavor}" — expected one of ${Object.keys(FLAVORS)}`);
+	}
 	const warmHueRad = (config.neutralHue * Math.PI) / 180;
 	const out = {};
 	const table = [];
 
 	// Midpoint of the neutral ramp, so a boost expands symmetrically instead of
-	// dragging the whole ramp lighter or darker.
-	const ramp = NEUTRALS.map((n) => hexToLch(MOCHA[n])[0]);
+	// dragging the whole ramp lighter or darker. Taken from THIS variant's source
+	// flavor: Latte's midpoint sits far higher than Mocha's, and using Mocha's
+	// would drag the whole light ramp dark instead of expanding it in place.
+	const ramp = NEUTRALS.map((n) => hexToLch(source[n])[0]);
 	const mid = (Math.min(...ramp) + Math.max(...ramp)) / 2;
 	const boost = config.contrastBoost ?? 0;
 
 	for (const name of NEUTRALS) {
-		const [L0] = hexToLch(MOCHA[name]);
+		const [L0] = hexToLch(source[name]);
 		const L = Math.min(1, Math.max(0, mid + (L0 - mid) * (1 + boost)));
 		const hex = lchToHex([L, config.neutralChroma, warmHueRad]);
 		out[name] = hex;
 		table.push([
 			name,
-			MOCHA[name],
+			source[name],
 			hex,
 			boost ? `neutral→warm grey, contrast ×${1 + boost}` : "neutral→warm grey",
 		]);
 	}
 	for (const name of ACCENTS) {
-		const [L, C, h] = hexToLch(MOCHA[name]);
+		const [L, C, h] = hexToLch(source[name]);
 		const hex = lchToHex([L, C * config.accentChromaScale, h]);
 		out[name] = hex;
-		table.push([name, MOCHA[name], hex, `chroma ×${config.accentChromaScale}`]);
+		table.push([name, source[name], hex, `chroma ×${config.accentChromaScale}`]);
 	}
 	return { out, table };
 }
@@ -203,19 +279,32 @@ if (isMain) {
 	const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 	// One pair of files per variant. `nebelung` keeps its existing filenames, so
-	// every downstream path stays exactly where it was.
+	// every downstream path stays exactly where it was. The whiskers override file
+	// is keyed by the flavor it overrides, so a latte variant writes { latte: … }
+	// and must be rendered with `whiskers -f latte`.
+	const manifest = {};
 	for (const [variant, cfg] of Object.entries(VARIANTS)) {
+		const flavor = cfg.flavor ?? "mocha";
 		const { out: vOut } = buildOverrides(cfg);
 		writeFileSync(
 			join(root, "palette", `${variant}.json`),
-			JSON.stringify({ mocha: vOut }, null, 2) + "\n",
+			JSON.stringify({ [flavor]: vOut }, null, 2) + "\n",
 		);
 		// Also a flat hex map for docs/reference.
 		writeFileSync(
 			join(root, "palette", `${variant}.hex.json`),
 			JSON.stringify(vOut, null, 2) + "\n",
 		);
+		manifest[variant] = { flavor, dir: variantDir(variant) };
 	}
+
+	// The manifest build.sh renders from. Generated rather than hand-listed so
+	// "which variants exist, from which flavor, into which dist subdir" has one
+	// answer — VARIANTS above — instead of one per consumer.
+	writeFileSync(
+		join(root, "palette", "variants.json"),
+		JSON.stringify(manifest, null, 2) + "\n",
+	);
 
 	const { out, table } = buildOverrides();
 
@@ -236,5 +325,8 @@ if (isMain) {
 			`  ${name.padEnd(11)} #${from} ${swatch(from)}  #${to} ${swatch(to)}  ${note}`,
 		);
 	}
-	console.log("\n  Wrote palette/nebelung.json and palette/nebelung.hex.json\n");
+	console.log(
+		`\n  Wrote ${Object.keys(VARIANTS).length} variant(s) + palette/variants.json: ` +
+			`${Object.keys(VARIANTS).join(", ")}\n`,
+	);
 }

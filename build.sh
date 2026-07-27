@@ -8,27 +8,33 @@
 #   name | template path | output subdir under dist/
 # Each port's whiskers template owns its output filename (via its `filename:`
 # frontmatter); we render from inside dist/<subdir>/ so those paths land there.
-# We force `-f mocha` so only the Nebelung (overridden) flavor is produced.
+#
+# WHICH variants get rendered, from WHICH catppuccin flavor, into WHICH dist
+# subdir is not decided here — it's read from palette/variants.json, generated
+# from the VARIANTS table in scripts/generate-palette.mjs. The flavor is
+# load-bearing, not cosmetic: templates branch on `flavor.dark` (ghostty's ANSI
+# 0/7/8/15, kitty's tab colours, zen's prefers-color-scheme) and name their
+# output after it, so a latte palette rendered with `-f mocha` would emit
+# light colours wearing dark-mode structure under mocha's filenames.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
-PALETTE="$ROOT/palette/nebelung.json"
-FLAVOR="mocha"
+MANIFEST="$ROOT/palette/variants.json"
 
 if [[ "${1:-}" != "--no-gen" ]]; then
   echo "→ generating palette"
   node scripts/generate-palette.mjs >/dev/null
 fi
-[[ -f "$PALETTE" ]] || { echo "missing $PALETTE"; exit 1; }
+[[ -f "$MANIFEST" ]] || { echo "missing $MANIFEST (run without --no-gen)"; exit 1; }
 
 # Clean dist once so ports that emit into a shared tree (e.g. zen's two
 # templates) don't wipe each other.
 rm -rf dist
 
-# render_ports <palette-file> <dist-root>
+# render_ports <palette-file> <flavor> <dist-root>
 render_ports() {
-  local palette="$1" root_out="$2" name template outdir produced
+  local palette="$1" flavor="$2" root_out="$3" name template outdir produced
   count=0
   while IFS='|' read -r name template outdir; do
     name="$(echo "$name" | xargs)"
@@ -40,37 +46,43 @@ render_ports() {
       echo "✗ $name: template not found ($template) — skipping"; continue
     fi
     mkdir -p "$outdir"
-    ( cd "$outdir" && whiskers "$template" -f "$FLAVOR" --color-overrides "$palette" >/dev/null )
+    ( cd "$outdir" && whiskers "$template" -f "$flavor" --color-overrides "$palette" >/dev/null )
     produced="$(find "$outdir" -type f | sed "s|^$outdir/||" | paste -sd' ' - | cut -c1-80)"
     echo "✓ $name → $outdir/ ($produced)"
     count=$((count + 1))
   done < ports.conf
 }
 
+# The default variant renders at the dist ROOT and every other one into
+# dist/<dir>/ alongside it (dir comes from the manifest). Deliberately not
+# dist/nebelung/ + dist/latte/: moving the default would break every consumer
+# path for the sake of symmetry.
 count=0
-render_ports "$PALETTE" "dist"
+while IFS='|' read -r variant flavor dir; do
+  [[ -n "$variant" ]] || continue
+  palette="$ROOT/palette/$variant.json"
+  [[ -f "$palette" ]] || { echo "missing $palette"; exit 1; }
+  out="dist${dir:+/$dir}"
+  echo "→ variant: $variant (catppuccin $flavor → $out/)"
+  render_ports "$palette" "$flavor" "$out"
+  # One preview per variant — light mode especially is a thing you check by eye,
+  # and the default keeps its historical preview/nebelung.html path.
+  whiskers templates/preview.html.tera -f "$flavor" --color-overrides "$palette" \
+    > "preview/$variant.html"
+  echo "✓ preview → preview/$variant.html"
+  echo "rendered $count port(s) against the $variant palette"
+done < <(node -e '
+  const { readFileSync } = require("node:fs");
+  const manifest = JSON.parse(readFileSync(process.argv[1], "utf8"));
+  for (const [name, v] of Object.entries(manifest)) {
+    console.log([name, v.flavor, v.dir].join("|"));
+  }
+' "$MANIFEST")
 
 # VS Code / Cursor: native catppuccin.colorOverrides snippet (no whiskers).
+# Both of these are default-palette-only — they patch upstream catppuccin
+# artifacts that are themselves flavor-keyed, so a variant has nowhere to land.
 node scripts/gen-vscode.mjs
 
 # Stylus: userstyles import json modifier (no whiskers).
 node scripts/gen-stylus.mjs
-
-# Visual preview (plain stdout template, rendered separately).
-whiskers templates/preview.html.tera -f "$FLAVOR" --color-overrides "$PALETTE" > preview/nebelung.html
-echo "✓ preview → preview/nebelung.html"
-
-echo "rendered $count port(s) against the nebelung palette"
-
-# Extra palette variants render ALONGSIDE the default, into dist/<variant>/.
-# Deliberately not dist/nebelung/ + dist/high-contrast/: moving the default
-# would break every consumer path for the sake of symmetry.
-for extra in "$ROOT"/palette/nebelung-*.json; do
-  [[ -e "$extra" ]] || continue
-  case "$extra" in *.hex.json) continue ;; esac
-  variant="$(basename "$extra" .json)"      # nebelung-high-contrast
-  short="${variant#nebelung-}"              # high-contrast
-  echo "→ variant: $short"
-  render_ports "$extra" "dist/$short"
-  echo "rendered $count port(s) against the $short palette"
-done
