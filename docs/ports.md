@@ -25,12 +25,31 @@ Paths below are the default (Mocha) variant. A variant's files sit under its
 | Zen | `zen/themes/Mocha/<Accent>/userChrome.css` (+ `userContent.css`) | pick an accent folder, copy into your Zen `chrome/` dir |
 | Obsidian | `obsidian/Nebelung/` | copy the folder into a vault's `.obsidian/themes/`, then choose Nebelung under Settings ▸ Appearance ▸ Themes (dark mode recommended) |
 | opencode | `opencode/nebelung.json` | copy into `~/.config/opencode/themes/`, then `theme = "nebelung"` in `opencode.json` |
+| Helix | `helix/themes/default/catppuccin_mocha.toml` (+ `no_italics/`) | copy into `~/.config/helix/themes/`, set `theme = "catppuccin_mocha"` (or `inherits` it) |
+| Xcode | `xcode/themes/Catppuccin Mocha.xccolortheme` | copy into `~/Library/Developer/Xcode/UserData/FontAndColorThemes/`, pick it under Settings ▸ Themes |
+| gh-dash | `gh-dash/themes/mocha/catppuccin-mocha-<accent>.yml` | merge the `theme:` block into `~/.config/gh-dash/config.yml` |
+| bottom | `bottom/themes/mocha.toml` | merge the `[styles.*]` tables into `~/.config/bottom/bottom.toml` |
+| gitui | `gitui/themes/catppuccin-mocha.ron` | copy as `~/.config/gitui/theme.ron` |
+| micro | `micro/themes/catppuccin-mocha.micro` (+ `-transparent`) | copy into `~/.config/micro/colorschemes/`, set `"colorscheme": "catppuccin-mocha"` |
+| Rio | `rio/themes/catppuccin-mocha.toml` | copy into `~/.config/rio/themes/`, set `theme = "catppuccin-mocha"` |
+| Warp | `warp/themes/catppuccin_mocha.yml` | copy into `~/.warp/themes/`, pick it under Settings ▸ Appearance |
+| fish | `fish/themes/catppuccin-mocha.theme` (+ `static/`) | copy into `~/.config/fish/themes/`, then `fish_config theme choose catppuccin-mocha` (the theme name is the filename) — the light variants ship `static/` only (upstream's dynamic theme is dark-flavor-only) |
+| mpv | `mpv/themes/mocha/<accent>.conf` | `include=` the accent you want from `~/.config/mpv/mpv.conf` (colors the OSD/OSC) |
+| Raycast | `raycast/README.md` | click the theme deeplink in it (needs Raycast Pro) |
+| Dark Reader | `dark-reader/README.md` | paste the three hexes into Dark Reader ▸ Colors (set Selection to `Custom`) |
 | VS Code / Cursor | `vscode/settings.json` | merge into your user `settings.json` (needs the Catppuccin extension) |
 | Stylus | `stylus/nebelung-stylus.json` (+ README) | import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`) |
 
 VS Code uses the extension's native `catppuccin.colorOverrides` setting — no
 build, the palette is just injected via settings. Set `catppuccin.accentColor`
 yourself if you want a non-default accent.
+
+Slack, Raycast and Dark Reader are **paste-a-string** ports: the template renders
+a README carrying the payload rather than a config file. Upstream's versions loop
+over all four Catppuccin flavors, but `--color-overrides` only rewrites the one
+being rendered — so ours are patched (search `NEBELUNG PATCH` in the template) to
+emit only that flavor. Otherwise the extra rows would hand you stock Catppuccin
+under a Nebelung heading.
 
 ## Rendering
 

@@ -5,7 +5,7 @@
 **Mocha with the blue stripped out**
 
 the theme — a silver-mist [Catppuccin](https://catppuccin.com) flavor, rendered
-into 21 ports.
+into 33 ports.
 
 ![part of nebelhaus](https://img.shields.io/badge/part_of-nebelhaus-f2c4e5?labelColor=202020)
 ![license](https://img.shields.io/badge/license-MIT-d7d7d7?labelColor=202020)
@@ -69,9 +69,13 @@ Needs [`whiskers`](https://whiskers.catppuccin.com)
 
 ## the ports
 
-Ghostty · Kitty · Alacritty · Starship · Zellij · btop · tmux · bat · delta ·
-fzf · lsd · yazi · lazygit · glow · zsh-syntax-highlighting · Slack · Zen ·
-Obsidian · opencode · VS Code / Cursor · Stylus
+- **terminals** — Ghostty · Kitty · Alacritty · Rio · Warp
+- **shell + prompt** — Starship · fish · zsh-syntax-highlighting · fzf
+- **multiplexers** — Zellij · tmux
+- **editors** — Helix · micro · Xcode · VS Code / Cursor
+- **git** — delta · lazygit · gitui · gh-dash
+- **cli + tui** — bat · lsd · yazi · glow · btop · bottom · mpv
+- **apps** — Slack · Zen · Obsidian · opencode · Raycast · Dark Reader · Stylus
 
 Each renders into `dist/<port>/`, per variant. Paths and per-port install steps
 are in [`docs/ports.md`](docs/ports.md).

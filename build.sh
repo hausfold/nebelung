@@ -32,15 +32,25 @@ fi
 # templates) don't wipe each other.
 rm -rf dist
 
+# Strip leading/trailing whitespace from $1. Deliberately NOT `xargs`: xargs
+# also does shell-style quote parsing, so a ports.conf comment containing an
+# apostrophe ("btop's sibling") died with "unterminated quote" and took the
+# whole build down with it.
+trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  printf '%s' "${s%"${s##*[![:space:]]}"}"
+}
+
 # render_ports <palette-file> <flavor> <dist-root>
 render_ports() {
   local palette="$1" flavor="$2" root_out="$3" name template outdir produced
   count=0
   while IFS='|' read -r name template outdir; do
-    name="$(echo "$name" | xargs)"
+    name="$(trim "$name")"
     [[ -z "$name" || "$name" == \#* ]] && continue
-    template="$ROOT/$(echo "$template" | xargs)"
-    outdir="$root_out/$(echo "$outdir" | xargs)"
+    template="$ROOT/$(trim "$template")"
+    outdir="$root_out/$(trim "$outdir")"
 
     if [[ ! -f "$template" ]]; then
       echo "✗ $name: template not found ($template) — skipping"; continue
