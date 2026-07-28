@@ -17,6 +17,7 @@ import {
   INSTALL_KINDS,
   SELECT_KINDS,
   TIERS,
+  PLATFORMS,
   deriveTier,
   readMeta,
   readConfPorts,
@@ -59,6 +60,11 @@ test("every entry is well-formed", () => {
     assert.ok(INSTALL_KINDS.includes(p.install), `${name}.install: ${p.install}`);
     assert.ok(SELECT_KINDS.includes(p.select), `${name}.select: ${p.select}`);
     assert.ok(TIERS.includes(p.tier), `${name}.tier: ${p.tier}`);
+    assert.ok(Array.isArray(p.platform) && p.platform.length, `${name}.platform must be a non-empty array`);
+    for (const plat of p.platform) {
+      assert.ok(PLATFORMS.includes(plat), `${name}.platform: ${plat}`);
+    }
+    assert.equal(new Set(p.platform).size, p.platform.length, `${name}.platform has duplicates`);
     if (p.requires !== undefined) {
       assert.ok(Array.isArray(p.requires), `${name}.requires must be an array`);
     }

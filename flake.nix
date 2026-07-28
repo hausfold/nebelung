@@ -52,8 +52,8 @@
       # subdirectory inside the themes package, "" for the default.
       variants = variantManifest;
 
-      # Per-port install metadata: name -> { title, path, dest, install, select,
-      # tier, howto, ... }. ports.conf says which ports get RENDERED; this says
+      # Per-port install metadata: name -> { title, path, platform, dest,
+      # install, select, tier, howto, ... }. ports.conf says which ports get RENDERED; this says
       # what installing one actually takes, in a shape a config manager can act
       # on instead of a paragraph a human has to read. `tier` is what a consumer
       # branches on:
@@ -64,6 +64,9 @@
       #   manual   — the app has no file interface for selecting a theme; the
       #              drop can be automated, the selection can't. Surface these to
       #              the user instead of pretending they're wired.
+      # `platform` (["darwin"] / ["linux"] / both) is the other filter a consumer
+      # wants first: several ports are Linux-only tools that are `auto` but have
+      # nothing to wire on a Mac.
       # docs/ports.md is generated from this file (scripts/gen-ports-doc.mjs) and
       # a test asserts each stored tier matches the select/install rule, so the
       # value read here can't drift from the rule that defines it.

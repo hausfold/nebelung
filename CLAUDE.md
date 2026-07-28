@@ -35,10 +35,11 @@ colored.
   needs go in `templates/<port>/static/`, copied into its output verbatim.
 - `ports.conf` → which ports get rendered.
 - `ports.meta.json` → what INSTALLING each rendered port takes: `dest`, how it gets
-  there (`install`), what makes it the active theme (`select`), and the derived
-  `tier` — `auto` (a rebuild can do the whole thing), `activate` (the "which theme"
-  setting lives in a file the app rewrites, so it needs an idempotent activation
-  patch), `manual` (no file interface for selecting it; a human clicks or pastes).
+  there (`install`), what makes it the active theme (`select`), where its tool runs
+  (`platform`), and the derived `tier` — `auto` (a rebuild can do the whole thing),
+  `activate` (the "which theme" setting lives in a file the app rewrites, so it
+  needs an idempotent activation patch), `manual` (no file interface for selecting
+  it; a human clicks or pastes).
   Exposed as the flake's `ports` output so `nebelhaus` can wire what it can and
   *report* what it can't. Hand-written, but fenced by tests: the ports.conf and
   ports.meta.json port sets must match, `tier` must agree with `select`/`install`,
