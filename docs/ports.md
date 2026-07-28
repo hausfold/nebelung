@@ -53,6 +53,10 @@ Paths below are the default (Mocha) variant. A variant's files sit under its
 | spotify-player | `spotify-player/theme.toml` | copy into `~/.config/spotify-player/`, set `theme = "Catppuccin-mocha"` |
 | chroma | `chroma/themes/mocha-chroma-style.css` (+ `.xml`) | serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style` |
 | zsh-fsh | `zsh-fsh/themes/catppuccin-mocha.ini` | copy into `~/.config/fsh/`, then `fast-theme XDG:catppuccin-mocha` |
+| sc-im | `sc-im/themes/mocha` | copy as `~/.config/sc-im/scimrc` colours, or `load` it from your `scimrc` |
+| tty | `tty/themes/mocha.txt` | the Linux console's 16 colours — `cat` it into `setvtrgb` (`setvtrgb < mocha.txt`) |
+| Telegram | `telegram/themes/mocha/{android,desktop,ios,macos}` | per-client palette source: rename `android` to `Nebelung.attheme` and open it in Telegram Android; the other three are inputs to that client's packaging (see [catppuccin/telegram](https://github.com/catppuccin/telegram)) |
+| qBittorrent | `qbittorrent/themes/catppuccin-mocha/` (+ `themes/icons/`) | compile it: `cd qbittorrent/themes/catppuccin-mocha && rcc -binary resources.qrc -o nebelung.qbtheme`, then point Options ▸ Behavior ▸ "Use custom UI theme" at the `.qbtheme` |
 | VS Code / Cursor | `vscode/settings.json` | merge into your user `settings.json` (needs the Catppuccin extension) |
 | Stylus | `stylus/nebelung-stylus.json` (+ README) | import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`) |
 
@@ -91,14 +95,18 @@ Re-vendoring any of those templates from upstream drops the patch — re-apply i
 
 Ports can also ship colour-free companion files: anything under
 `templates/<port>/static/` is copied into the port's output verbatim (OBS's base
-`.obt`, which the rendered `.ovt` extends).
+`.obt`, which the rendered `.ovt` extends). Assets that *do* carry colour get a
+template instead — `templates/qbittorrent/icons.tera` has no upstream
+counterpart, because upstream ships those SVGs static with the flavor's `text`
+and `overlay1` baked into the `fill`. The path data is upstream's; only the fill
+is templated.
 
 ## Missing a port?
 
 Catppuccin has ~350 ports; Nebelung carries the ones its author uses plus the
 widely-used rest. Not carried today, mostly for want of a user: aerc, Cider,
-Contour, Element, Halloy, HexChat, imv, Mailspring, process-compose,
-qBittorrent, sc-im, Telegram, tty. Anything Catppuccin themes with a
+Contour, Element, Halloy, HexChat, imv, Mailspring, process-compose. Anything
+Catppuccin themes with a
 [whiskers](https://whiskers.catppuccin.com) template can be added in about three
 lines — **[open an issue](https://github.com/nebelhaus/nebelung/issues/new) or a
 PR** with the port name and it goes in. Ports without a whiskers template (nvim,

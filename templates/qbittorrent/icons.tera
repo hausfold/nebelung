@@ -1,0 +1,29 @@
+---
+# NEBELUNG PATCH: this template has no upstream counterpart. catppuccin/
+# qbittorrent ships these icons as STATIC svgs with the flavor's text colour
+# (#cdd6f4 / #4c4f69) and overlay1 (#7f849c / #8c8fa1) baked into the fill, so
+# copying them verbatim would put stock Catppuccin inside a Nebelung theme.
+# The path data is upstream's, untouched; only the fill is templated. The
+# dark/light directory split is what resources.qrc references, so it stays.
+whiskers:
+  version: "^2.5.1"
+  matrix:
+    - flavor
+    - icon: [arrow_down, arrow_down_disabled, branch_closed, branch_open, check, checkbox_checked, checkbox_indeterminate, checkbox_unchecked, chevron_down, chevron_down_disabled, chevron_up, chevron_up_disabled]
+  filename: "themes/icons/{% if flavor.dark %}dark{% else %}light{% endif %}/{{ icon }}.svg"
+---
+{%- set disabled = ["arrow_down_disabled", "chevron_down_disabled", "chevron_up_disabled"] -%}
+{%- if icon in disabled %}{% set_global fill = overlay1.hex %}{% else %}{% set_global fill = text.hex %}{% endif -%}
+{% if icon == "arrow_down" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m24 30-10-9.95h20Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "arrow_down_disabled" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m24 30-10-9.95h20Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "branch_closed" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m18.75 36-2.15-2.15 9.9-9.9-9.9-9.9 2.15-2.15L30.8 23.95Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "branch_open" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m24 30.75-12-12 2.15-2.15L24 26.5l9.85-9.85L36 18.8Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "check" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "checkbox_checked" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M20.95 31.95 35.4 17.5l-2.15-2.15-12.3 12.3L15 21.7l-2.15 2.15ZM9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h30q1.2 0 2.1.9.9.9.9 2.1v30q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V9H9v30ZM9 9v30V9Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "checkbox_indeterminate" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M12.5 25.4h23.05v-3H12.5ZM9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h30q1.2 0 2.1.9.9.9.9 2.1v30q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V9H9v30ZM9 9v30V9Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "checkbox_unchecked" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h30q1.2 0 2.1.9.9.9.9 2.1v30q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V9H9v30Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "chevron_down" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m24 30.75-12-12 2.15-2.15L24 26.5l9.85-9.85L36 18.8Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "chevron_down_disabled" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m24 30.75-12-12 2.15-2.15L24 26.5l9.85-9.85L36 18.8Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "chevron_up" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M14.15 30.75 12 28.6l12-12 12 11.95-2.15 2.15L24 20.85Z" fill="#{{ fill }}"/></svg>
+{% elif icon == "chevron_up_disabled" %}<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M14.15 30.75 12 28.6l12-12 12 11.95-2.15 2.15L24 20.85Z" fill="#{{ fill }}"/></svg>
+{%- endif %}
