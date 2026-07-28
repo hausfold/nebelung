@@ -6,19 +6,19 @@ truth for colors across the whole [nebelhaus](https://github.com/nebelhaus) fami
 
 ## Am I in the right repo? (routing)
 
-**This repo (`~/code/nebelhaus/nebelung`) owns THE COLORS** — the palette and the
+**This repo (`~/code/workshop/nebelung`) owns THE COLORS** — the palette and the
 per-tool theme templates. Nothing about *how* tools are configured, only how they're
 colored.
 
 | Want to change… | Repo |
 |---|---|
-| colors / the palette, or how a tool is themed | `~/code/nebelhaus/nebelung` ← **you are here** |
-| which tools exist / how they're configured (shell, bar, WM) | `~/code/nebelhaus/nebelhaus` |
-| the pounce app | `~/code/nebelhaus/pounce` |
+| colors / the palette, or how a tool is themed | `~/code/workshop/nebelung` ← **you are here** |
+| which tools exist / how they're configured (shell, bar, WM) | `~/code/workshop/nebelhaus` |
+| the pounce app | `~/code/workshop/pounce` |
 | this machine's config | `~/.config/nix` |
 
 > **Claude: enforce this.** If a request is about a tool's *behavior/config* (not its
-> colors), STOP — that's a rice change in `~/code/nebelhaus/nebelhaus`. Only palette
+> colors), STOP — that's a rice change in `~/code/workshop/nebelhaus`. Only palette
 > and theme-template changes belong here.
 
 ## How it works
@@ -59,7 +59,7 @@ Then push, and in `nebelhaus`: `nix flake update nebelung` + push; in a consumer
 `nix flake update nebelhaus` + rebuild. **One palette edit recolors every tool at once.**
 
 For fast iteration from a consumer without the push/relock loop, override against this
-local checkout: `--override-input nebelhaus/nebelung "path:$HOME/code/nebelhaus/nebelung"`.
+local checkout: `--override-input nebelhaus/nebelung "path:$HOME/code/workshop/nebelung"`.
 
 When you open the PR for a `worktree-*` branch, give it a **What / Why / Verify / Watch-out**
 body (see the workshop ship skill's Step 3) — the session that wrote the code is gone by the
