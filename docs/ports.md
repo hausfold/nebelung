@@ -4,61 +4,88 @@ Paths below are the default (Mocha) variant. A variant's files sit under its
 `dist/` subdir and are named after **its** flavor — Ghostty's light-mode theme is
 `dist/latte/ghostty/themes/catppuccin-latte.conf`, not `catppuccin-mocha.conf`.
 
-| Port | Output in `dist/` | Install |
-| --- | --- | --- |
-| Ghostty | `ghostty/themes/catppuccin-mocha.conf` | copy into `~/.config/ghostty/themes/`, then `theme = catppuccin-mocha` |
-| Kitty | `kitty/themes/mocha.conf` | copy into `~/.config/kitty/`, then `include mocha.conf` |
-| Alacritty | `alacritty/catppuccin-mocha.toml` | import under `[general] import` in `alacritty.toml` |
-| Starship | `starship/themes/mocha.toml` | merge into `~/.config/starship.toml` (or `palette = "mocha"`) |
-| Zellij | `zellij/themes/nebelung.kdl` | copy into `~/.config/zellij/themes/`, set `theme "nebelung"` |
-| btop | `btop/themes/catppuccin_mocha.theme` | copy into `~/.config/btop/themes/`, set `color_theme` |
-| tmux | `tmux/themes/catppuccin_mocha_tmux.conf` | `source` it from `.tmux.conf` |
-| bat | `bat/themes/Catppuccin Mocha.tmTheme` | copy into `$(bat --config-dir)/themes/`, `bat cache --build`, set `--theme` |
-| delta | `delta/catppuccin.gitconfig` | `include` it from `~/.gitconfig`, set `features = catppuccin-mocha` |
-| fzf | `fzf/themes/catppuccin-fzf-mocha.sh` (+ fish/nu/ps1/rc) | source it from your shell rc |
-| lsd | `lsd/themes/catppuccin-mocha/colors.yaml` | copy as `~/.config/lsd/colors.yaml`, set `color.theme: custom` |
-| yazi | `yazi/themes/mocha/catppuccin-mocha-<accent>.toml` | copy the accent you want as the flavor in `theme.toml` |
-| lazygit | `lazygit/themes/mocha/<accent>.yml` | point `lg` config at it, or merge the `themes-mergable` variant |
-| glow | `glow/catppuccin-mocha.json` | a glamour style — pass with `glow -s <path>` |
-| zsh-syntax-highlighting | `zsh-syntax-highlighting/themes/…mocha….zsh` | source it before `zsh-syntax-highlighting.zsh` |
-| Slack | `slack/README.md` | copy the comma-separated hex string → Slack ▸ Preferences ▸ Themes ▸ paste |
-| Zen | `zen/themes/Mocha/<Accent>/userChrome.css` (+ `userContent.css`) | pick an accent folder, copy into your Zen `chrome/` dir |
-| Obsidian | `obsidian/Nebelung/` | copy the folder into a vault's `.obsidian/themes/`, then choose Nebelung under Settings ▸ Appearance ▸ Themes (dark mode recommended) |
-| opencode | `opencode/nebelung.json` | copy into `~/.config/opencode/themes/`, then `theme = "nebelung"` in `opencode.json` |
-| Helix | `helix/themes/default/catppuccin_mocha.toml` (+ `no_italics/`) | copy into `~/.config/helix/themes/`, set `theme = "catppuccin_mocha"` (or `inherits` it) |
-| Xcode | `xcode/themes/Catppuccin Mocha.xccolortheme` | copy into `~/Library/Developer/Xcode/UserData/FontAndColorThemes/`, pick it under Settings ▸ Themes |
-| gh-dash | `gh-dash/themes/mocha/catppuccin-mocha-<accent>.yml` | merge the `theme:` block into `~/.config/gh-dash/config.yml` |
-| bottom | `bottom/themes/mocha.toml` | merge the `[styles.*]` tables into `~/.config/bottom/bottom.toml` |
-| gitui | `gitui/themes/catppuccin-mocha.ron` | copy as `~/.config/gitui/theme.ron` |
-| micro | `micro/themes/catppuccin-mocha.micro` (+ `-transparent`) | copy into `~/.config/micro/colorschemes/`, set `"colorscheme": "catppuccin-mocha"` |
-| Rio | `rio/themes/catppuccin-mocha.toml` | copy into `~/.config/rio/themes/`, set `theme = "catppuccin-mocha"` |
-| Warp | `warp/themes/catppuccin_mocha.yml` | copy into `~/.warp/themes/`, pick it under Settings ▸ Appearance |
-| fish | `fish/themes/catppuccin-mocha.theme` (+ `static/`) | copy into `~/.config/fish/themes/`, then `fish_config theme choose catppuccin-mocha` (the theme name is the filename) — the light variants ship `static/` only (upstream's dynamic theme is dark-flavor-only) |
-| mpv | `mpv/themes/mocha/<accent>.conf` | `include=` the accent you want from `~/.config/mpv/mpv.conf` (colors the OSD/OSC) |
-| Raycast | `raycast/README.md` | click the theme deeplink in it (needs Raycast Pro) |
-| Dark Reader | `dark-reader/README.md` | paste the three hexes into Dark Reader ▸ Colors (set Selection to `Custom`) |
-| Zed | `zed/themes/catppuccin-<accent>.json` (+ `catppuccin-no-italics-<accent>.json`) | copy into `~/.config/zed/themes/`, pick it under Settings ▸ Theme |
-| Emacs | `emacs/catppuccin-definitions.el` | drop it beside `catppuccin-theme.el` (it replaces the upstream definitions), then `(setq catppuccin-flavor 'mocha)` |
-| Sublime Text | `sublime-text/themes/Catppuccin Mocha.sublime-color-scheme` | copy into `Packages/User/`, set `"color_scheme"` in your preferences |
-| JetBrains | `jetbrains/themes/mocha.xml` + `mocha.theme.json` (+ `-no-italics` / `-islands`) | import the `.xml` under Settings ▸ Editor ▸ Color Scheme ▸ Import Scheme; the `.theme.json` is the UI half and needs the plugin layout to load |
-| Kakoune | `kakoune/colors/catppuccin_mocha.kak` | copy into `~/.config/kak/colors/`, then `colorscheme catppuccin_mocha` |
-| k9s | `k9s/themes/catppuccin-mocha.yaml` (+ `-transparent`) | copy into `~/.config/k9s/skins/`, set `ui.skin` |
-| skim | `skim/README.md` | copy the `SKIM_DEFAULT_OPTIONS` snippet into your shell rc |
-| foot | `foot/themes/catppuccin-mocha.ini` | `include=` it from `~/.config/foot/foot.ini` |
-| Konsole | `konsole/themes/catppuccin-mocha.colorscheme` | copy into `~/.local/share/konsole/`, pick it in the profile |
-| Tabby | `tabby/themes/catppuccin-mocha.yaml` | Settings ▸ Color scheme ▸ add it as a custom scheme |
-| Xresources | `xresources/themes/mocha.Xresources` | `#include` from `~/.Xresources`, then `xrdb -merge ~/.Xresources` |
-| zathura | `zathura/themes/catppuccin-mocha` | `include` it from `~/.config/zathura/zathurarc` |
-| OBS | `obs/themes/Catppuccin_Mocha.ovt` **and** `obs/themes/Catppuccin.obt` | copy **both** into OBS's theme dir (`~/Library/Application Support/obs-studio/themes/`), pick it under Appearance — the `.ovt` extends the `.obt` |
-| spotify-player | `spotify-player/theme.toml` | copy into `~/.config/spotify-player/`, set `theme = "Catppuccin-mocha"` |
-| chroma | `chroma/themes/mocha-chroma-style.css` (+ `.xml`) | serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style` |
-| zsh-fsh | `zsh-fsh/themes/catppuccin-mocha.ini` | copy into `~/.config/fsh/`, then `fast-theme XDG:catppuccin-mocha` |
-| sc-im | `sc-im/themes/mocha` | copy as `~/.config/sc-im/scimrc` colours, or `load` it from your `scimrc` |
-| tty | `tty/themes/mocha.txt` | the Linux console's 16 colours — `cat` it into `setvtrgb` (`setvtrgb < mocha.txt`) |
-| Telegram | `telegram/themes/mocha/{android,desktop,ios,macos}` | per-client palette source: rename `android` to `Nebelung.attheme` and open it in Telegram Android; the other three are inputs to that client's packaging (see [catppuccin/telegram](https://github.com/catppuccin/telegram)) |
-| qBittorrent | `qbittorrent/themes/catppuccin-mocha/` (+ `themes/icons/`) | compile it: `cd qbittorrent/themes/catppuccin-mocha && rcc -binary resources.qrc -o nebelung.qbtheme`, then point Options ▸ Behavior ▸ "Use custom UI theme" at the `.qbtheme` |
-| VS Code / Cursor | `vscode/settings.json` | merge into your user `settings.json` (needs the Catppuccin extension) |
-| Stylus | `stylus/nebelung-stylus.json` (+ README) | import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`) |
+Every port sits in one of three **tiers**, from the `select` field in
+[`ports.meta.json`](../ports.meta.json) — which is what decides how much of the
+install a config manager can do for you:
+
+- **auto** — the theme file goes at a known path, and what makes it *active* is a
+  setting, include line, env var or one-shot command in a config a manager owns.
+  A rebuild can do the whole thing.
+- **activate** — same file drop, but the "which theme" state lives in a file the
+  **app itself rewrites** (Obsidian's `appearance.json`, Zed's `settings.json`, a
+  Zen profile's `user.js`). It has to be patched idempotently at activation time
+  rather than symlinked, and the app can clobber it back.
+- **manual** — the app offers no file interface for picking a theme; you paste a
+  string or click through its settings. The file drop can still be automated, the
+  selection cannot.
+
+Each port also carries a `platform` list (`darwin`, `linux`, usually both), so a
+consumer walking this file doesn't try to wire a Wayland terminal on macOS.
+
+<!-- ports:begin -->
+<!-- Generated by scripts/gen-ports-doc.mjs from ports.meta.json — do not edit by hand. -->
+
+| Port | Output in `dist/` | Tier | Install |
+| --- | --- | --- | --- |
+| Ghostty | `ghostty/themes/catppuccin-mocha.conf` | auto | copy into `~/.config/ghostty/themes/`, then `theme = catppuccin-mocha` |
+| Kitty | `kitty/themes/mocha.conf` | auto | copy into `~/.config/kitty/`, then `include mocha.conf` |
+| Alacritty | `alacritty/catppuccin-mocha.toml` | auto | import under `[general] import` in `alacritty.toml` |
+| Starship | `starship/themes/mocha.toml` | auto | merge into `~/.config/starship.toml` (or `palette = "mocha"`) |
+| btop | `btop/themes/catppuccin_mocha.theme` | auto | copy into `~/.config/btop/themes/`, set `color_theme` |
+| tmux | `tmux/themes/catppuccin_mocha_tmux.conf` | auto | `source` it from `.tmux.conf` |
+| Slack | `slack/README.md` | manual | copy the comma-separated hex string → Slack ▸ Preferences ▸ Themes ▸ paste |
+| Zellij | `zellij/themes/nebelung.kdl` | auto | copy into `~/.config/zellij/themes/`, set `theme "nebelung"` |
+| delta | `delta/catppuccin.gitconfig` | auto | `include` it from `~/.gitconfig`, set `features = catppuccin-mocha` |
+| fzf | `fzf/themes/catppuccin-fzf-mocha.sh` (+ fish/nu/ps1/rc) | auto | source it from your shell rc |
+| lsd | `lsd/themes/catppuccin-mocha/colors.yaml` | auto | copy as `~/.config/lsd/colors.yaml`, set `color.theme: custom` |
+| glow | `glow/catppuccin-mocha.json` | auto | a glamour style — pass with `glow -s <path>`, or point `GLAMOUR_STYLE` at it |
+| bat | `bat/themes/Catppuccin Mocha.tmTheme` | auto | copy into `$(bat --config-dir)/themes/`, `bat cache --build`, set `--theme` |
+| zsh-syntax-highlighting | `zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh` | auto | source it before `zsh-syntax-highlighting.zsh` |
+| Obsidian | `obsidian/Nebelung/` | activate | copy the folder into a vault's `.obsidian/themes/`, then choose Nebelung under Settings ▸ Appearance ▸ Themes (dark mode recommended) |
+| lazygit | `lazygit/themes/mocha/<accent>.yml` | auto | point `lg` config at it, or merge the `themes-mergable` variant |
+| yazi | `yazi/themes/mocha/catppuccin-mocha-<accent>.toml` | auto | copy the accent you want as the flavor in `theme.toml` |
+| Zen | `zen/themes/Mocha/<Accent>/userChrome.css` (+ `userContent.css`) | activate | pick an accent folder, copy into your Zen `chrome/` dir (needs `toolkit.legacyUserProfileCustomizations.stylesheets`) |
+| opencode | `opencode/nebelung.json` | auto | copy into `~/.config/opencode/themes/`, then `theme = "nebelung"` in `opencode.json` |
+| Helix | `helix/themes/default/catppuccin_mocha.toml` (+ `no_italics/`) | auto | copy into `~/.config/helix/themes/`, set `theme = "catppuccin_mocha"` (or `inherits` it) |
+| Xcode | `xcode/themes/Catppuccin Mocha.xccolortheme` | manual | copy into `~/Library/Developer/Xcode/UserData/FontAndColorThemes/`, pick it under Settings ▸ Themes |
+| gh-dash | `gh-dash/themes/mocha/catppuccin-mocha-<accent>.yml` | auto | merge the `theme:` block into `~/.config/gh-dash/config.yml` |
+| mpv | `mpv/themes/mocha/<accent>.conf` | auto | `include=` the accent you want from `~/.config/mpv/mpv.conf` (colors the OSD/OSC) |
+| bottom | `bottom/themes/mocha.toml` | auto | merge the `[styles.*]` tables into `~/.config/bottom/bottom.toml` |
+| gitui | `gitui/themes/catppuccin-mocha.ron` | auto | copy as `~/.config/gitui/theme.ron` |
+| micro | `micro/themes/catppuccin-mocha.micro` (+ `-transparent`) | auto | copy into `~/.config/micro/colorschemes/`, set `"colorscheme": "catppuccin-mocha"` |
+| Rio | `rio/themes/catppuccin-mocha.toml` | auto | copy into `~/.config/rio/themes/`, set `theme = "catppuccin-mocha"` |
+| Warp | `warp/themes/catppuccin_mocha.yml` | manual | copy into `~/.warp/themes/`, pick it under Settings ▸ Appearance |
+| fish | `fish/themes/catppuccin-mocha.theme` (+ `static/`) | auto | copy into `~/.config/fish/themes/`, then `fish_config theme choose catppuccin-mocha` (the theme name is the filename) — the light variants ship `static/` only (upstream's dynamic theme is dark-flavor-only) |
+| Raycast | `raycast/README.md` | manual | click the theme deeplink in it (needs Raycast Pro) |
+| Dark Reader | `dark-reader/README.md` | manual | paste the three hexes into Dark Reader ▸ Colors (set Selection to `Custom`) |
+| Zed | `zed/themes/catppuccin-<accent>.json` (+ `catppuccin-no-italics-<accent>.json`) | activate | copy into `~/.config/zed/themes/`, set `"theme"` in `settings.json` (or pick it under Settings ▸ Theme) |
+| Emacs | `emacs/catppuccin-definitions.el` | auto | drop it beside `catppuccin-theme.el` (it replaces the upstream definitions), then `(setq catppuccin-flavor 'mocha)` |
+| Sublime Text | `sublime-text/themes/Catppuccin Mocha.sublime-color-scheme` | activate | copy into `Packages/User/`, set `"color_scheme"` in your preferences |
+| Kakoune | `kakoune/colors/catppuccin_mocha.kak` | auto | copy into `~/.config/kak/colors/`, then `colorscheme catppuccin_mocha` |
+| JetBrains | `jetbrains/themes/mocha.xml` + `mocha.theme.json` (+ `-no-italics` / `-islands`) | manual | import the `.xml` under Settings ▸ Editor ▸ Color Scheme ▸ Import Scheme; the `.theme.json` is the UI half and needs the plugin layout to load |
+| foot | `foot/themes/catppuccin-mocha.ini` | auto | `include=` it from `~/.config/foot/foot.ini` |
+| Konsole | `konsole/themes/catppuccin-mocha.colorscheme` | manual | copy into `~/.local/share/konsole/`, pick it in the profile |
+| Tabby | `tabby/themes/catppuccin-mocha.yaml` | manual | Settings ▸ Color scheme ▸ add it as a custom scheme |
+| Xresources | `xresources/themes/mocha.Xresources` | auto | `#include` from `~/.Xresources`, then `xrdb -merge ~/.Xresources` |
+| k9s | `k9s/themes/catppuccin-mocha.yaml` (+ `-transparent`) | auto | copy into `~/.config/k9s/skins/`, set `ui.skin` |
+| skim | `skim/README.md` | auto | copy the `SKIM_DEFAULT_OPTIONS` snippet into your shell rc |
+| spotify-player | `spotify-player/theme.toml` | auto | copy into `~/.config/spotify-player/`, set `theme = "Catppuccin-mocha"` |
+| zsh-fsh | `zsh-fsh/themes/catppuccin-mocha.ini` | auto | copy into `~/.config/fsh/`, then `fast-theme XDG:catppuccin-mocha` |
+| OBS | `obs/themes/Catppuccin_Mocha.ovt` **and** `obs/themes/Catppuccin.obt` | manual | copy **both** into OBS's theme dir (`~/Library/Application Support/obs-studio/themes/`), pick it under Appearance — the `.ovt` extends the `.obt` |
+| zathura | `zathura/themes/catppuccin-mocha` | auto | `include` it from `~/.config/zathura/zathurarc` |
+| chroma | `chroma/themes/mocha-chroma-style.css` (+ `.xml`) | auto | serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style` |
+| sc-im | `sc-im/themes/mocha` | auto | copy as `~/.config/sc-im/scimrc` colours, or `load` it from your `scimrc` |
+| tty | `tty/themes/mocha.txt` | auto | the Linux console's 16 colours — `cat` it into `setvtrgb` (`setvtrgb < mocha.txt`) |
+| Telegram | `telegram/themes/mocha/{android,desktop,ios,macos}` | manual | per-client palette source: rename `android` to `Nebelung.attheme` and open it in Telegram Android; the other three are inputs to that client's packaging (see [catppuccin/telegram](https://github.com/catppuccin/telegram)) |
+| qBittorrent | `qbittorrent/themes/catppuccin-mocha/` (+ `themes/icons/`) | manual | compile it: `cd qbittorrent/themes/catppuccin-mocha && rcc -binary resources.qrc -o nebelung.qbtheme`, then point Options ▸ Behavior ▸ "Use custom UI theme" at the `.qbtheme` |
+| VS Code / Cursor | `vscode/settings.json` | activate | merge into your user `settings.json` (needs the Catppuccin extension) |
+| Stylus | `stylus/nebelung-stylus.json` (+ README) | manual | import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`) |
+
+**12 of 53 ports can't be installed for you:** Slack, Xcode, Warp, Raycast, Dark Reader, JetBrains, Konsole, Tabby, OBS, Telegram, qBittorrent, Stylus. Everything else is a file drop plus a setting a config manager can own.
+
+**7 are platform-specific:** Linux only — foot, Konsole, Xresources, zathura, tty; macOS only — Xcode, Raycast. The rest list both.
+
+<!-- ports:end -->
 
 VS Code uses the extension's native `catppuccin.colorOverrides` setting — no
 build, the palette is just injected via settings. Set `catppuccin.accentColor`
@@ -125,8 +152,31 @@ Requirements:
 - [`whiskers`](https://whiskers.catppuccin.com) — `brew install catppuccin/tap/whiskers`
 - Node (for the palette generator)
 
-The port manifest is [`ports.conf`](../ports.conf): `name | template | output |
-extra args`. Vendored upstream `.tera` templates live in
+The port manifest is [`ports.conf`](../ports.conf): `name | template | output
+subdir`, one line per rendered file (a port spans several lines when it emits
+more than one). Vendored upstream `.tera` templates live in
 [`templates/`](../templates).
 
 CI keeps the committed `dist/` honest by rebuilding and diffing on every push.
+
+## Install metadata
+
+[`ports.meta.json`](../ports.meta.json) is the second manifest: for each port,
+where its output has to land (`dest`), how it gets there (`install`), what makes
+it the active theme (`select`), where its tool runs (`platform`), and the
+resulting `tier`. It's exposed as the
+flake's **`ports`** output, so a config manager can wire the `auto` ports itself,
+patch the `activate` ones at activation time, and tell the user about the
+`manual` ones instead of silently doing nothing.
+
+The table above is generated from it — after editing, run:
+
+```bash
+node scripts/gen-ports-doc.mjs           # rewrite the table
+node scripts/gen-ports-doc.mjs --check   # or just check it's in sync
+```
+
+`node --test` fails on a stale table, on a `tier` that disagrees with the
+`select`/`install` rule, on an unknown `install`/`select`/`tier`/`platform`
+value, on a port in `ports.conf` with no metadata, and on an advertised path
+that doesn't exist in `dist/`.

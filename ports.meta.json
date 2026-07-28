@@ -1,0 +1,807 @@
+{
+  "ghostty": {
+    "title": "Ghostty",
+    "path": "ghostty/themes/catppuccin-mocha.conf",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/ghostty/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "theme",
+      "value": "catppuccin-mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/ghostty/themes/`, then `theme = catppuccin-mocha`"
+  },
+  "kitty": {
+    "title": "Kitty",
+    "path": "kitty/themes/mocha.conf",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/kitty/",
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "copy into `~/.config/kitty/`, then `include mocha.conf`"
+  },
+  "alacritty": {
+    "title": "Alacritty",
+    "path": "alacritty/catppuccin-mocha.toml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/alacritty/",
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "import under `[general] import` in `alacritty.toml`"
+  },
+  "starship": {
+    "title": "Starship",
+    "path": "starship/themes/mocha.toml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/starship.toml",
+    "install": "merge",
+    "select": "key",
+    "setting": {
+      "key": "palette",
+      "value": "mocha"
+    },
+    "tier": "auto",
+    "howto": "merge into `~/.config/starship.toml` (or `palette = \"mocha\"`)"
+  },
+  "btop": {
+    "title": "btop",
+    "path": "btop/themes/catppuccin_mocha.theme",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/btop/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "color_theme",
+      "value": "catppuccin_mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/btop/themes/`, set `color_theme`"
+  },
+  "tmux": {
+    "title": "tmux",
+    "path": "tmux/themes/catppuccin_mocha_tmux.conf",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "`source` it from `.tmux.conf`"
+  },
+  "slack": {
+    "title": "Slack",
+    "path": "slack/README.md",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "paste",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "copy the comma-separated hex string → Slack ▸ Preferences ▸ Themes ▸ paste"
+  },
+  "zellij": {
+    "title": "Zellij",
+    "path": "zellij/themes/nebelung.kdl",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/zellij/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "theme",
+      "value": "nebelung"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/zellij/themes/`, set `theme \"nebelung\"`"
+  },
+  "delta": {
+    "title": "delta",
+    "path": "delta/catppuccin.gitconfig",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "setting": {
+      "key": "features",
+      "value": "catppuccin-mocha"
+    },
+    "tier": "auto",
+    "howto": "`include` it from `~/.gitconfig`, set `features = catppuccin-mocha`"
+  },
+  "fzf": {
+    "title": "fzf",
+    "path": "fzf/themes/catppuccin-fzf-mocha.sh",
+    "pathNote": "(+ fish/nu/ps1/rc)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "source it from your shell rc"
+  },
+  "lsd": {
+    "title": "lsd",
+    "path": "lsd/themes/catppuccin-mocha/colors.yaml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/lsd/colors.yaml",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "color.theme",
+      "value": "custom"
+    },
+    "tier": "auto",
+    "howto": "copy as `~/.config/lsd/colors.yaml`, set `color.theme: custom`"
+  },
+  "glow": {
+    "title": "glow",
+    "path": "glow/catppuccin-mocha.json",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "env",
+    "setting": {
+      "key": "GLAMOUR_STYLE"
+    },
+    "tier": "auto",
+    "howto": "a glamour style — pass with `glow -s <path>`, or point `GLAMOUR_STYLE` at it"
+  },
+  "bat": {
+    "title": "bat",
+    "path": "bat/themes/Catppuccin Mocha.tmTheme",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "$(bat --config-dir)/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "--theme",
+      "value": "Catppuccin Mocha"
+    },
+    "requires": [
+      "bat cache --build"
+    ],
+    "tier": "auto",
+    "howto": "copy into `$(bat --config-dir)/themes/`, `bat cache --build`, set `--theme`"
+  },
+  "zsh-syntax-highlighting": {
+    "title": "zsh-syntax-highlighting",
+    "path": "zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "source it before `zsh-syntax-highlighting.zsh`"
+  },
+  "obsidian": {
+    "title": "Obsidian",
+    "path": "obsidian/Nebelung/",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "<vault>/.obsidian/themes/",
+    "install": "copy",
+    "select": "mutable",
+    "setting": {
+      "file": "<vault>/.obsidian/appearance.json",
+      "key": "cssTheme",
+      "value": "Nebelung"
+    },
+    "tier": "activate",
+    "howto": "copy the folder into a vault's `.obsidian/themes/`, then choose Nebelung under Settings ▸ Appearance ▸ Themes (dark mode recommended)"
+  },
+  "lazygit": {
+    "title": "lazygit",
+    "path": "lazygit/themes/mocha/<accent>.yml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/lazygit/config.yml",
+    "install": "merge",
+    "select": "key",
+    "setting": {
+      "key": "gui.theme"
+    },
+    "tier": "auto",
+    "howto": "point `lg` config at it, or merge the `themes-mergable` variant"
+  },
+  "yazi": {
+    "title": "yazi",
+    "path": "yazi/themes/mocha/catppuccin-mocha-<accent>.toml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/yazi/theme.toml",
+    "install": "copy",
+    "select": "path",
+    "tier": "auto",
+    "howto": "copy the accent you want as the flavor in `theme.toml`"
+  },
+  "zen": {
+    "title": "Zen",
+    "path": "zen/themes/Mocha/<Accent>/userChrome.css",
+    "pathNote": "(+ `userContent.css`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "<zen profile>/chrome/",
+    "install": "copy",
+    "select": "mutable",
+    "setting": {
+      "file": "<zen profile>/user.js",
+      "key": "toolkit.legacyUserProfileCustomizations.stylesheets",
+      "value": "true"
+    },
+    "tier": "activate",
+    "howto": "pick an accent folder, copy into your Zen `chrome/` dir (needs `toolkit.legacyUserProfileCustomizations.stylesheets`)"
+  },
+  "opencode": {
+    "title": "opencode",
+    "path": "opencode/nebelung.json",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/opencode/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "theme",
+      "value": "nebelung"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/opencode/themes/`, then `theme = \"nebelung\"` in `opencode.json`"
+  },
+  "helix": {
+    "title": "Helix",
+    "path": "helix/themes/default/catppuccin_mocha.toml",
+    "pathNote": "(+ `no_italics/`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/helix/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "theme",
+      "value": "catppuccin_mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/helix/themes/`, set `theme = \"catppuccin_mocha\"` (or `inherits` it)"
+  },
+  "xcode": {
+    "title": "Xcode",
+    "path": "xcode/themes/Catppuccin Mocha.xccolortheme",
+    "platform": [
+      "darwin"
+    ],
+    "dest": "~/Library/Developer/Xcode/UserData/FontAndColorThemes/",
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "copy into `~/Library/Developer/Xcode/UserData/FontAndColorThemes/`, pick it under Settings ▸ Themes"
+  },
+  "gh-dash": {
+    "title": "gh-dash",
+    "path": "gh-dash/themes/mocha/catppuccin-mocha-<accent>.yml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/gh-dash/config.yml",
+    "install": "merge",
+    "select": "key",
+    "setting": {
+      "key": "theme"
+    },
+    "tier": "auto",
+    "howto": "merge the `theme:` block into `~/.config/gh-dash/config.yml`"
+  },
+  "mpv": {
+    "title": "mpv",
+    "path": "mpv/themes/mocha/<accent>.conf",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "`include=` the accent you want from `~/.config/mpv/mpv.conf` (colors the OSD/OSC)"
+  },
+  "bottom": {
+    "title": "bottom",
+    "path": "bottom/themes/mocha.toml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/bottom/bottom.toml",
+    "install": "merge",
+    "select": "path",
+    "tier": "auto",
+    "howto": "merge the `[styles.*]` tables into `~/.config/bottom/bottom.toml`"
+  },
+  "gitui": {
+    "title": "gitui",
+    "path": "gitui/themes/catppuccin-mocha.ron",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/gitui/theme.ron",
+    "install": "copy",
+    "select": "path",
+    "tier": "auto",
+    "howto": "copy as `~/.config/gitui/theme.ron`"
+  },
+  "micro": {
+    "title": "micro",
+    "path": "micro/themes/catppuccin-mocha.micro",
+    "pathNote": "(+ `-transparent`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/micro/colorschemes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "colorscheme",
+      "value": "catppuccin-mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/micro/colorschemes/`, set `\"colorscheme\": \"catppuccin-mocha\"`"
+  },
+  "rio": {
+    "title": "Rio",
+    "path": "rio/themes/catppuccin-mocha.toml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/rio/themes/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "theme",
+      "value": "catppuccin-mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/rio/themes/`, set `theme = \"catppuccin-mocha\"`"
+  },
+  "warp": {
+    "title": "Warp",
+    "path": "warp/themes/catppuccin_mocha.yml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.warp/themes/",
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "copy into `~/.warp/themes/`, pick it under Settings ▸ Appearance"
+  },
+  "fish": {
+    "title": "fish",
+    "path": "fish/themes/catppuccin-mocha.theme",
+    "pathNote": "(+ `static/`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/fish/themes/",
+    "install": "copy",
+    "select": "command",
+    "requires": [
+      "fish_config theme choose catppuccin-mocha"
+    ],
+    "tier": "auto",
+    "howto": "copy into `~/.config/fish/themes/`, then `fish_config theme choose catppuccin-mocha` (the theme name is the filename) — the light variants ship `static/` only (upstream's dynamic theme is dark-flavor-only)"
+  },
+  "raycast": {
+    "title": "Raycast",
+    "path": "raycast/README.md",
+    "platform": [
+      "darwin"
+    ],
+    "dest": null,
+    "install": "paste",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "click the theme deeplink in it (needs Raycast Pro)"
+  },
+  "dark-reader": {
+    "title": "Dark Reader",
+    "path": "dark-reader/README.md",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "paste",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "paste the three hexes into Dark Reader ▸ Colors (set Selection to `Custom`)"
+  },
+  "zed": {
+    "title": "Zed",
+    "path": "zed/themes/catppuccin-<accent>.json",
+    "pathNote": "(+ `catppuccin-no-italics-<accent>.json`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/zed/themes/",
+    "install": "copy",
+    "select": "mutable",
+    "setting": {
+      "file": "~/.config/zed/settings.json",
+      "key": "theme"
+    },
+    "tier": "activate",
+    "howto": "copy into `~/.config/zed/themes/`, set `\"theme\"` in `settings.json` (or pick it under Settings ▸ Theme)"
+  },
+  "emacs": {
+    "title": "Emacs",
+    "path": "emacs/catppuccin-definitions.el",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "catppuccin-flavor",
+      "value": "mocha"
+    },
+    "tier": "auto",
+    "howto": "drop it beside `catppuccin-theme.el` (it replaces the upstream definitions), then `(setq catppuccin-flavor 'mocha)`"
+  },
+  "sublime-text": {
+    "title": "Sublime Text",
+    "path": "sublime-text/themes/Catppuccin Mocha.sublime-color-scheme",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "Packages/User/",
+    "install": "copy",
+    "select": "mutable",
+    "setting": {
+      "file": "Packages/User/Preferences.sublime-settings",
+      "key": "color_scheme"
+    },
+    "tier": "activate",
+    "howto": "copy into `Packages/User/`, set `\"color_scheme\"` in your preferences"
+  },
+  "kakoune": {
+    "title": "Kakoune",
+    "path": "kakoune/colors/catppuccin_mocha.kak",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/kak/colors/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "colorscheme",
+      "value": "catppuccin_mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/kak/colors/`, then `colorscheme catppuccin_mocha`"
+  },
+  "jetbrains": {
+    "title": "JetBrains",
+    "path": "jetbrains/themes/mocha.xml",
+    "pathNote": "+ `mocha.theme.json` (+ `-no-italics` / `-islands`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "import the `.xml` under Settings ▸ Editor ▸ Color Scheme ▸ Import Scheme; the `.theme.json` is the UI half and needs the plugin layout to load"
+  },
+  "foot": {
+    "title": "foot",
+    "path": "foot/themes/catppuccin-mocha.ini",
+    "platform": [
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "`include=` it from `~/.config/foot/foot.ini`"
+  },
+  "konsole": {
+    "title": "Konsole",
+    "path": "konsole/themes/catppuccin-mocha.colorscheme",
+    "platform": [
+      "linux"
+    ],
+    "dest": "~/.local/share/konsole/",
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "copy into `~/.local/share/konsole/`, pick it in the profile"
+  },
+  "tabby": {
+    "title": "Tabby",
+    "path": "tabby/themes/catppuccin-mocha.yaml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "Settings ▸ Color scheme ▸ add it as a custom scheme"
+  },
+  "xresources": {
+    "title": "Xresources",
+    "path": "xresources/themes/mocha.Xresources",
+    "platform": [
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "requires": [
+      "xrdb -merge ~/.Xresources"
+    ],
+    "tier": "auto",
+    "howto": "`#include` from `~/.Xresources`, then `xrdb -merge ~/.Xresources`"
+  },
+  "k9s": {
+    "title": "k9s",
+    "path": "k9s/themes/catppuccin-mocha.yaml",
+    "pathNote": "(+ `-transparent`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/k9s/skins/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "ui.skin",
+      "value": "catppuccin-mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/k9s/skins/`, set `ui.skin`"
+  },
+  "skim": {
+    "title": "skim",
+    "path": "skim/README.md",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "paste",
+    "select": "env",
+    "setting": {
+      "key": "SKIM_DEFAULT_OPTIONS"
+    },
+    "tier": "auto",
+    "howto": "copy the `SKIM_DEFAULT_OPTIONS` snippet into your shell rc"
+  },
+  "spotify-player": {
+    "title": "spotify-player",
+    "path": "spotify-player/theme.toml",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/spotify-player/",
+    "install": "copy",
+    "select": "key",
+    "setting": {
+      "key": "theme",
+      "value": "Catppuccin-mocha"
+    },
+    "tier": "auto",
+    "howto": "copy into `~/.config/spotify-player/`, set `theme = \"Catppuccin-mocha\"`"
+  },
+  "zsh-fsh": {
+    "title": "zsh-fsh",
+    "path": "zsh-fsh/themes/catppuccin-mocha.ini",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/fsh/",
+    "install": "copy",
+    "select": "command",
+    "requires": [
+      "fast-theme XDG:catppuccin-mocha"
+    ],
+    "tier": "auto",
+    "howto": "copy into `~/.config/fsh/`, then `fast-theme XDG:catppuccin-mocha`"
+  },
+  "obs": {
+    "title": "OBS",
+    "path": "obs/themes/Catppuccin_Mocha.ovt",
+    "pathNote": "**and** `obs/themes/Catppuccin.obt`",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/Library/Application Support/obs-studio/themes/",
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "copy **both** into OBS's theme dir (`~/Library/Application Support/obs-studio/themes/`), pick it under Appearance — the `.ovt` extends the `.obt`"
+  },
+  "zathura": {
+    "title": "zathura",
+    "path": "zathura/themes/catppuccin-mocha",
+    "platform": [
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "`include` it from `~/.config/zathura/zathurarc`"
+  },
+  "chroma": {
+    "title": "chroma",
+    "path": "chroma/themes/mocha-chroma-style.css",
+    "pathNote": "(+ `.xml`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "path",
+    "tier": "auto",
+    "howto": "serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style`"
+  },
+  "sc-im": {
+    "title": "sc-im",
+    "path": "sc-im/themes/mocha",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": "~/.config/sc-im/",
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "copy as `~/.config/sc-im/scimrc` colours, or `load` it from your `scimrc`"
+  },
+  "tty": {
+    "title": "tty",
+    "path": "tty/themes/mocha.txt",
+    "platform": [
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "command",
+    "requires": [
+      "setvtrgb < mocha.txt"
+    ],
+    "tier": "auto",
+    "howto": "the Linux console's 16 colours — `cat` it into `setvtrgb` (`setvtrgb < mocha.txt`)"
+  },
+  "telegram": {
+    "title": "Telegram",
+    "path": "telegram/themes/mocha/{android,desktop,ios,macos}",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "per-client palette source: rename `android` to `Nebelung.attheme` and open it in Telegram Android; the other three are inputs to that client's packaging (see [catppuccin/telegram](https://github.com/catppuccin/telegram))"
+  },
+  "qbittorrent": {
+    "title": "qBittorrent",
+    "path": "qbittorrent/themes/catppuccin-mocha/",
+    "pathNote": "(+ `themes/icons/`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "compile",
+    "select": "gui",
+    "requires": [
+      "rcc -binary resources.qrc -o nebelung.qbtheme"
+    ],
+    "tier": "manual",
+    "howto": "compile it: `cd qbittorrent/themes/catppuccin-mocha && rcc -binary resources.qrc -o nebelung.qbtheme`, then point Options ▸ Behavior ▸ \"Use custom UI theme\" at the `.qbtheme`"
+  },
+  "vscode": {
+    "title": "VS Code / Cursor",
+    "path": "vscode/settings.json",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "merge",
+    "select": "mutable",
+    "setting": {
+      "key": "catppuccin.colorOverrides"
+    },
+    "tier": "activate",
+    "howto": "merge into your user `settings.json` (needs the Catppuccin extension)"
+  },
+  "stylus": {
+    "title": "Stylus",
+    "path": "stylus/nebelung-stylus.json",
+    "pathNote": "(+ README)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "paste",
+    "select": "gui",
+    "tier": "manual",
+    "howto": "import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`)"
+  }
+}

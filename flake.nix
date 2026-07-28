@@ -52,6 +52,26 @@
       # subdirectory inside the themes package, "" for the default.
       variants = variantManifest;
 
+      # Per-port install metadata: name -> { title, path, platform, dest,
+      # install, select, tier, howto, ... }. ports.conf says which ports get RENDERED; this says
+      # what installing one actually takes, in a shape a config manager can act
+      # on instead of a paragraph a human has to read. `tier` is what a consumer
+      # branches on:
+      #   auto     — a rebuild can drop the file and make it active, end to end
+      #   activate — same file drop, but the "which theme" setting lives in a
+      #              file the app rewrites at runtime, so it needs an idempotent
+      #              activation-time patch rather than a symlink
+      #   manual   — the app has no file interface for selecting a theme; the
+      #              drop can be automated, the selection can't. Surface these to
+      #              the user instead of pretending they're wired.
+      # `platform` (["darwin"] / ["linux"] / both) is the other filter a consumer
+      # wants first: several ports are Linux-only tools that are `auto` but have
+      # nothing to wire on a Mac.
+      # docs/ports.md is generated from this file (scripts/gen-ports-doc.mjs) and
+      # a test asserts each stored tier matches the select/install rule, so the
+      # value read here can't drift from the rule that defines it.
+      ports = builtins.fromJSON (builtins.readFile ./ports.meta.json);
+
       # `nix flake check` runs these — the same palette unit tests + shellcheck
       # that CI's `unit` job runs, so local check == CI without pushing.
       checks = forSystems (
@@ -103,12 +123,15 @@
             # dist/<port>/... mirrors the layout home-manager sources from;
             # previews + palette JSON tag along for reference (one preview per
             # variant, and variants.json so the tree describes its own layout).
+            # ports.meta.json rides along for the same reason: the tree then
+            # describes how to INSTALL what's in it, not just what's in it.
             installPhase = ''
               runHook preInstall
               mkdir -p "$out/preview"
               cp -R dist/. "$out/"
               cp preview/*.html "$out/preview/"
               cp palette/*.json "$out/"
+              cp ports.meta.json "$out/"
               runHook postInstall
             '';
           };
