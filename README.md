@@ -5,7 +5,7 @@
 **Mocha with the blue stripped out**
 
 the theme — a silver-mist [Catppuccin](https://catppuccin.com) flavor, rendered
-into 22 ports.
+into 21 ports.
 
 ![part of nebelhaus](https://img.shields.io/badge/part_of-nebelhaus-f2c4e5?labelColor=202020)
 ![license](https://img.shields.io/badge/license-MIT-d7d7d7?labelColor=202020)
