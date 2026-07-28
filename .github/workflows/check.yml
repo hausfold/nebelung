@@ -19,8 +19,9 @@ jobs:
       #
       # The `find` filter below excludes the REFERENCE files the package ships
       # alongside the rendered ports — the per-variant previews, the palette hex
-      # maps, and variants.json (the render manifest). They live in the repo root
-      # rather than under dist/, so they're legitimately absent from it.
+      # maps, variants.json (the render manifest), and ports.meta.json (install
+      # metadata). They live in the repo root rather than under dist/, so they're
+      # legitimately absent from it.
       - name: dist/ matches the built output
         run: |
           fail=0
@@ -29,7 +30,7 @@ jobs:
           done < <(cd dist && find . -type f)
           while IFS= read -r f; do
             [ -f "dist/$f" ] || { echo "::error::dist/$f is missing (rendered but not committed)"; fail=1; }
-          done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung*.json' -not -name 'variants.json')
+          done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung*.json' -not -name 'variants.json' -not -name 'ports.meta.json')
           [ "$fail" = 0 ] && echo "dist/ is in sync"
           exit "$fail"
 
