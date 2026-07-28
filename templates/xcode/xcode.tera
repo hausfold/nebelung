@@ -1,0 +1,236 @@
+---
+whiskers:
+  version: ^2.4.0
+  matrix:
+    - flavor
+  filename: "themes/Catppuccin {{ flavor.name }}.xccolortheme"
+---
+
+{%- macro val(val) -%}
+{{ val / 255 | trunc(places=6) | float * 1000000 | round / 1000000 }}
+{%- endmacro -%}
+
+{%- macro rgb(color) -%}
+{{ self::val(val=color.rgb.r) }} {{ self::val(val=color.rgb.g) }} {{ self::val(val=color.rgb.b) }} {{ self::val(val=color.opacity) }}
+{%- endmacro -%}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DVTConsoleDebuggerInputTextColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTConsoleDebuggerInputTextFont</key>
+	<string>SFMono-Bold - 14.0</string>
+	<key>DVTConsoleDebuggerOutputTextColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTConsoleDebuggerOutputTextFont</key>
+	<string>SFMono-Medium - 14.0</string>
+	<key>DVTConsoleDebuggerPromptTextColor</key>
+	<string>{{ self::rgb(color=green) }}</string>
+	<key>DVTConsoleDebuggerPromptTextFont</key>
+	<string>SFMono-Bold - 14.0</string>
+	<key>DVTConsoleExectuableInputTextColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTConsoleExectuableInputTextFont</key>
+	<string>SFMono-Medium - 14.0</string>
+	<key>DVTConsoleExectuableOutputTextColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTConsoleExectuableOutputTextFont</key>
+	<string>SFMono-Bold - 14.0</string>
+	<key>DVTConsoleTextBackgroundColor</key>
+	<string>{{ self::rgb(color=base) }}</string>
+	<key>DVTConsoleTextInsertionPointColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTConsoleTextSelectionColor</key>
+	<string>{{ self::rgb(color=surface1) }}</string>
+	<key>DVTFontAndColorVersion</key>
+	<integer>1</integer>
+	<key>DVTMarkupTextBackgroundColor</key>
+	<string>0.18856 0.195 0.22444 1</string>
+	<key>DVTMarkupTextBorderColor</key>
+	<string>0.253475 0.2594 0.286485 1</string>
+	<key>DVTMarkupTextCodeFont</key>
+	<string>SFMono-Regular - 10.0</string>
+	<key>DVTMarkupTextEmphasisColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTMarkupTextEmphasisFont</key>
+	<string>.AppleSystemUIFontItalic - 10.0</string>
+	<key>DVTMarkupTextInlineCodeColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTMarkupTextLinkColor</key>
+	<string>{{ self::rgb(color=sky) }}</string>
+	<key>DVTMarkupTextLinkFont</key>
+	<string>.AppleSystemUIFont - 10.0</string>
+	<key>DVTMarkupTextNormalColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTMarkupTextNormalFont</key>
+	<string>.AppleSystemUIFont - 10.0</string>
+	<key>DVTMarkupTextOtherHeadingColor</key>
+	<string>1 1 1 0.5</string>
+	<key>DVTMarkupTextOtherHeadingFont</key>
+	<string>.AppleSystemUIFont - 14.0</string>
+	<key>DVTMarkupTextPrimaryHeadingColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTMarkupTextPrimaryHeadingFont</key>
+	<string>.AppleSystemUIFont - 24.0</string>
+	<key>DVTMarkupTextSecondaryHeadingColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTMarkupTextSecondaryHeadingFont</key>
+	<string>.AppleSystemUIFont - 18.0</string>
+	<key>DVTMarkupTextStrongColor</key>
+	<string>{{ self::rgb(color=text) }}</string>
+	<key>DVTMarkupTextStrongFont</key>
+	<string>.AppleSystemUIFontBold - 10.0</string>
+	<key>DVTScrollbarMarkerAnalyzerColor</key>
+	<string>0.403922 0.372549 1 1</string>
+	<key>DVTScrollbarMarkerBreakpointColor</key>
+	<string>0.290196 0.290196 0.968627 1</string>
+	<key>DVTScrollbarMarkerDiffColor</key>
+	<string>0.556863 0.556863 0.556863 1</string>
+	<key>DVTScrollbarMarkerDiffConflictColor</key>
+	<string>0.968627 0.290196 0.290196 1</string>
+	<key>DVTScrollbarMarkerErrorColor</key>
+	<string>0.968627 0.290196 0.290196 1</string>
+	<key>DVTScrollbarMarkerRuntimeIssueColor</key>
+	<string>0.643137 0.509804 1 1</string>
+	<key>DVTScrollbarMarkerWarningColor</key>
+	<string>0.937255 0.717647 0.34902 1</string>
+	<key>DVTSourceTextBackground</key>
+	<string>{{ self::rgb(color=base) }}</string>
+	<key>DVTSourceTextBlockDimBackgroundColor</key>
+	<string>0.5 0.5 0.5 1</string>
+	<key>DVTSourceTextCurrentLineHighlightColor</key>
+	<string>{{ self::rgb(color=surface0) }}</string>
+	<key>DVTSourceTextInsertionPointColor</key>
+	<string>{{ self::rgb(color=subtext0) }}</string>
+	<key>DVTSourceTextInvisiblesColor</key>
+	<string>{{ self::rgb(color=surface2) }}</string>
+	<key>DVTSourceTextSelectionColor</key>
+	<string>{{ self::rgb(color=surface1) }}</string>
+	<key>DVTSourceTextSyntaxColors</key>
+	<dict>
+		<key>xcode.syntax.attribute</key>
+		<string>{{ self::rgb(color=teal) }}</string>
+		<key>xcode.syntax.character</key>
+		<string>{{ self::rgb(color=green) }}</string>
+		<key>xcode.syntax.comment</key>
+		<string>{{ self::rgb(color=overlay2) }}</string>
+		<key>xcode.syntax.comment.doc</key>
+		<string>{{ self::rgb(color=overlay2) }}</string>
+		<key>xcode.syntax.comment.doc.keyword</key>
+		<string>{{ self::rgb(color=overlay2) }}</string>
+		<key>xcode.syntax.declaration.other</key>
+		<string>{{ self::rgb(color=text) }}</string>
+		<key>xcode.syntax.declaration.type</key>
+		<string>{{ self::rgb(color=yellow) }}</string>
+		<key>xcode.syntax.identifier.class</key>
+		<string>{{ self::rgb(color=yellow) }}</string>
+		<key>xcode.syntax.identifier.class.system</key>
+		<string>{{ self::rgb(color=yellow) }}</string>
+		<key>xcode.syntax.identifier.constant</key>
+		<string>{{ self::rgb(color=peach) }}</string>
+		<key>xcode.syntax.identifier.constant.system</key>
+		<string>{{ self::rgb(color=peach) }}</string>
+		<key>xcode.syntax.identifier.function</key>
+		<string>{{ self::rgb(color=blue) }}</string>
+		<key>xcode.syntax.identifier.function.system</key>
+		<string>{{ self::rgb(color=blue) }}</string>
+		<key>xcode.syntax.identifier.macro</key>
+		<string>{{ self::rgb(color=blue) }}</string>
+		<key>xcode.syntax.identifier.macro.system</key>
+		<string>{{ self::rgb(color=blue) }}</string>
+		<key>xcode.syntax.identifier.type</key>
+		<string>{{ self::rgb(color=yellow) }}</string>
+		<key>xcode.syntax.identifier.type.system</key>
+		<string>{{ self::rgb(color=yellow) }}</string>
+		<key>xcode.syntax.identifier.variable</key>
+		<string>{{ self::rgb(color=text) }}</string>
+		<key>xcode.syntax.identifier.variable.system</key>
+		<string>{{ self::rgb(color=text) }}</string>
+		<key>xcode.syntax.keyword</key>
+		<string>{{ self::rgb(color=mauve) }}</string>
+		<key>xcode.syntax.mark</key>
+		<string>{{ self::rgb(color=blue) }}</string>
+		<key>xcode.syntax.markup.code</key>
+		<string>{{ self::rgb(color=teal) }}</string>
+		<key>xcode.syntax.number</key>
+		<string>{{ self::rgb(color=peach) }}</string>
+		<key>xcode.syntax.plain</key>
+		<string>{{ self::rgb(color=text) }}</string>
+		<key>xcode.syntax.preprocessor</key>
+		<string>{{ self::rgb(color=teal) }}</string>
+		<key>xcode.syntax.regex</key>
+		<string>{{ self::rgb(color=pink) }}</string>
+		<key>xcode.syntax.regex.capturename</key>
+		<string>{{ self::rgb(color=text) }}</string>
+		<key>xcode.syntax.regex.charname</key>
+		<string>{{ self::rgb(color=yellow) }}</string>
+		<key>xcode.syntax.regex.number</key>
+		<string>{{ self::rgb(color=peach) }}</string>
+		<key>xcode.syntax.regex.other</key>
+		<string>{{ self::rgb(color=sky) }}</string>
+		<key>xcode.syntax.string</key>
+		<string>{{ self::rgb(color=green) }}</string>
+		<key>xcode.syntax.url</key>
+		<string>{{ self::rgb(color=blue) }}</string>
+	</dict>
+	<key>DVTSourceTextSyntaxFonts</key>
+	<dict>
+		<key>xcode.syntax.attribute</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.character</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.comment</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.comment.doc</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.comment.doc.keyword</key>
+		<string>SFMono-Bold - 14.0</string>
+		<key>xcode.syntax.declaration.other</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.declaration.type</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.class</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.class.system</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.constant</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.constant.system</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.function</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.function.system</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.macro</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.macro.system</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.type</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.type.system</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.variable</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.identifier.variable.system</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.keyword</key>
+		<string>SFMono-{% if flavor.light %}Semibold{% else %}Bold{% endif %} - 14.0</string>
+		<key>xcode.syntax.mark</key>
+		<string>SFMono-Bold - 14.0</string>
+		<key>xcode.syntax.markup.code</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.number</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.plain</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.preprocessor</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.string</key>
+		<string>SFMono-Regular - 14.0</string>
+		<key>xcode.syntax.url</key>
+		<string>SFMono-Regular - 14.0</string>
+	</dict>
+</dict>
+</plist>

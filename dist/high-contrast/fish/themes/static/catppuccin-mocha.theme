@@ -1,0 +1,30 @@
+# name: 'Catppuccin Mocha'
+# url: 'https://github.com/catppuccin/fish'
+
+# preferred_background: 090909
+fish_color_normal ffffff
+fish_color_command 8db4f3
+fish_color_param efcece
+fish_color_keyword c9a8f1
+fish_color_quote abe1a6
+fish_color_redirection f2c4e5
+fish_color_end f5b58e
+fish_color_comment 8e8e8e
+fish_color_error ed8fa9
+fish_color_gray 737373
+fish_color_selection --background=222222
+fish_color_search_match --background=222222
+fish_color_option abe1a6
+fish_color_operator f2c4e5
+fish_color_escape e6a3ad
+fish_color_autosuggestion 737373
+fish_color_cancel ed8fa9
+fish_color_cwd f7e2b5
+fish_color_user 9be0d5
+fish_color_host 8db4f3
+fish_color_host_remote abe1a6
+fish_color_status ed8fa9
+fish_pager_color_progress 737373
+fish_pager_color_prefix f2c4e5
+fish_pager_color_completion ffffff
+fish_pager_color_description 737373

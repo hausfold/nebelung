@@ -59,18 +59,6 @@
 
 ### Theme Strings
 
-- **Latte** (Make sure to enable light mode!)
-  ```
-  #EFF1F5,#F8F8FA,#8839EF,#EFF1F5,#DCE0E8,#4C4F69,#8839EF,#E64553,#EFF1F5,#4C4F69
-  ```
-- **Frappé**
-  ```
-  #303446,#F8F8FA,#CA9EE6,#303446,#232634,#C6D0F5,#CA9EE6,#EA999C,#303446,#C6D0F5
-  ```
-- **Macchiato**
-  ```
-  #24273A,#F8F8FA,#C6A0F6,#24273A,#181926,#CAD3F5,#C6A0F6,#EE99A0,#24273A,#CAD3F5
-  ```
 - **Mocha**
   ```
   #090909,#F8F8FA,#C9A8F1,#090909,#010101,#FFFFFF,#C9A8F1,#E6A3AD,#090909,#FFFFFF

@@ -1,0 +1,26 @@
+---
+whiskers:
+  version: "^2.9.0"
+  matrix:
+    - flavor
+    - accent
+  filename: "themes/{{ flavor.identifier }}/catppuccin-{{ flavor.identifier }}-{{ accent }}.yml"
+  hex_format: "#{{r}}{{g}}{{b}}{{z}}"
+---
+{%- set accent = flavor.colors[accent] -%}
+theme:
+  colors:
+    text:
+      primary: "{{ text.hex }}"
+      secondary: "{{ accent.hex }}"
+      inverted: "{{ crust.hex }}"
+      faint: "{{ subtext1.hex }}"
+      warning: "{{ yellow.hex }}"
+      success: "{{ green.hex }}"
+      error: "{{ red.hex }}"
+    background:
+      selected: "{{ surface0.hex }}"
+    border:
+      primary: "{{ accent.hex }}"
+      secondary: "{{ surface1.hex }}"
+      faint: "{{ surface0.hex }}"

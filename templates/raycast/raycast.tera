@@ -1,0 +1,71 @@
+---
+whiskers:
+  version: "2.2.0"
+  filename: "README.md"
+---
+<h3 align="center">
+  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/><br/>
+  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+  Catppuccin for <a href="https://www.raycast.com/">Raycast</a>
+  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+</h3>
+
+<p align="center">
+  <a href="https://github.com/catppuccin/raycast/stargazers"><img src="https://img.shields.io/github/stars/catppuccin/raycast?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/catppuccin/raycast/issues"><img src="https://img.shields.io/github/issues/catppuccin/raycast?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+  <a href="https://github.com/catppuccin/raycast/contributors"><img src="https://img.shields.io/github/contributors/catppuccin/raycast?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
+</p>
+
+<p align="center">
+  <img src="./assets/preview.webp"/>
+</p>
+
+## Previews
+
+{%- for _, flavor in flavors %}
+<details>
+<summary>{{ flavor.emoji }} {{ flavor.name }}</summary>
+<img src="./assets/{{ flavor.identifier }}.webp"/>
+</details>
+{%- endfor %}
+
+## Usage
+
+Click one of the following links to install the theme to your profile:
+
+{#- NEBELUNG PATCH: upstream emits a link for all four catppuccin flavors, but
+    only the one this render targets carries the Nebelung overrides — the other
+    three would be stock Catppuccin links wearing a Nebelung README. Capture the
+    rendered flavor before the loop shadows `flavor`, then emit only that one. -#}
+{%- set current = flavor.identifier -%}
+{%- for id, flavor in flavors -%}
+{%- if id == current -%}
+{%- set palette = flavor.colors %}
+- [{{ flavor.emoji }} {{ flavor.name }}](https://themes.ray.so?version=1&name=Catppuccin%20{{ flavor.name }}&colors=%23{{ [palette.base, palette.base, palette.text, palette.overlay0, palette.overlay1, palette.red, palette.peach, palette.yellow, palette.green, palette.blue, palette.lavender, palette.mauve] | map(attribute="hex") | join(sep=",%23") }}&appearance={%- if flavor.dark == true -%}dark{%- else -%}light{%- endif -%})
+{%- endif -%}
+{%- endfor %}
+
+## 🙋 FAQ
+
+- Q: **_"Why do I need Pro to install this theme?"_**\
+  A: Sadly themes need a subscription to Raycast Pro to be enabled.
+  It's not ideal, but if you happen to have Raycast Pro these are designed for
+  you.
+
+## 💝 Thanks to
+
+- [RayhanADev](https://github.com/rayhanadev)
+
+&nbsp;
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" />
+</p>
+
+<p align="center">
+	Copyright &copy; 2021-present <a href="https://github.com/catppuccin" target="_blank">Catppuccin Org</a>
+</p>
+
+<p align="center">
+	<a href="https://github.com/catppuccin/catppuccin/blob/main/LICENSE"><img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=d9e0ee&colorA=363a4f&colorB=b7bdf8"/></a>
+</p>

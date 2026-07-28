@@ -64,7 +64,12 @@ whiskers:
 
 ### Theme Strings
 
-{% for id, flavor in flavors %}
+{# NEBELUNG PATCH: emit only the flavor this render targets. Upstream lists all
+    four, but --color-overrides only rewrites the selected one, so the other
+    three were stock Catppuccin theme strings under a Nebelung heading.
+    `current` is captured before the loop shadows `flavor`. -#}
+{%- set current = flavor.identifier -%}
+{% for id, flavor in flavors %}{% if id == current %}
 {%- set palette = flavor.colors -%}
 - **{{flavor.name}}**{% if id == "latte" %} (Make sure to enable light mode!){%- endif %}
 {%- filter upper %}
@@ -72,7 +77,7 @@ whiskers:
   #{{palette.base.hex}},#F8F8FA,#{{palette.mauve.hex}},#{{palette.base.hex}},#{{palette.crust.hex}},#{{palette.text.hex}},#{{palette.mauve.hex}},#{{palette.maroon.hex}},#{{palette.base.hex}},#{{palette.text.hex}}
   ```
 {% endfilter -%}
-{%- endfor %}
+{%- endif %}{%- endfor %}
 ## 💝 Thanks to
 
 - [qupufu](https://github.com/qupufu)
