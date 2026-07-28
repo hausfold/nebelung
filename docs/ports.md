@@ -37,6 +37,22 @@ Paths below are the default (Mocha) variant. A variant's files sit under its
 | mpv | `mpv/themes/mocha/<accent>.conf` | `include=` the accent you want from `~/.config/mpv/mpv.conf` (colors the OSD/OSC) |
 | Raycast | `raycast/README.md` | click the theme deeplink in it (needs Raycast Pro) |
 | Dark Reader | `dark-reader/README.md` | paste the three hexes into Dark Reader ▸ Colors (set Selection to `Custom`) |
+| Zed | `zed/themes/catppuccin-<accent>.json` (+ `catppuccin-no-italics-<accent>.json`) | copy into `~/.config/zed/themes/`, pick it under Settings ▸ Theme |
+| Emacs | `emacs/catppuccin-definitions.el` | drop it beside `catppuccin-theme.el` (it replaces the upstream definitions), then `(setq catppuccin-flavor 'mocha)` |
+| Sublime Text | `sublime-text/themes/Catppuccin Mocha.sublime-color-scheme` | copy into `Packages/User/`, set `"color_scheme"` in your preferences |
+| JetBrains | `jetbrains/themes/mocha.xml` + `mocha.theme.json` (+ `-no-italics` / `-islands`) | import the `.xml` under Settings ▸ Editor ▸ Color Scheme ▸ Import Scheme; the `.theme.json` is the UI half and needs the plugin layout to load |
+| Kakoune | `kakoune/colors/catppuccin_mocha.kak` | copy into `~/.config/kak/colors/`, then `colorscheme catppuccin_mocha` |
+| k9s | `k9s/themes/catppuccin-mocha.yaml` (+ `-transparent`) | copy into `~/.config/k9s/skins/`, set `ui.skin` |
+| skim | `skim/README.md` | copy the `SKIM_DEFAULT_OPTIONS` snippet into your shell rc |
+| foot | `foot/themes/catppuccin-mocha.ini` | `include=` it from `~/.config/foot/foot.ini` |
+| Konsole | `konsole/themes/catppuccin-mocha.colorscheme` | copy into `~/.local/share/konsole/`, pick it in the profile |
+| Tabby | `tabby/themes/catppuccin-mocha.yaml` | Settings ▸ Color scheme ▸ add it as a custom scheme |
+| Xresources | `xresources/themes/mocha.Xresources` | `#include` from `~/.Xresources`, then `xrdb -merge ~/.Xresources` |
+| zathura | `zathura/themes/catppuccin-mocha` | `include` it from `~/.config/zathura/zathurarc` |
+| OBS | `obs/themes/Catppuccin_Mocha.ovt` **and** `obs/themes/Catppuccin.obt` | copy **both** into OBS's theme dir (`~/Library/Application Support/obs-studio/themes/`), pick it under Appearance — the `.ovt` extends the `.obt` |
+| spotify-player | `spotify-player/theme.toml` | copy into `~/.config/spotify-player/`, set `theme = "Catppuccin-mocha"` |
+| chroma | `chroma/themes/mocha-chroma-style.css` (+ `.xml`) | serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style` |
+| zsh-fsh | `zsh-fsh/themes/catppuccin-mocha.ini` | copy into `~/.config/fsh/`, then `fast-theme XDG:catppuccin-mocha` |
 | VS Code / Cursor | `vscode/settings.json` | merge into your user `settings.json` (needs the Catppuccin extension) |
 | Stylus | `stylus/nebelung-stylus.json` (+ README) | import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`) |
 
@@ -44,12 +60,50 @@ VS Code uses the extension's native `catppuccin.colorOverrides` setting — no
 build, the palette is just injected via settings. Set `catppuccin.accentColor`
 yourself if you want a non-default accent.
 
-Slack, Raycast and Dark Reader are **paste-a-string** ports: the template renders
-a README carrying the payload rather than a config file. Upstream's versions loop
-over all four Catppuccin flavors, but `--color-overrides` only rewrites the one
-being rendered — so ours are patched (search `NEBELUNG PATCH` in the template) to
-emit only that flavor. Otherwise the extra rows would hand you stock Catppuccin
-under a Nebelung heading.
+Slack, Raycast, Dark Reader and skim are **paste-a-string** ports: the template
+renders a README carrying the payload rather than a config file.
+
+## One flavor per render
+
+`--color-overrides` rewrites exactly one Catppuccin flavor — the one the render
+targets. Any template that emits *several* flavors into one file therefore ships
+stock Catppuccin alongside the Nebelung part. Every such template here is patched
+to emit only the rendered flavor; search **`NEBELUNG PATCH`** in `templates/` to
+find them. Today that means:
+
+- **README ports** (Slack, Raycast, Dark Reader, skim) — one flavor block, not four.
+- **multi-flavor config files** (delta's gitconfig, Zed's theme family, Emacs's
+  palette alist, spotify-player's `theme.toml`) — one section, not four. For Zed
+  this also cuts the port from 3.3 MB to 0.8 MB per variant.
+- **light+dark-in-one-file themes** (fish, foot) — upstream's "dynamic" mode
+  carries a `[light]` / `[colors-light]` half built from Latte, which a Mocha
+  render can't reach. Only the static theme is rendered, and it lands directly in
+  `themes/` (no `static/` subdir, since there is nothing to disambiguate from).
+
+A few templates also had upstream's own build layout stripped from their output
+path (`dist/`, `build/`, `src/main/resources/`) so everything lands under
+`dist/<port>/` here. Same marker.
+
+The one deliberate exception is **Stylus**: its import JSON is a userstyles
+bundle where picking a flavor per site is the feature, so it keeps all four.
+
+Re-vendoring any of those templates from upstream drops the patch — re-apply it.
+
+Ports can also ship colour-free companion files: anything under
+`templates/<port>/static/` is copied into the port's output verbatim (OBS's base
+`.obt`, which the rendered `.ovt` extends).
+
+## Missing a port?
+
+Catppuccin has ~350 ports; Nebelung carries the ones its author uses plus the
+widely-used rest. Not carried today, mostly for want of a user: aerc, Cider,
+Contour, Element, Halloy, HexChat, imv, Mailspring, process-compose,
+qBittorrent, sc-im, Telegram, tty. Anything Catppuccin themes with a
+[whiskers](https://whiskers.catppuccin.com) template can be added in about three
+lines — **[open an issue](https://github.com/nebelhaus/nebelung/issues/new) or a
+PR** with the port name and it goes in. Ports without a whiskers template (nvim,
+Discord, …) need a hand-written template first; say so in the issue and it can
+still happen.
 
 ## Rendering
 

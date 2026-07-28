@@ -5,7 +5,15 @@ whiskers:
   hex_format: "#{{r}}{{g}}{{b}}"
 ---
 
+{# NEBELUNG PATCH: emit only the flavor this render targets. Upstream writes a
+   [delta "catppuccin-<flavor>"] section for all four, but --color-overrides
+   rewrites just the rendered one — the other three were stock Catppuccin
+   sections in a Nebelung gitconfig. `current` is captured before the loop
+   shadows `flavor`; consumers set features = catppuccin-<flavor> to match the
+   variant they are on, which is what nebelhaus already does. #}
+{%- set current = flavor.identifier -%}
 {%- for identifier, flavor in flavors -%}
+{%- if identifier == current -%}
 {%- set palette = flavor.colors -%}
 
 [delta "catppuccin-{{ identifier }}"]
@@ -39,5 +47,6 @@ whiskers:
 	# Should match the name of the bat theme
 	syntax-theme = Catppuccin {{ identifier | capitalize }}
 {% if not loop.last %}
+{% endif -%}
 {% endif -%}
 {% endfor -%}

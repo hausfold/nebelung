@@ -3,9 +3,13 @@ whiskers:
   version: "^2.6.0"
   matrix:
     - flavor
-    - mode: [dynamic, static]
-  filename: "themes/{% if mode == 'static' %}static/{% endif %}catppuccin-{{ flavor.identifier }}.theme"
-  skip_if: "{{ mode == 'dynamic' and flavor.light }}"
+    # NEBELUNG PATCH: upstream also renders a "dynamic" mode whose [light]
+    # section is built from flavors.latte. --color-overrides only rewrites the
+    # flavor being rendered, so that half shipped stock Catppuccin Latte inside
+    # a Nebelung theme. Static only; the filename loses the static/ subdir it
+    # only existed to disambiguate from.
+    - mode: [static]
+  filename: "themes/catppuccin-{{ flavor.identifier }}.theme"
 ---
 {%- macro theme(name, palette) -%}
 # preferred_background: {{ palette.base.hex }}

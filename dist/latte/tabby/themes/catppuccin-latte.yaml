@@ -1,0 +1,23 @@
+name: Catppuccin Latte
+foreground: '#515151'
+background: '#f1f1f1'
+selection: null
+cursor: '#d78d7d'
+cursorAccent: null
+colors:
+  - '#616161'
+  - '#ca2a40'
+  - '#4a9e3a'
+  - '#d99137'
+  - '#2a6ae8'
+  - '#e47cc7'
+  - '#2f9197'
+  - '#b0b0b0'
+  - '#717171'
+  - '#ca2a40'
+  - '#4a9e3a'
+  - '#d99137'
+  - '#2a6ae8'
+  - '#e47cc7'
+  - '#2f9197'
+  - '#c0c0c0'
