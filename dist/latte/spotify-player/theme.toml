@@ -1,0 +1,38 @@
+
+[[themes]]
+name = "Catppuccin-latte"
+[themes.palette]
+background = "#f1f1f1"
+foreground = "#515151"
+black = "#f1f1f1"
+blue = "#2a6ae8"
+cyan = "#30a4de"
+green = "#4a9e3a"
+magenta = "#8545e3"
+red = "#ca2a40"
+white = "#515151"
+yellow = "#d99137"
+bright_black = "#f1f1f1"
+bright_blue = "#2a6ae8"
+bright_cyan = "#30a4de"
+bright_green = "#4a9e3a"
+bright_magenta = "#8545e3"
+bright_red = "#ca2a40"
+bright_white = "#515151"
+bright_yellow = "#d99137"
+
+[themes.component_style]
+selection = { bg = "#d0d0d0", modifiers = ["Bold"] }
+block_title = { fg = "Magenta" }
+playback_track = { fg = "Cyan", modifiers = ["Bold"] }
+playback_album = { fg = "Yellow" }
+playback_metadata = { fg = "Blue" }
+playback_progress_bar = { bg = "#d0d0d0", fg = "Green" }
+current_playing = { fg = "Green", modifiers = ["Bold"] }
+page_desc = { fg = "Cyan", modifiers = ["Bold"] }
+table_header = { fg = "Blue" }
+border = {}
+playback_status = { fg = "Cyan", modifiers = ["Bold"] }
+playback_artists = { fg = "Cyan", modifiers = ["Bold"] }
+playlist_desc = { fg = "#717171" }
+

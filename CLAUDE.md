@@ -25,7 +25,14 @@ colored.
 
 - `palette/nebelung.hex.json` → the `name → #hex` map. The flake exposes it as the
   `palette` output; consumers inject it directly (e.g. a starship `[palettes.*]` table).
-- `templates/` → whiskers templates, one per tool (bat, delta, ghostty, zellij, …).
+- `templates/` → whiskers templates, one per tool (bat, delta, ghostty, zellij, …),
+  vendored from upstream **verbatim except where marked `NEBELUNG PATCH`**. Nearly
+  every patch is the same fix: `--color-overrides` rewrites only the flavor being
+  rendered, so a template that emits *all four* catppuccin flavors into one file
+  ships stock Catppuccin next to the Nebelung part. Grep the marker before
+  re-vendoring — a fresh copy from upstream silently drops it. Details and the
+  full list: [`docs/ports.md`](docs/ports.md). Colour-free companion files a port
+  needs go in `templates/<port>/static/`, copied into its output verbatim.
 - `ports.conf` → which ports get rendered.
 - **Variants** (`VARIANTS` in `scripts/generate-palette.mjs`) → the flavor axis
   (mocha = dark, latte = light) crossed with the contrast axis. Adding or retuning

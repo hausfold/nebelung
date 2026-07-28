@@ -44,7 +44,7 @@ trim() {
 
 # render_ports <palette-file> <flavor> <dist-root>
 render_ports() {
-  local palette="$1" flavor="$2" root_out="$3" name template outdir produced
+  local palette="$1" flavor="$2" root_out="$3" name template outdir produced static_dir
   count=0
   while IFS='|' read -r name template outdir; do
     name="$(trim "$name")"
@@ -57,6 +57,14 @@ render_ports() {
     fi
     mkdir -p "$outdir"
     ( cd "$outdir" && whiskers "$template" -f "$flavor" --color-overrides "$palette" >/dev/null )
+    # A port can ship colour-free companion files its rendered output needs —
+    # OBS renders a .ovt that `extends` a base .obt carrying only structure.
+    # Anything under templates/<port>/static/ is copied in verbatim, mirroring
+    # the output layout.
+    static_dir="$(dirname "$template")/static"
+    if [[ -d "$static_dir" ]]; then
+      cp -R "$static_dir/." "$outdir/"
+    fi
     produced="$(find "$outdir" -type f | sed "s|^$outdir/||" | paste -sd' ' - | cut -c1-80)"
     echo "✓ $name → $outdir/ ($produced)"
     count=$((count + 1))

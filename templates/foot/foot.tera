@@ -1,0 +1,66 @@
+---
+whiskers:
+  version: ^2.9.0
+  matrix:
+    - flavor
+    # NEBELUNG PATCH: upstream also renders a "dynamic" mode that carries a
+    # [colors-light] section built from flavors.latte. --color-overrides only
+    # rewrites the flavor being rendered, so that half was stock Catppuccin
+    # Latte inside a Nebelung theme. Static only; the filename loses the
+    # static/ subdir it only existed to disambiguate from.
+    - mode: [static]
+  filename: "themes/catppuccin-{{ flavor.identifier }}.ini"
+---
+{%- macro theme(name, palette, dark) -%}
+{#
+  0 = black
+  1 = red
+  2 = green
+  3 = yellow
+  4 = blue
+  5 = magenta
+  6 = cyan
+  7 = white
+-#}
+cursor={% if dark %}{{ palette.crust.hex }}{% else %}{{ palette.base.hex }}{% endif %} {{palette.rosewater.hex}}
+foreground={{palette.text.hex}}
+background={{palette.base.hex}}
+
+regular0={% if dark %}{{ palette.surface1.hex }}{% else %}{{ palette.subtext1.hex }}{% endif %}
+regular1={{palette.red.hex}}
+regular2={{palette.green.hex}}
+regular3={{palette.yellow.hex}}
+regular4={{palette.blue.hex}}
+regular5={{palette.pink.hex}}
+regular6={{palette.teal.hex}}
+regular7={% if dark %}{{ palette.subtext1.hex }}{% else %}{{ palette.surface2.hex }}{% endif %}
+
+bright0={% if dark %}{{ palette.surface2.hex }}{% else %}{{ palette.subtext0.hex }}{% endif %}
+bright1={{palette.red.hex}}
+bright2={{palette.green.hex}}
+bright3={{palette.yellow.hex}}
+bright4={{palette.blue.hex}}
+bright5={{palette.pink.hex}}
+bright6={{palette.teal.hex}}
+bright7={% if dark %}{{ palette.subtext0.hex }}{% else %}{{ palette.surface1.hex }}{% endif %}
+
+16={{palette.peach.hex}}
+17={{palette.rosewater.hex}}
+
+selection-foreground={{palette.text.hex}}
+selection-background={{palette.overlay2 | mix(color=palette.base, amount=0.3) | get(key='hex')}}
+
+search-box-no-match={{palette.crust.hex}} {{palette.red.hex}}
+search-box-match={{palette.text.hex}} {{palette.surface0.hex}}
+
+jump-labels={{palette.crust.hex}} {{palette.peach.hex}}
+urls={{palette.blue.hex}}
+{%- endmacro -%}
+
+[colors-dark]
+{{ self::theme(name=flavor.name, palette=flavor.colors, dark=flavor.dark) }}
+
+{% if mode == "dynamic" -%}
+[colors-light]
+{{ self::theme(name="Latte", palette=flavors.latte.colors, dark=false) }}
+{% endif -%}

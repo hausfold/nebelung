@@ -1,0 +1,18 @@
+---
+whiskers:
+  version: 2.7.0
+  filename: catppuccin-definitions.el
+  hex_format: "#{{r}}{{g}}{{b}}"
+---
+;;; {{ whiskers.filename }} --- The Catppuccin palette -*- no-byte-compile: t; -*-
+{# NEBELUNG PATCH: upstream emits an alist of all four catppuccin flavors, but
+    --color-overrides only rewrites the one being rendered, so the other three
+    would be stock Catppuccin inside a Nebelung file. We emit a single entry,
+    keyed by the rendered flavor, so `(setq catppuccin-flavor '<flavor>)` still
+    resolves. The inner loop.last paren dance is upstream's, untouched. -#}
+(({{ flavor.identifier }} .
+   ({% for id, color in flavor.colors -%}
+   ({{id}} . "{{color.hex}}")
+   {%- if loop.last -%})){%- endif %}{% if not loop.last %}
+   {% endif %}{% endfor %})
+
