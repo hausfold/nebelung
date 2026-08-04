@@ -139,10 +139,34 @@ test("committed palette/variants.json matches VARIANTS (drift guard)", () => {
 	const expected = Object.fromEntries(
 		Object.entries(VARIANTS).map(([name, cfg]) => [
 			name,
-			{ flavor: cfg.flavor ?? "mocha", dir: variantDir(name) },
+			{
+				flavor: cfg.flavor ?? "mocha",
+				contrast: cfg.contrastBoost ? "high" : "normal",
+				dir: variantDir(name),
+			},
 		]),
 	);
 	assert.deepEqual(committed, expected);
+});
+
+test("every contrast has both flavors (stylus pairs them)", () => {
+	// gen-stylus renders ONE bundle per contrast carrying both the mocha and the
+	// latte slot, because a userstyle picks between them by the browser's colour
+	// scheme rather than by anything we render. A contrast missing a flavor would
+	// leave half of every style resolving to upstream Catppuccin — the exact bug
+	// that let light mode go un-nebelung'd for as long as it did.
+	const byContrast = {};
+	for (const [name, cfg] of Object.entries(VARIANTS)) {
+		const contrast = cfg.contrastBoost ? "high" : "normal";
+		(byContrast[contrast] ??= new Set()).add(cfg.flavor ?? "mocha");
+	}
+	for (const [contrast, flavors] of Object.entries(byContrast)) {
+		assert.deepEqual(
+			[...flavors].sort(),
+			["latte", "mocha"],
+			`contrast "${contrast}" needs a mocha AND a latte variant`,
+		);
+	}
 });
 
 test("the default variant is unambiguously the plain nebelung one", () => {

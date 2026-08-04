@@ -295,7 +295,16 @@ if (isMain) {
 			join(root, "palette", `${variant}.hex.json`),
 			JSON.stringify(vOut, null, 2) + "\n",
 		);
-		manifest[variant] = { flavor, dir: variantDir(variant) };
+		// `contrast` is derived, not declared: a variant IS high-contrast exactly
+		// when it asked for a boost. It's in the manifest because the two axes
+		// are independent for any consumer that has to PAIR variants up —
+		// gen-stylus renders one bundle per contrast carrying both flavors, and
+		// without this it would have to re-derive the pairing from the name.
+		manifest[variant] = {
+			flavor,
+			contrast: cfg.contrastBoost ? "high" : "normal",
+			dir: variantDir(variant),
+		};
 	}
 
 	// The manifest build.sh renders from. Generated rather than hand-listed so

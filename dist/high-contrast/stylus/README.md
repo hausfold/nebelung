@@ -1,4 +1,4 @@
-# Stylus (Nebelung Port)
+# Stylus (Nebelung Port, high contrast)
 
 This port modifies the official [Catppuccin Userstyles](https://github.com/catppuccin/userstyles) to use the Nebelung palette.
 
@@ -17,7 +17,7 @@ Because Catppuccin styles are written in LESS and compiled dynamically in the br
 ## What this bundle is, and isn't
 
 It carries **both** flavors — the mocha slot and the latte slot are both
-Nebelung, at normal contrast — so light and
+Nebelung, at high contrast — so light and
 dark both look right. Which one a style uses is that style's own
 `lightFlavor` / `darkFlavor` var, and the **accent** is likewise a per-style
 `accentColor` var defaulting to `mauve`. Those live in Stylus's own storage,
