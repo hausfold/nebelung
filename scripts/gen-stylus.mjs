@@ -28,7 +28,6 @@
 // is what lets a consumer path stay uniform) without the package paying twice.
 import fs from 'fs';
 import path from 'path';
-import https from 'https';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -68,30 +67,25 @@ const lessBlock = (palette) => {
   return `{ ${SLOTS.map((s) => `@${s}: #${palette[s]};`).join(' ')} }`;
 };
 
-async function fetchImportJson() {
-  const envPath = process.env.CATPPUCCIN_USERSTYLES_EXPORT;
-  if (envPath && fs.existsSync(envPath)) {
-    return JSON.parse(fs.readFileSync(envPath, 'utf-8'));
-  }
+// The bundle's input is the VENDORED upstream export, never a live download.
+// Upstream's "all-userstyles-export" asset is a rolling URL: it used to be the
+// fallback here, so a plain `bash build.sh` outside Nix silently bundled a
+// NEWER export than the one the Nix build (and therefore CI) uses, and the
+// committed dist/ drifted the moment someone ran the build without the env var
+// set. Same input, or no build. Re-vendor by re-downloading that URL into
+// vendor/ deliberately — see the note in flake.nix.
+const VENDORED_EXPORT = path.join(ROOT, 'vendor', 'catppuccin-userstyles-export.json');
 
-  // Fallback for manual builds without Nix
-  const url = 'https://github.com/catppuccin/userstyles/releases/download/all-userstyles-export/import.json';
-  console.log(`fetching ${url} (fallback)`);
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      if (res.statusCode === 301 || res.statusCode === 302) {
-        https.get(res.headers.location, (res2) => {
-          let data = '';
-          res2.on('data', chunk => data += chunk);
-          res2.on('end', () => resolve(JSON.parse(data)));
-        }).on('error', reject);
-      } else {
-        let data = '';
-        res.on('data', chunk => data += chunk);
-        res.on('end', () => resolve(JSON.parse(data)));
-      }
-    }).on('error', reject);
-  });
+function readImportJson() {
+  const src = process.env.CATPPUCCIN_USERSTYLES_EXPORT || VENDORED_EXPORT;
+  if (!fs.existsSync(src)) {
+    throw new Error(
+      `userstyles export not found at ${src}. It is vendored, not fetched — ` +
+      `restore vendor/catppuccin-userstyles-export.json (or point ` +
+      `CATPPUCCIN_USERSTYLES_EXPORT at a copy) and re-run.`,
+    );
+  }
+  return JSON.parse(fs.readFileSync(src, 'utf-8'));
 }
 
 // One contrast's bundle: the upstream export with our overrides injected.
@@ -164,8 +158,8 @@ not in this file: set them in the Stylus UI, or have your rice stamp them into
 the bundle before importing.
 `;
 
-async function main() {
-  const importJson = await fetchImportJson();
+function main() {
+  const importJson = readImportJson();
 
   // Group the variants by contrast: one bundle per contrast, and within a
   // contrast the two flavors share it.
@@ -224,7 +218,9 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+try {
+  main();
+} catch (err) {
   console.error(err);
   process.exit(1);
-});
+}
