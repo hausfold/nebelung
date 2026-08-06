@@ -10,7 +10,7 @@ into 53 ports.
 ![part of nebelhaus](https://img.shields.io/badge/part_of-nebelhaus-f2c4e5?labelColor=202020)
 ![license](https://img.shields.io/badge/license-MIT-d7d7d7?labelColor=202020)
 
-<img src="./assets/mocha-vs-nebelung.png" alt="the same Ghostty window — Helix, Starship and delta — in Catppuccin Mocha above and Nebelung below: blue-tinted neutrals versus true-gray neutrals, with the four variant ramps beneath" width="560">
+<img src="./assets/mocha-vs-nebelung.png" alt="the same zellij session — lazygit and Neovim in Ghostty — running Catppuccin Mocha above and Nebelung below: blue-tinted neutrals versus true-gray neutrals, with the four variant ramps beneath" width="560">
 
 </div>
 

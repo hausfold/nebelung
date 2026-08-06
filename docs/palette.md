@@ -10,9 +10,9 @@ palette/
   nebelung-*.json     # …and the same pair per variant
 scripts/
   generate-palette.mjs# regenerates every variant via OKLCH color math
-  gen-hero.mjs        # re-renders the README hero from the live palette
+  gen-hero.mjs        # recomposes the README hero from the live palette
 templates/            # vendored upstream port .tera templates
-assets/               # README images (the hero is generated, not drawn)
+assets/               # README images (hero composed from assets/scenes/)
 dist/                 # rendered themes, ready to install (variants in subdirs)
 preview/*.html        # visual swatch + mockup per variant, through whiskers
 ports.conf            # port manifest: name | template | output | extra args
@@ -52,16 +52,20 @@ Re-run `node scripts/generate-palette.mjs` (or `./build.sh`) and re-open
 
 ## The README hero
 
-`assets/mocha-vs-nebelung.png` is generated too — one scene (a Ghostty window
-running Helix, Starship and delta) rendered twice, Mocha above and Nebelung
-below, over the *current* palette, with the four variant ramps and the port
-count in the footer. Nothing in it is hand-drawn or hand-typed, so a palette
-change or a new port can't leave it lying:
+`assets/mocha-vs-nebelung.png` is composed, not drawn. The two halves are real
+screenshots of the same zellij session — lazygit and Neovim in Ghostty — one
+running Catppuccin Mocha, one running Nebelung; they live in `assets/scenes/`
+(2048px wide, cropped to the same rect). Everything around them — the labels,
+each base's measured OKLCH chroma, the four variant ramps, the port count —
+comes from `palette/` and `ports.meta.json`, so a recolor or a new port can't
+leave the hero lying:
 
 ```bash
 node scripts/gen-hero.mjs          # → assets/mocha-vs-nebelung.png (1080×1350)
 node scripts/gen-hero.mjs --html   # stop at the throwaway HTML, to iterate on it
 ```
 
-macOS-only for now: it screenshots with headless Google Chrome at 2x and
-downscales with `sips`.
+Reshooting the scenes is the one manual step: same window, same session, flip
+the theme between the two shots, crop both to the same rect. macOS-only for
+now — it screenshots with headless Google Chrome at 2x and downscales with
+`sips`.
