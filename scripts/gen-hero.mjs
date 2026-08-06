@@ -6,9 +6,9 @@
 //   node scripts/gen-hero.mjs --html     → stop at the (throwaway) HTML
 //
 // The screenshots themselves live in assets/scenes/ (whole window, 2048px
-// wide) and are the only hand-made part — the labels around them, down to each
-// base's measured OKLCH chroma, come from palette/. Reshooting them: same
-// window, same zellij session, flip the theme, same crop.
+// wide) and are the only hand-made part — the frame and label type around them
+// are Nebelung's own surface0/text/subtext0, read from palette/. Reshooting them:
+// same window, same zellij session, flip the theme, same crop.
 //
 // Needs Google Chrome for the screenshot (headless) and `sips` to downscale.
 
@@ -24,7 +24,6 @@ import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { MOCHA, hexToLch } from "./generate-palette.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const WIDTH = 1080;
@@ -33,18 +32,14 @@ const HEIGHT = 1350; // 4:5 portrait — a phone-shaped hero
 const readJson = (p) => JSON.parse(readFileSync(join(ROOT, p), "utf8"));
 
 const nebelung = readJson("palette/nebelung.hex.json");
-// The claim in each chip, measured rather than asserted.
-const chroma = (hex) => hexToLch(hex)[1].toFixed(3).replace(/^0/, "");
-
 const dataUri = (rel) =>
 	`data:image/png;base64,${readFileSync(join(ROOT, rel)).toString("base64")}`;
 
-const scene = ({ name, desc, base, shot }) => `
+const scene = ({ name, desc, shot }) => `
   <section class="scene">
     <div class="label">
       <span class="name">${name}</span><span class="sep">·</span>
       <span class="desc">${desc}</span>
-      <span class="chip">base <b>#${base}</b> · chroma ${chroma(base)}</span>
     </div>
     <div class="shot"><img src="${dataUri(shot)}" alt=""></div>
   </section>`;
@@ -55,26 +50,20 @@ const html = `<!doctype html>
   * { box-sizing: border-box; margin: 0; }
   html, body { width: ${WIDTH}px; height: ${HEIGHT}px; overflow: hidden; }
   body {
-    background: #0b0b0b;
+    background: #${nebelung.surface0};
     font: 400 16px/1.5 "JetBrainsMono Nerd Font", "JetBrains Mono",
           ui-monospace, "SF Mono", Menlo, monospace;
     -webkit-font-smoothing: antialiased;
-    color: #d7d7d7;
+    color: #${nebelung.text};
     padding: 20px 48px;
     display: flex; flex-direction: column; justify-content: center; gap: 14px;
   }
 
   .scene { display: flex; flex-direction: column; gap: 7px; }
   .label { display: flex; align-items: baseline; gap: 10px; padding: 0 2px; }
-  .label .name { font-size: 21px; font-weight: 700; letter-spacing: -.2px; color: #ececec; }
-  .label .sep { color: #5c5c5c; }
-  .label .desc { font-size: 18px; color: #b4b4b4; }
-  .label .chip {
-    margin-left: auto; font-size: 13px; color: #8a8a8a;
-    border: 1px solid #2c2c2c; border-radius: 6px; padding: 3px 9px;
-  }
-  .label .chip b { color: #b4b4b4; font-weight: 400; }
-
+  .label .name { font-size: 21px; font-weight: 700; letter-spacing: -.2px; color: #${nebelung.text}; }
+  .label .sep { color: #${nebelung.surface2}; }
+  .label .desc { font-size: 18px; color: #${nebelung.subtext0}; }
   .shot { border-radius: 11px; overflow: hidden; }
   .shot img { display: block; width: 100%; }
 
@@ -83,13 +72,11 @@ const html = `<!doctype html>
 ${scene({
 	name: "Catppuccin Mocha",
 	desc: "blue-tinted neutrals",
-	base: MOCHA.base,
 	shot: "assets/scenes/mocha.png",
 })}
 ${scene({
 	name: "Nebelung",
 	desc: "true-gray neutrals",
-	base: nebelung.base,
 	shot: "assets/scenes/nebelung.png",
 })}
 </body></html>`;
