@@ -10,7 +10,9 @@ palette/
   nebelung-*.json     # …and the same pair per variant
 scripts/
   generate-palette.mjs# regenerates every variant via OKLCH color math
+  gen-hero.mjs        # recomposes the README hero from the live palette
 templates/            # vendored upstream port .tera templates
+assets/               # README images (hero composed from assets/scenes/)
 dist/                 # rendered themes, ready to install (variants in subdirs)
 preview/*.html        # visual swatch + mockup per variant, through whiskers
 ports.conf            # port manifest: name | template | output | extra args
@@ -47,3 +49,21 @@ Edit the `CONFIG` block at the top of `scripts/generate-palette.mjs`:
 
 Re-run `node scripts/generate-palette.mjs` (or `./build.sh`) and re-open
 `preview/nebelung.html` to judge.
+
+## The README hero
+
+`assets/mocha-vs-nebelung.png` is composed, not drawn. The two halves are real
+screenshots of the same zellij session — lazygit and Neovim in Ghostty — one
+running Catppuccin Mocha, one running Nebelung; they live in `assets/scenes/`
+(whole window, 2048px wide). What's drawn around them — the labels, each base's
+hex and its measured OKLCH chroma — is read from `palette/`, so a recolor can't
+leave the hero lying:
+
+```bash
+node scripts/gen-hero.mjs          # → assets/mocha-vs-nebelung.png (1080×1350)
+node scripts/gen-hero.mjs --html   # stop at the throwaway HTML, to iterate on it
+```
+
+Reshooting the scenes is the one manual step: same window, same session, flip
+the theme between the two shots, crop both the same. macOS-only for now — it screenshots with headless Google Chrome at 2x and downscales with
+`sips`.

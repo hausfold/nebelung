@@ -10,7 +10,7 @@ into 53 ports.
 ![part of nebelhaus](https://img.shields.io/badge/part_of-nebelhaus-f2c4e5?labelColor=202020)
 ![license](https://img.shields.io/badge/license-MIT-d7d7d7?labelColor=202020)
 
-<img src="./assets/loud-vs-right.webp" alt="the same code in Catppuccin Mocha vs Nebelung — blue neutrals vs warm graphite" width="820">
+<img src="./assets/mocha-vs-nebelung.png" alt="the same zellij session — lazygit and Neovim in Ghostty — running Catppuccin Mocha above and Nebelung below: blue-tinted neutrals versus true-gray neutrals" width="560">
 
 </div>
 
@@ -24,8 +24,8 @@ hue. Nebelung does two things about it:
 2. **calms the 14 accents** — chroma ×0.9, so they sit against true grey instead
    of a slightly-blue base.
 
-Grey is the point. It's a low-contrast, muted palette for people who find Mocha
-too loud — named for a cat breed the colour of high fog.
+Grey is the point. Same structure, same 14 accent slots, same ports — the blue
+cast is the only thing that leaves. Named for a cat breed the colour of high fog.
 
 ## why nebelung
 
@@ -51,13 +51,58 @@ still resolves. The rest nest inside it.
 
 ## install
 
-Consuming the flake is the easy path — that's how the rice themes everything:
+Every port is the same two moves: **drop a rendered file, name it in a config.**
+Ghostty, start to finish:
+
+```bash
+git clone --depth 1 https://github.com/nebelhaus/nebelung
+mkdir -p ~/.config/ghostty/themes
+cp nebelung/dist/ghostty/themes/catppuccin-mocha.conf ~/.config/ghostty/themes/
+echo 'theme = catppuccin-mocha' >> ~/.config/ghostty/config
+```
+
+Reload Ghostty (`cmd+shift+,`) and you're in Nebelung. The file keeps its
+upstream **Catppuccin** name on purpose: Nebelung renders into the flavor slot
+each template already has, so `catppuccin-mocha` *is* the Nebelung theme.
+Nothing else about the port changes.
+
+### picking a variant
+
+Variants nest under their own `dist/` subdir and are named after the catppuccin
+flavor they rendered as — light mode is `catppuccin-latte`:
+
+```bash
+cp nebelung/dist/latte-high-contrast/ghostty/themes/catppuccin-latte.conf \
+   ~/.config/ghostty/themes/
+echo 'theme = catppuccin-latte' >> ~/.config/ghostty/config
+```
+
+### as a flake
+
+Consuming the flake skips the copying — that's how the rice themes everything:
 
 ```nix
 inputs.nebelung.url = "github:nebelhaus/nebelung";
 ```
 
-Or build the `dist/` tree and copy what you want by hand:
+```nix
+# in a home-manager module — the rendered file, straight out of the store
+xdg.configFile."ghostty/themes/catppuccin-mocha.conf".source =
+  "${nebelung.packages.${pkgs.system}.default}/ghostty/themes/catppuccin-mocha.conf";
+
+# or the raw colors, for configs Nix generates itself
+programs.starship.settings.palettes.nebelung = nebelung.palette;
+
+# variants are data, not paths to guess — this one is
+# { dir = "latte-high-contrast"; flavor = "latte"; }
+lightTheme = with nebelung.variants."nebelung-latte-high-contrast";
+  "${nebelung.packages.${pkgs.system}.default}/${dir}/ghostty/themes/catppuccin-${flavor}.conf";
+```
+
+[Nix outputs in full](docs/nix.md) — `palette`, `palettes`, `variants`, `ports`,
+`checks`.
+
+### build it yourself
 
 ```bash
 ./build.sh             # regenerate palette + render all ports → dist/
@@ -77,8 +122,12 @@ Needs [`whiskers`](https://whiskers.catppuccin.com)
 - **cli + tui** — bat · lsd · yazi · glow · btop · bottom · k9s · mpv · spotify-player · sc-im · tty
 - **apps** — Slack · Telegram · Zen · Obsidian · opencode · Raycast · OBS · zathura · qBittorrent · Dark Reader · Stylus · chroma
 
-Each renders into `dist/<port>/`, per variant. Paths and per-port install steps
-are in [`docs/ports.md`](docs/ports.md).
+Each renders into `dist/<port>/`, per variant. Every output path, the setting
+that makes it active, and how much of that a config manager can do for you —
+**auto** (all of it), **activate** (the app rewrites its own theme setting, so it
+needs an idempotent patch), **manual** (you paste or click) — are in the
+[full ports table](docs/ports.md), generated from
+[`ports.meta.json`](ports.meta.json) and exposed as the flake's `ports` output.
 
 **Missing a port Catppuccin has?** [Open an issue](https://github.com/nebelhaus/nebelung/issues/new)
 or a PR — anything with a [whiskers](https://whiskers.catppuccin.com) template is
