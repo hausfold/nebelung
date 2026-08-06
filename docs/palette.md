@@ -55,9 +55,8 @@ Re-run `node scripts/generate-palette.mjs` (or `./build.sh`) and re-open
 `assets/mocha-vs-nebelung.png` is composed, not drawn. The two halves are real
 screenshots of the same zellij session — lazygit and Neovim in Ghostty — one
 running Catppuccin Mocha, one running Nebelung; they live in `assets/scenes/`
-(2048px wide, cropped to the same rect). Everything around them — the labels,
-each base's measured OKLCH chroma, the four variant ramps, the port count —
-comes from `palette/` and `ports.meta.json`, so a recolor or a new port can't
+(whole window, 2048px wide). What's drawn around them — the labels, each base's
+hex and its measured OKLCH chroma — is read from `palette/`, so a recolor can't
 leave the hero lying:
 
 ```bash
@@ -66,6 +65,5 @@ node scripts/gen-hero.mjs --html   # stop at the throwaway HTML, to iterate on i
 ```
 
 Reshooting the scenes is the one manual step: same window, same session, flip
-the theme between the two shots, crop both to the same rect. macOS-only for
-now — it screenshots with headless Google Chrome at 2x and downscales with
+the theme between the two shots, crop both the same. macOS-only for now — it screenshots with headless Google Chrome at 2x and downscales with
 `sips`.
