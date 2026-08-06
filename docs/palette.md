@@ -10,7 +10,9 @@ palette/
   nebelung-*.json     # …and the same pair per variant
 scripts/
   generate-palette.mjs# regenerates every variant via OKLCH color math
+  gen-hero.mjs        # re-renders the README hero from the live palette
 templates/            # vendored upstream port .tera templates
+assets/               # README images (the hero is generated, not drawn)
 dist/                 # rendered themes, ready to install (variants in subdirs)
 preview/*.html        # visual swatch + mockup per variant, through whiskers
 ports.conf            # port manifest: name | template | output | extra args
@@ -47,3 +49,19 @@ Edit the `CONFIG` block at the top of `scripts/generate-palette.mjs`:
 
 Re-run `node scripts/generate-palette.mjs` (or `./build.sh`) and re-open
 `preview/nebelung.html` to judge.
+
+## The README hero
+
+`assets/mocha-vs-nebelung.png` is generated too — one scene (a Ghostty window
+running Helix, Starship and delta) rendered twice, Mocha above and Nebelung
+below, over the *current* palette, with the four variant ramps and the port
+count in the footer. Nothing in it is hand-drawn or hand-typed, so a palette
+change or a new port can't leave it lying:
+
+```bash
+node scripts/gen-hero.mjs          # → assets/mocha-vs-nebelung.png (1080×1350)
+node scripts/gen-hero.mjs --html   # stop at the throwaway HTML, to iterate on it
+```
+
+macOS-only for now: it screenshots with headless Google Chrome at 2x and
+downscales with `sips`.
