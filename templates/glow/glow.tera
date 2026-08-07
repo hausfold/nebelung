@@ -3,16 +3,18 @@ whiskers:
   version: ^2.5.1
   matrix:
     - flavor
-  filename: "catppuccin-{{ flavor.identifier }}.json"
+    - accent
+  filename: "themes/{{ flavor.identifier }}/catppuccin-{{ flavor.identifier }}-{{ accent }}.json"
 ---
+{%- set accent = flavor.colors[accent] -%}
 {
   "document":    { "block_prefix": "\n", "block_suffix": "\n", "color": "#{{ text.hex }}", "margin": 2 },
   "block_quote": { "color": "#{{ subtext0.hex }}", "italic": true, "indent": 1, "indent_token": "│ " },
   "paragraph":   {},
   "list":        { "level_indent": 2 },
   "heading":     { "block_suffix": "\n", "color": "#{{ text.hex }}", "bold": true },
-  "h1": { "prefix": " ", "suffix": " ", "color": "#{{ base.hex }}", "background_color": "#{{ mauve.hex }}", "bold": true },
-  "h2": { "prefix": "## ",     "color": "#{{ mauve.hex }}",    "bold": true },
+  "h1": { "prefix": " ", "suffix": " ", "color": "#{{ base.hex }}", "background_color": "#{{ accent.hex }}", "bold": true },
+  "h2": { "prefix": "## ",     "color": "#{{ accent.hex }}",   "bold": true },
   "h3": { "prefix": "### ",    "color": "#{{ lavender.hex }}", "bold": true },
   "h4": { "prefix": "#### ",   "color": "#{{ blue.hex }}",     "bold": true },
   "h5": { "prefix": "##### ",  "color": "#{{ sapphire.hex }}", "bold": true },
