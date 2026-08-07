@@ -38,7 +38,7 @@ consumer walking this file doesn't try to wire a Wayland terminal on macOS.
 | delta | `delta/catppuccin.gitconfig` | auto | `include` it from `~/.gitconfig`, set `features = catppuccin-mocha` |
 | fzf | `fzf/themes/catppuccin-fzf-mocha.sh` (+ fish/nu/ps1/rc) | auto | source it from your shell rc |
 | lsd | `lsd/themes/catppuccin-mocha/colors.yaml` | auto | copy as `~/.config/lsd/colors.yaml`, set `color.theme: custom` |
-| glow | `glow/catppuccin-mocha.json` | auto | a glamour style — pass with `glow -s <path>`, or point `GLAMOUR_STYLE` at it |
+| glow | `glow/themes/mocha/catppuccin-mocha-<accent>.json` | auto | a glamour style — pass with `glow -s <path>`, or point `GLAMOUR_STYLE` at it |
 | bat | `bat/themes/Catppuccin Mocha.tmTheme` | auto | copy into `$(bat --config-dir)/themes/`, `bat cache --build`, set `--theme` |
 | zsh-syntax-highlighting | `zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh` | auto | source it before `zsh-syntax-highlighting.zsh` |
 | Obsidian | `obsidian/Nebelung/` | activate | copy the folder into a vault's `.obsidian/themes/`, then choose Nebelung under Settings ▸ Appearance ▸ Themes (dark mode recommended) |

@@ -169,7 +169,7 @@
   },
   "glow": {
     "title": "glow",
-    "path": "glow/catppuccin-mocha.json",
+    "path": "glow/themes/mocha/catppuccin-mocha-<accent>.json",
     "platform": [
       "darwin",
       "linux"

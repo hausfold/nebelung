@@ -9,7 +9,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -107,6 +107,20 @@ test("advertised output paths exist in dist/", () => {
     const dir = meta[name].path.split(/[<>{]/)[0].replace(/[^/]*$/, "");
     assert.ok(existsSync(join(root, "dist", dir)), `${name}: dist/${dir} does not exist`);
     assert.ok(readdirSync(join(root, "dist", dir)).length, `${name}: dist/${dir} is empty`);
+  }
+});
+
+test("glow headings follow the rendered accent", () => {
+  for (const accent of ["pink", "mauve"]) {
+    const style = JSON.parse(
+      readFileSync(
+        join(root, "dist", "glow", "themes", "mocha", `catppuccin-mocha-${accent}.json`),
+        "utf8",
+      ),
+    );
+    const palette = JSON.parse(readFileSync(join(root, "palette", "nebelung.json"), "utf8"));
+    assert.equal(style.h1.background_color, `#${palette.mocha[accent]}`, `${accent} H1 background`);
+    assert.equal(style.h2.color, `#${palette.mocha[accent]}`, `${accent} H2 foreground`);
   }
 });
 
