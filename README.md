@@ -133,7 +133,7 @@ needs an idempotent patch), **manual** (you paste or click) — are in the
 ### on the web
 
 The `css` port is the odd one out: there's no app to point at a file, you just
-import it. Two shapes per flavor, take one — plain custom properties, or a
+import it. Two shapes per variant, take one — plain custom properties, or a
 Tailwind v4 `@theme` (v4 has no JS config; a theme *is* CSS).
 
 ```css
@@ -146,11 +146,12 @@ Tailwind v4 `@theme` (v4 has no JS config; a theme *is* CSS).
 ```
 
 Light + dark from one sheet: import each flavor behind its own media query, so
-only one of them ever defines `:root`.
+only one of them ever defines `:root`. They render into sibling dirs —
+`dist/css/` and `dist/latte/css/` — so copy both out and the paths are yours.
 
 ```css
-@import url("nebelung-mocha.css") screen and (prefers-color-scheme: dark);
-@import url("latte/nebelung-latte.css") screen and (prefers-color-scheme: light);
+@import url("nebelung-mocha.css") (prefers-color-scheme: dark);
+@import url("nebelung-latte.css") (prefers-color-scheme: light);
 ```
 
 **Missing a port Catppuccin has?** [Open an issue](https://github.com/nebelhaus/nebelung/issues/new)

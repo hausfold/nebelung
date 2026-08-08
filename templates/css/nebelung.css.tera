@@ -22,10 +22,11 @@ whiskers:
  *   border-color: color-mix(in oklab, var(--nebelung-mauve) 30%, transparent);
  *
  * Light + dark from one sheet: import each flavour behind its own media query,
- * so only one of them ever defines :root.
+ * so only one of them ever defines :root. The two files ship in sibling dirs
+ * (css/ and latte/css/) — these paths are wherever you copied them to.
  *
- *   @import url("nebelung-mocha.css") screen and (prefers-color-scheme: dark);
- *   @import url("latte/nebelung-latte.css") screen and (prefers-color-scheme: light);
+ *   @import url("nebelung-mocha.css") (prefers-color-scheme: dark);
+ *   @import url("nebelung-latte.css") (prefers-color-scheme: light);
  */
 
 :root {
