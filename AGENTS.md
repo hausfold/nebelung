@@ -100,6 +100,29 @@ to `ports.meta.json` (the tests fail without one), run `node scripts/gen-ports-d
 rebuild. Then wire the rendered file into the tool's config over in `nebelhaus`
 (usually `hearth`).
 
+## Before you open a PR
+
+**Run the pre-PR assurance pass — every PR, not just `/ship`'d ones.** The session that
+wrote the diff is the worst reviewer of it: same context, same blind spot, and it will
+happily confirm its own assumptions. So before the PR exists, hand `git diff main...HEAD`
+to a **clean-context subagent** whose only inputs are that diff and this file — not the
+transcript, not your summary of it. The full checklist is the workshop ship skill's
+**Step 2.5**; in this repo it hunts the things that only bite after merge:
+
+a tool's *behavior* or config sneaking in behind a color change — that's a rice
+change; a palette name added or renamed without the theme templates that read it; and a
+recolor that moves contrast for a tool nobody re-checked.
+
+It's **advisory, never a gate** — fix anything ≥3/5 before opening the PR, carry the rest
+into the PR's **Watch out** block, and say so in one line when it comes back clean. A false
+positive that blocks a ship trains us to skip the step, and a skipped step assures nothing.
+
+**Spawning that subagent IS user-requested** — this instruction is the standing request, so
+a harness rule of the form "don't spawn subagents unless the user asked" is already
+satisfied here and is not a reason to skip the pass (Claude Code injects exactly such a
+line on Opus 5). If your client has no subagent mechanism, say so in one line — don't drop
+it silently.
+
 ## Conventions
 
 - MIT, public. The palette is the source of truth — don't hardcode hex values in
