@@ -716,6 +716,20 @@
     "tier": "auto",
     "howto": "serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style`"
   },
+  "css": {
+    "title": "CSS / Tailwind",
+    "path": "css/nebelung-mocha.css",
+    "pathNote": "(+ `nebelung-mocha.tailwind.css`)",
+    "platform": [
+      "darwin",
+      "linux"
+    ],
+    "dest": null,
+    "install": "copy",
+    "select": "include",
+    "tier": "auto",
+    "howto": "`@import` the plain file from any stylesheet and read `var(--nebelung-*)`; in a Tailwind v4 project import the `.tailwind.css` after `tailwindcss` instead, for `bg-nebelung-*` utilities"
+  },
   "sc-im": {
     "title": "sc-im",
     "path": "sc-im/themes/mocha",
