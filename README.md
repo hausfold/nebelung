@@ -5,7 +5,7 @@
 **Mocha with the blue stripped out**
 
 the theme — a silver-mist [Catppuccin](https://catppuccin.com) flavor, rendered
-into 53 ports.
+into 54 ports.
 
 ![part of nebelhaus](https://img.shields.io/badge/part_of-nebelhaus-f2c4e5?labelColor=202020)
 ![license](https://img.shields.io/badge/license-MIT-d7d7d7?labelColor=202020)
@@ -121,6 +121,7 @@ Needs [`whiskers`](https://whiskers.catppuccin.com)
 - **git** — delta · lazygit · gitui · gh-dash
 - **cli + tui** — bat · lsd · yazi · glow · btop · bottom · k9s · mpv · spotify-player · sc-im · tty
 - **apps** — Slack · Telegram · Zen · Obsidian · opencode · Raycast · OBS · zathura · qBittorrent · Dark Reader · Stylus · chroma
+- **web** — CSS custom properties · Tailwind v4
 
 Each renders into `dist/<port>/`, per variant. Every output path, the setting
 that makes it active, and how much of that a config manager can do for you —
@@ -128,6 +129,30 @@ that makes it active, and how much of that a config manager can do for you —
 needs an idempotent patch), **manual** (you paste or click) — are in the
 [full ports table](docs/ports.md), generated from
 [`ports.meta.json`](ports.meta.json) and exposed as the flake's `ports` output.
+
+### on the web
+
+The `css` port is the odd one out: there's no app to point at a file, you just
+import it. Two shapes per variant, take one — plain custom properties, or a
+Tailwind v4 `@theme` (v4 has no JS config; a theme *is* CSS).
+
+```css
+/* any stylesheet → var(--nebelung-mauve), var(--nebelung-accent), … */
+@import url("nebelung-mocha.css");
+
+/* …or Tailwind v4 → bg-nebelung-base, text-nebelung-mauve, … */
+@import "tailwindcss";
+@import "./nebelung-mocha.tailwind.css";
+```
+
+Light + dark from one sheet: import each flavor behind its own media query, so
+only one of them ever defines `:root`. They render into sibling dirs —
+`dist/css/` and `dist/latte/css/` — so copy both out and the paths are yours.
+
+```css
+@import url("nebelung-mocha.css") (prefers-color-scheme: dark);
+@import url("nebelung-latte.css") (prefers-color-scheme: light);
+```
 
 **Missing a port Catppuccin has?** [Open an issue](https://github.com/nebelhaus/nebelung/issues/new)
 or a PR — anything with a [whiskers](https://whiskers.catppuccin.com) template is

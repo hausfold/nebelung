@@ -74,6 +74,7 @@ consumer walking this file doesn't try to wire a Wayland terminal on macOS.
 | OBS | `obs/themes/Catppuccin_Mocha.ovt` **and** `obs/themes/Catppuccin.obt` | manual | copy **both** into OBS's theme dir (`~/Library/Application Support/obs-studio/themes/`), pick it under Appearance — the `.ovt` extends the `.obt` |
 | zathura | `zathura/themes/catppuccin-mocha` | auto | `include` it from `~/.config/zathura/zathurarc` |
 | chroma | `chroma/themes/mocha-chroma-style.css` (+ `.xml`) | auto | serve the CSS from your Hugo/chroma site, or feed the XML to `chroma --style` |
+| CSS / Tailwind | `css/nebelung-mocha.css` (+ `nebelung-mocha.tailwind.css`) | auto | `@import` the plain file from any stylesheet and read `var(--nebelung-*)`; in a Tailwind v4 project import the `.tailwind.css` after `tailwindcss` instead, for `bg-nebelung-*` utilities |
 | sc-im | `sc-im/themes/mocha` | auto | copy as `~/.config/sc-im/scimrc` colours, or `load` it from your `scimrc` |
 | tty | `tty/themes/mocha.txt` | auto | the Linux console's 16 colours — `cat` it into `setvtrgb` (`setvtrgb < mocha.txt`) |
 | Telegram | `telegram/themes/mocha/{android,desktop,ios,macos}` | manual | per-client palette source: rename `android` to `Nebelung.attheme` and open it in Telegram Android; the other three are inputs to that client's packaging (see [catppuccin/telegram](https://github.com/catppuccin/telegram)) |
@@ -81,7 +82,7 @@ consumer walking this file doesn't try to wire a Wayland terminal on macOS.
 | VS Code / Cursor | `vscode/settings.json` | activate | merge into your user `settings.json` (needs the Catppuccin extension) |
 | Stylus | `stylus/nebelung-stylus.json` (+ README) | manual | import via the Stylus browser extension ▸ Manage ▸ Import (see `stylus/README.md`) |
 
-**12 of 53 ports can't be installed for you:** Slack, Xcode, Warp, Raycast, Dark Reader, JetBrains, Konsole, Tabby, OBS, Telegram, qBittorrent, Stylus. Everything else is a file drop plus a setting a config manager can own.
+**12 of 54 ports can't be installed for you:** Slack, Xcode, Warp, Raycast, Dark Reader, JetBrains, Konsole, Tabby, OBS, Telegram, qBittorrent, Stylus. Everything else is a file drop plus a setting a config manager can own.
 
 **7 are platform-specific:** Linux only — foot, Konsole, Xresources, zathura, tty; macOS only — Xcode, Raycast. The rest list both.
 
