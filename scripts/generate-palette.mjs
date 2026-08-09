@@ -66,7 +66,7 @@ export const VARIANTS = {
 // existed before any variant did still resolves. MIRRORED in two places that
 // must agree with this one: `render_ports` in build.sh (which reads the
 // generated palette/variants.json) and nebelhaus's modules/lib/nebelung.nix
-// (which builds the same subdir from nebelhaus.theme.flavor/contrast).
+// (which builds the same subdir from haus.theme.flavor/contrast).
 export const variantDir = (name) => (name === "nebelung" ? "" : name.replace(/^nebelung-/, ""));
 
 // Canonical Catppuccin Mocha palette (source of truth we override from).
