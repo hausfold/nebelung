@@ -177,4 +177,4 @@ Each one stands alone. Together they're a house.
 
 ## license
 
-MIT © nebelhaus
+MIT © hausfold
