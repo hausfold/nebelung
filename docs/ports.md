@@ -136,7 +136,7 @@ widely-used rest. Not carried today, mostly for want of a user: aerc, Cider,
 Contour, Element, Halloy, HexChat, imv, Mailspring, process-compose. Anything
 Catppuccin themes with a
 [whiskers](https://whiskers.catppuccin.com) template can be added in about three
-lines — **[open an issue](https://github.com/nebelhaus/nebelung/issues/new) or a
+lines — **[open an issue](https://github.com/hausfold/nebelung/issues/new) or a
 PR** with the port name and it goes in. Ports without a whiskers template (nvim,
 Discord, …) need a hand-written template first; say so in the issue and it can
 still happen.

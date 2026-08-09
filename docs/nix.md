@@ -1,11 +1,11 @@
 # nebelung on Nix
 
 You don't need to install any port by hand if you consume this repo as a flake —
-that's how the [nebelhaus](https://github.com/nebelhaus/nebelhaus) rice themes
+that's how the [nebelhaus](https://github.com/hausfold/hausfold) rice themes
 everything.
 
 ```nix
-inputs.nebelung.url = "github:nebelhaus/nebelung";
+inputs.nebelung.url = "github:hausfold/nebelung";
 ```
 
 ## Outputs
@@ -37,5 +37,5 @@ Picking an accent and applying it is a single option — see
 [Theming & accents](https://nebelhaus.com/guides/theming/) on nebelhaus.com.
 
 Hacking on the palette inside the wider rice? `bench try` in the
-[workshop](https://github.com/nebelhaus/workshop) rebuilds your machine against
+[workshop](https://github.com/hausfold/workshop) rebuilds your machine against
 this local checkout — no push/re-lock loop.
