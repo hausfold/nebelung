@@ -127,13 +127,7 @@ it silently.
 
 - MIT, public. The palette is the source of truth — don't hardcode hex values in
   `nebelhaus`; inject `nebelung.palette` or reference the rendered theme tree (`packages.<system>.default`).
-> **"trill" in this repo means the ARCHIVED Messages client**, now
-> [`nebelhaus/messages`](https://github.com/nebelhaus/messages). The *name*
-> passed to the notification compositor (`hausfold/trill`) on 2026-08-08. The
-> hand-mirror rule below is about the old app and is now moot — but it will
-> apply again, verbatim, to the compositor: it is another Swift/Xcode app that
-> can't consume this flake either.
-
-- **`trill` can't consume the flake.** The family's Swift/Xcode Messages client
-  builds outside Nix, so it hand-copies these hex literals into its own `Rice.swift`
-  — a palette change here must be mirrored into trill by hand, or it silently drifts.
+- **A Swift/Xcode app can't consume this flake.** `trill` (the notification
+  compositor) builds outside Nix and takes no `nebelung` input, so it hand-copies
+  these hex literals into its own Swift source — a palette change here must be
+  mirrored into it by hand, or it silently drifts.
