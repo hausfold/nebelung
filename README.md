@@ -45,7 +45,7 @@ cast is the only thing that leaves. Named for a cat breed the colour of high fog
 The default keeps the tree root, so every path that existed before variants did
 still resolves. The rest nest inside it.
 
-▶ **[open the interactive preview](https://htmlpreview.github.io/?https://github.com/nebelhaus/nebelung/blob/main/preview/nebelung.html)**
+▶ **[open the interactive preview](https://htmlpreview.github.io/?https://github.com/hausfold/nebelung/blob/main/preview/nebelung.html)**
 — live swatch board plus editor and terminal mockups. One per variant;
 [`nebelung-latte.html`](preview/nebelung-latte.html) is light mode.
 
@@ -55,7 +55,7 @@ Every port is the same two moves: **drop a rendered file, name it in a config.**
 Ghostty, start to finish:
 
 ```bash
-git clone --depth 1 https://github.com/nebelhaus/nebelung
+git clone --depth 1 https://github.com/hausfold/nebelung
 mkdir -p ~/.config/ghostty/themes
 cp nebelung/dist/ghostty/themes/catppuccin-mocha.conf ~/.config/ghostty/themes/
 echo 'theme = catppuccin-mocha' >> ~/.config/ghostty/config
@@ -82,7 +82,7 @@ echo 'theme = catppuccin-latte' >> ~/.config/ghostty/config
 Consuming the flake skips the copying — that's how the rice themes everything:
 
 ```nix
-inputs.nebelung.url = "github:nebelhaus/nebelung";
+inputs.nebelung.url = "github:hausfold/nebelung";
 ```
 
 ```nix
@@ -154,7 +154,7 @@ only one of them ever defines `:root`. They render into sibling dirs —
 @import url("nebelung-latte.css") (prefers-color-scheme: light);
 ```
 
-**Missing a port Catppuccin has?** [Open an issue](https://github.com/nebelhaus/nebelung/issues/new)
+**Missing a port Catppuccin has?** [Open an issue](https://github.com/hausfold/nebelung/issues/new)
 or a PR — anything with a [whiskers](https://whiskers.catppuccin.com) template is
 about three lines to add.
 
@@ -167,11 +167,11 @@ about three lines to add.
 
 ## the family
 
-- 🏠 [**nebelhaus**](https://github.com/nebelhaus/nebelhaus) — the house. the whole rice, one Nix flake. start here.
-- 🐾 [**pounce**](https://github.com/nebelhaus/pounce) — the palette. keyboard-first launcher; every command a file.
-- 🪺 [**perch**](https://github.com/nebelhaus/perch) — the shelf. files, caught in the notch.
-- 🌫️ [**nebelung**](https://github.com/nebelhaus/nebelung) — the theme. the silver-mist palette. *(you are here)*
-- 🧰 [**workshop**](https://github.com/nebelhaus/workshop) — the bench. where the family is built.
+- 🏠 [**nebelhaus**](https://github.com/hausfold/hausfold) — the house. the whole rice, one Nix flake. start here.
+- 🐾 [**pounce**](https://github.com/hausfold/pounce) — the palette. keyboard-first launcher; every command a file.
+- 🪺 [**perch**](https://github.com/hausfold/perch) — the shelf. files, caught in the notch.
+- 🌫️ [**nebelung**](https://github.com/hausfold/nebelung) — the theme. the silver-mist palette. *(you are here)*
+- 🧰 [**workshop**](https://github.com/hausfold/workshop) — the bench. where the family is built.
 
 Each one stands alone. Together they're a house.
 

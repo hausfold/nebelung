@@ -2,7 +2,7 @@
 
 **Nebelung** — a silver-mist Catppuccin variant (Mocha with the blue stripped),
 built with [whiskers](https://github.com/catppuccin/whiskers). The single source of
-truth for colors across the whole [nebelhaus](https://github.com/nebelhaus) family.
+truth for colors across the whole [hausfold](https://github.com/hausfold) family.
 
 **This file is the one set of instructions, for every agent.** Claude Code,
 Codex, OpenCode, Cursor, Copilot — TUI or GUI — all read *this*, directly or
@@ -20,13 +20,13 @@ colored.
 | Want to change… | Repo |
 |---|---|
 | colors / the palette, or how a tool is themed | `~/code/workshop/nebelung` ← **you are here** |
-| which tools exist / how they're configured (shell, bar, WM) | `~/code/workshop/nebelhaus` |
+| which tools exist / how they're configured (shell, bar, WM) | `~/code/workshop/hausfold` |
 | the pounce app | `~/code/workshop/pounce` |
 | this machine's config | `~/.config/nix` |
 
 > **Whatever agent you are, enforce this.** If a request is about a tool's
 > *behavior/config* (not its colors), STOP — that's a rice change in
-> `~/code/workshop/nebelhaus`. Only palette and theme-template changes belong here.
+> `~/code/workshop/hausfold`. Only palette and theme-template changes belong here.
 
 ## How it works
 
