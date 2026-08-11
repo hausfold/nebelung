@@ -3,7 +3,7 @@ themes {
     nebelung {
         text_unselected {
             base "#d7d7d7"
-            background "#191919"
+            background "#141414"
             emphasis_0 "#f5b58e"
             emphasis_1 "#91dbe8"
             // emphasis_2 is the key-letter color in the mode keybind rows (the
@@ -13,14 +13,14 @@ themes {
         }
         text_selected {
             base "#d7d7d7"
-            background "#5c5c5c"
+            background "#5b5b5b"
             emphasis_0 "#f5b58e"
             emphasis_1 "#91dbe8"
             emphasis_2 "#abe1a6"
             emphasis_3 "#f2c4e5"
         }
         ribbon_selected {
-            base "#191919"
+            base "#141414"
             background "#abe1a6"
             emphasis_0 "#ed8fa9"
             emphasis_1 "#f5b58e"
@@ -33,7 +33,7 @@ themes {
             // bottom-right quick hints — reads the same greyed-out look as the
             // inactive top tabs: dark text on a medium-grey fill, with a yellow
             // key letter (emphasis_0) that stays readable on the grey.
-            base "#191919"
+            base "#141414"
             background "#717171"
             emphasis_0 "#f7e2b5"
             emphasis_1 "#91dbe8"
@@ -50,7 +50,7 @@ themes {
         }
         table_cell_selected {
             base "#d7d7d7"
-            background "#5c5c5c"
+            background "#5b5b5b"
             emphasis_0 "#f5b58e"
             emphasis_1 "#91dbe8"
             emphasis_2 "#abe1a6"
@@ -58,7 +58,7 @@ themes {
         }
         table_cell_unselected {
             base "#d7d7d7"
-            background "#191919"
+            background "#141414"
             emphasis_0 "#f5b58e"
             emphasis_1 "#91dbe8"
             emphasis_2 "#abe1a6"
@@ -66,7 +66,7 @@ themes {
         }
         list_selected {
             base "#d7d7d7"
-            background "#5c5c5c"
+            background "#5b5b5b"
             emphasis_0 "#f5b58e"
             emphasis_1 "#91dbe8"
             emphasis_2 "#abe1a6"
@@ -74,7 +74,7 @@ themes {
         }
         list_unselected {
             base "#d7d7d7"
-            background "#191919"
+            background "#141414"
             emphasis_0 "#f5b58e"
             emphasis_1 "#91dbe8"
             emphasis_2 "#abe1a6"
@@ -100,7 +100,7 @@ themes {
             base "#abe1a6"
             background 0
             emphasis_0 "#91dbe8"
-            emphasis_1 "#191919"
+            emphasis_1 "#141414"
             emphasis_2 "#f2c4e5"
             emphasis_3 "#8db4f3"
         }

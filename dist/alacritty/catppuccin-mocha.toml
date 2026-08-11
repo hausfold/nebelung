@@ -1,43 +1,43 @@
 [colors.primary]
-background = "#202020"
+background = "#1a1a1a"
 foreground = "#d7d7d7"
 dim_foreground = "#858585"
 bright_foreground = "#d7d7d7"
 
 [colors.cursor]
-text = "#202020"
+text = "#1a1a1a"
 cursor = "#f3e1dd"
 
 [colors.vi_mode_cursor]
-text = "#202020"
+text = "#1a1a1a"
 cursor = "#b5bff8"
 
 [colors.search.matches]
-foreground = "#202020"
+foreground = "#1a1a1a"
 background = "#aeaeae"
 
 [colors.search.focused_match]
-foreground = "#202020"
+foreground = "#1a1a1a"
 background = "#abe1a6"
 
 [colors.footer_bar]
-foreground = "#202020"
+foreground = "#1a1a1a"
 background = "#aeaeae"
 
 [colors.hints.start]
-foreground = "#202020"
+foreground = "#1a1a1a"
 background = "#f7e2b5"
 
 [colors.hints.end]
-foreground = "#202020"
+foreground = "#1a1a1a"
 background = "#aeaeae"
 
 [colors.selection]
-text = "#202020"
+text = "#1a1a1a"
 background = "#f3e1dd"
 
 [colors.normal]
-black = "#494949"
+black = "#464646"
 red = "#ed8fa9"
 green = "#abe1a6"
 yellow = "#f7e2b5"
@@ -47,7 +47,7 @@ cyan = "#9be0d5"
 white = "#c3c3c3"
 
 [colors.bright]
-black = "#5c5c5c"
+black = "#5b5b5b"
 red = "#ed8fa9"
 green = "#abe1a6"
 yellow = "#f7e2b5"

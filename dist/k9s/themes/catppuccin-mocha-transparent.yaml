@@ -28,7 +28,7 @@ k9s:
       keyColor: '#8db4f3'
       numKeyColor: '#e6a3ad'
     crumbs:
-      fgColor: '#202020'
+      fgColor: '#1a1a1a'
       bgColor: default
       activeColor: '#efcece'
     status:
@@ -47,8 +47,8 @@ k9s:
     table:
       fgColor: '#d7d7d7'
       bgColor: default
-      cursorFgColor: '#343434'
-      cursorBgColor: '#494949'
+      cursorFgColor: '#303030'
+      cursorBgColor: '#464646'
       markColor: '#f3e1dd'
       header:
         fgColor: '#f7e2b5'
@@ -57,8 +57,8 @@ k9s:
     xray:
       fgColor: '#d7d7d7'
       bgColor: default
-      cursorColor: '#494949'
-      cursorTextColor: '#202020'
+      cursorColor: '#464646'
+      cursorTextColor: '#1a1a1a'
       graphicColor: '#f2c4e5'
     charts:
       bgColor: default
@@ -92,9 +92,9 @@ k9s:
   dialog:
     fgColor: '#f7e2b5'
     bgColor: default
-    buttonFgColor: '#202020'
+    buttonFgColor: '#1a1a1a'
     buttonBgColor: default
-    buttonFocusFgColor: '#202020'
+    buttonFocusFgColor: '#1a1a1a'
     buttonFocusBgColor: '#f2c4e5'
     labelFgColor: '#f3e1dd'
     fieldFgColor: '#d7d7d7'

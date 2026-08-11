@@ -37,7 +37,7 @@
 </tr>
 <tr>
 <td>Background</td>
-<td>#090909 </td>
+<td>#060606 </td>
 </tr>
 <tr>
 <td>Text</td>
@@ -45,7 +45,7 @@
 </tr>
 <tr>
 <td>Selection</td>
-<td>#575757 </td>
+<td>#565656 </td>
 </tr>
 </table>
 </details>

@@ -1,5 +1,5 @@
 [app]
-overall = { bg = "#202020" }
+overall = { bg = "#1a1a1a" }
 
 [mgr]
 cwd = { fg = "#9be0d5" }
@@ -12,9 +12,9 @@ marker_cut      = { fg = "#ed8fa9", bg = "#ed8fa9" }
 marker_marked   = { fg = "#9be0d5", bg = "#9be0d5" }
 marker_selected = { fg = "#f5b58e", bg = "#f5b58e" }
 
-count_copied   = { fg = "#202020", bg = "#abe1a6" }
-count_cut      = { fg = "#202020", bg = "#ed8fa9" }
-count_selected = { fg = "#202020", bg = "#f5b58e" }
+count_copied   = { fg = "#1a1a1a", bg = "#abe1a6" }
+count_cut      = { fg = "#1a1a1a", bg = "#ed8fa9" }
+count_selected = { fg = "#1a1a1a", bg = "#f5b58e" }
 
 border_symbol = "│"
 border_style  = { fg = "#858585" }
@@ -22,30 +22,30 @@ border_style  = { fg = "#858585" }
 syntect_theme = "~/.config/yazi/Catppuccin-mocha.tmTheme"
 
 [tabs]
-active   = { fg = "#202020", bg = "#d7d7d7", bold = true }
-inactive = { fg = "#d7d7d7", bg = "#494949" }
+active   = { fg = "#1a1a1a", bg = "#d7d7d7", bold = true }
+inactive = { fg = "#d7d7d7", bg = "#464646" }
 
 [mode]
-normal_main = { fg = "#202020", bg = "#f5b58e", bold = true }
-normal_alt  = { fg = "#f5b58e", bg = "#343434"}
+normal_main = { fg = "#1a1a1a", bg = "#f5b58e", bold = true }
+normal_alt  = { fg = "#f5b58e", bg = "#303030"}
 
-select_main = { fg = "#202020", bg = "#abe1a6", bold = true }
-select_alt  = { fg = "#abe1a6", bg = "#343434"}
+select_main = { fg = "#1a1a1a", bg = "#abe1a6", bold = true }
+select_alt  = { fg = "#abe1a6", bg = "#303030"}
 
-unset_main  = { fg = "#202020", bg = "#efcece", bold = true }
-unset_alt   = { fg = "#efcece", bg = "#343434"}
+unset_main  = { fg = "#1a1a1a", bg = "#efcece", bold = true }
+unset_alt   = { fg = "#efcece", bg = "#303030"}
 
 [indicator]
-parent = { fg = "#202020", bg = "#d7d7d7" }
-current = { fg = "#202020", bg = "#f5b58e" }
-preview = { fg = "#202020", bg = "#d7d7d7" }
+parent = { fg = "#1a1a1a", bg = "#d7d7d7" }
+current = { fg = "#1a1a1a", bg = "#f5b58e" }
+preview = { fg = "#1a1a1a", bg = "#d7d7d7" }
 
 [status]
 sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 
 progress_label  = { fg = "#ffffff", bold = true }
-progress_normal = { fg = "#abe1a6", bg = "#494949" }
+progress_normal = { fg = "#abe1a6", bg = "#464646" }
 progress_error  = { fg = "#f7e2b5", bg = "#ed8fa9" }
 
 perm_type  = { fg = "#8db4f3" }
@@ -82,19 +82,19 @@ title   = {}
 hovered = { fg = "#f2c4e5", bold = true }
 
 [which]
-mask            = { bg = "#343434" }
+mask            = { bg = "#303030" }
 cand            = { fg = "#9be0d5" }
 rest            = { fg = "#9a9a9a" }
 desc            = { fg = "#f2c4e5" }
 separator       = "  "
-separator_style = { fg = "#5c5c5c" }
+separator_style = { fg = "#5b5b5b" }
 
 [help]
 on      = { fg = "#9be0d5" }
 run     = { fg = "#f2c4e5" }
 desc    = { fg = "#9a9a9a" }
-hovered = { bg = "#5c5c5c", bold = true }
-footer  = { fg = "#d7d7d7", bg = "#494949" }
+hovered = { bg = "#5b5b5b", bold = true }
+footer  = { fg = "#d7d7d7", bg = "#464646" }
 
 [notify]
 title_info  = { fg = "#9be0d5" }
@@ -114,7 +114,7 @@ rules = [
 	{ mime = "application/{pdf,doc,rtf}", fg = "#91dbe8" },
 
 	# Virtual file system
-	{ mime = "vfs/{absent,stale}", fg = "#494949" },
+	{ mime = "vfs/{absent,stale}", fg = "#464646" },
 
 	# Special file
 	{ url = "*", is = "orphan", bg = "#ed8fa9" },

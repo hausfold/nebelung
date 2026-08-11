@@ -5,17 +5,17 @@ wallpaper: t.me/bg/iZumGdCBBVEBAAAAkZ7Gl0zmXZk // link to cloud wallpaper
 
 // Palette
 
-ctpBase: #090909;
-ctpBaseTransparent: #090909cc;
+ctpBase: #060606;
+ctpBaseTransparent: #060606cc;
 ctpBlue: #8db4f3;
-ctpCrust: #010101;
-ctpCrustShadow: #01010111;
-ctpCrustTransparent: #010101cc;
+ctpCrust: #000000;
+ctpCrustShadow: #00000011;
+ctpCrustTransparent: #000000cc;
 ctpFlamingo: #efcece;
 ctpGreen: #abe1a6;
 ctpLavender: #b5bff8;
-ctpMantle: #040404;
-ctpMantleTransparent: #040404cc;
+ctpMantle: #020202;
+ctpMantleTransparent: #020202cc;
 ctpMaroon: #e6a3ad;
 ctpMauve: #c9a8f1;
 ctpOverlay0: #737373;
@@ -32,12 +32,12 @@ ctpSapphire: #7dc6e7;
 ctpSky: #91dbe8;
 ctpSubtext0: #c6c6c6;
 ctpSubtext1: #e3e3e3;
-ctpSurface0: #222222;
-ctpSurface0Transparent: #222222cc;
-ctpSurface1: #3d3d3d;
-ctpSurface1Transparent: #3d3d3dcc;
-ctpSurface2: #575757;
-ctpSurface2Transparent: #575757cc;
+ctpSurface0: #1e1e1e;
+ctpSurface0Transparent: #1e1e1ecc;
+ctpSurface1: #3a3a3a;
+ctpSurface1Transparent: #3a3a3acc;
+ctpSurface2: #565656;
+ctpSurface2Transparent: #565656cc;
 ctpTeal: #9be0d5;
 ctpText: #ffffff;
 ctpYellow: #f7e2b5;

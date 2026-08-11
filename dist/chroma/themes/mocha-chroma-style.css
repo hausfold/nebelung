@@ -1,6 +1,6 @@
 .chroma {
   color: #d7d7d7;
-  background-color: #202020;
+  background-color: #1a1a1a;
 }
 .chroma .cl {
   color: #d7d7d7;
@@ -12,7 +12,7 @@
   color: #d7d7d7;
 }
 .chroma .hl {
-  background-color: #494949;
+  background-color: #464646;
 }
 .chroma .lnt {
   color: #858585;
@@ -199,7 +199,7 @@
   font-style: italic;
 }
 .chroma .ch {
-  color: #5c5c5c;
+  color: #5b5b5b;
   font-style: italic;
 }
 .chroma .cp {
@@ -215,11 +215,11 @@
 }
 .chroma .gi {
   color: #abe1a6;
-  background-color: #343434;
+  background-color: #303030;
 }
 .chroma .gd {
   color: #ed8fa9;
-  background-color: #343434;
+  background-color: #303030;
 }
 .chroma .ge {
   color: #d7d7d7;

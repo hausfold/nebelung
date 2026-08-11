@@ -2,8 +2,8 @@
 
 # Normal
 foreground       = '#ffffff'
-background       = '#090909'
-black            = '#3d3d3d'
+background       = '#060606'
+black            = '#3a3a3a'
 blue             = '#8db4f3'
 cursor           = '#f3e1dd'
 cyan             = '#9be0d5'
@@ -14,16 +14,16 @@ white            = '#e3e3e3'
 yellow           = '#f7e2b5'
 
 # UI colors
-tabs             = '#090909'
+tabs             = '#060606'
 tabs-foreground  = '#ffffff'
 tabs-active      = '#b5bff8'
 tabs-active-highlight  = '#b5bff8'
-tabs-active-foreground = '#010101'
-selection-foreground   = '#090909'
+tabs-active-foreground = '#000000'
+selection-foreground   = '#060606'
 selection-background   = '#f3e1dd'
 
 # Dim colors
-dim-black        = '#3d3d3d'
+dim-black        = '#3a3a3a'
 dim-blue         = '#8db4f3'
 dim-cyan         = '#9be0d5'
 dim-foreground   = '#ffffff'
@@ -34,7 +34,7 @@ dim-white        = '#e3e3e3'
 dim-yellow       = '#f7e2b5'
 
 # Light colors
-light-black      = '#575757'
+light-black      = '#565656'
 light-blue       = '#8db4f3'
 light-cyan       = '#9be0d5'
 light-foreground = '#ffffff'

@@ -1,7 +1,7 @@
 # name: 'Catppuccin Mocha'
 # url: 'https://github.com/catppuccin/fish'
 
-# preferred_background: 202020
+# preferred_background: 1a1a1a
 fish_color_normal d7d7d7
 fish_color_command 8db4f3
 fish_color_param efcece
@@ -12,8 +12,8 @@ fish_color_end f5b58e
 fish_color_comment 858585
 fish_color_error ed8fa9
 fish_color_gray 717171
-fish_color_selection --background=343434
-fish_color_search_match --background=343434
+fish_color_selection --background=303030
+fish_color_search_match --background=303030
 fish_color_option abe1a6
 fish_color_operator f2c4e5
 fish_color_escape e6a3ad

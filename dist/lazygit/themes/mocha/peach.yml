@@ -9,13 +9,13 @@ theme:
   optionsTextColor:
     - '#8db4f3'
   selectedLineBgColor:
-    - '#343434'
+    - '#303030'
   inactiveViewSelectedLineBgColor:
     - '#717171'
   cherryPickedCommitFgColor:
     - '#f5b58e'
   cherryPickedCommitBgColor:
-    - '#494949'
+    - '#464646'
   markedBaseCommitFgColor:
     - '#8db4f3'
   markedBaseCommitBgColor:

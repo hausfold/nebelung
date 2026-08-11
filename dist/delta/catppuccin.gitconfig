@@ -1,6 +1,6 @@
 
 [delta "catppuccin-mocha"]
-	blame-palette = "#202020 #191919 #121212 #343434 #494949"
+	blame-palette = "#1a1a1a #141414 #0c0c0c #303030 #464646"
 	commit-decoration-style = "#717171" bold box ul
 	dark = true
 	file-decoration-style = "#717171"
@@ -15,17 +15,17 @@
 	line-numbers-right-style = "#717171"
 	line-numbers-zero-style = "#717171"
 	# 35% red 65% base
-	minus-emph-style = bold syntax "#684750"
+	minus-emph-style = bold syntax "#64434c"
 	# 20% red 80% base
-	minus-style = syntax "#49373c"
+	minus-style = syntax "#443237"
 	# 35% green 65% base
-	plus-emph-style = bold syntax "#51644f"
+	plus-emph-style = bold syntax "#4d604b"
 	# 20% green 80% base
-	plus-style = syntax "#3c473b"
+	plus-style = syntax "#374236"
 	map-styles = \
-		bold purple => syntax "#5b5069", \
-		bold blue => syntax "#46546a", \
-		bold cyan => syntax "#486166", \
-		bold yellow => syntax "#6b6454"
+		bold purple => syntax "#574c65", \
+		bold blue => syntax "#425066", \
+		bold cyan => syntax "#445d62", \
+		bold yellow => syntax "#676050"
 	# Should match the name of the bat theme
 	syntax-theme = Catppuccin Mocha

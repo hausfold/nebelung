@@ -27,13 +27,13 @@
     --ctp_overlay2: #9a9a9a;
     --ctp_overlay1: #858585;
     --ctp_overlay0: #717171;
-    --ctp_surface2: #5c5c5c;
-    --ctp_surface1: #494949;
-    --ctp_surface0: #343434;
-    --ctp_base: #202020;
-    --ctp_mantle: #191919;
-    --ctp_crust: #121212;
-    --ctp_selection_background: #383838;
+    --ctp_surface2: #5b5b5b;
+    --ctp_surface1: #464646;
+    --ctp_surface0: #303030;
+    --ctp_base: #1a1a1a;
+    --ctp_mantle: #141414;
+    --ctp_crust: #0c0c0c;
+    --ctp_selection_background: #343434;
 }
 
 /*

@@ -29,7 +29,7 @@
 bash/zsh:
 ```sh
 export SKIM_DEFAULT_OPTIONS="$SKIM_DEFAULT_OPTIONS \
---color=fg:#ffffff,bg:#090909,matched:#222222,matched_bg:#efcece,current:#ffffff,current_bg:#3d3d3d,current_match:#090909,current_match_bg:#f3e1dd,spinner:#abe1a6,info:#c9a8f1,prompt:#8db4f3,cursor:#ed8fa9,selected:#e6a3ad,header:#9be0d5,border:#737373"
+--color=fg:#ffffff,bg:#060606,matched:#1e1e1e,matched_bg:#efcece,current:#ffffff,current_bg:#3a3a3a,current_match:#060606,current_match_bg:#f3e1dd,spinner:#abe1a6,info:#c9a8f1,prompt:#8db4f3,cursor:#ed8fa9,selected:#e6a3ad,header:#9be0d5,border:#737373"
 ```
 
 <img src="assets/mocha.webp"/>

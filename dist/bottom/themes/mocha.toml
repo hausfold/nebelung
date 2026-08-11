@@ -23,9 +23,9 @@ headers = {color = "#f3e1dd"}
 graph_color = "#aeaeae"
 legend_text = {color = "#aeaeae"}
 [styles.widgets]
-border_color = "#5c5c5c"
+border_color = "#5b5b5b"
 selected_border_color = "#f2c4e5"
 widget_title = {color = "#efcece"}
 text = {color = "#d7d7d7"}
-selected_text = {color = "#121212", bg_color = "#c9a8f1"}
-disabled_text = {color = "#202020"}
+selected_text = {color = "#0c0c0c", bg_color = "#c9a8f1"}
+disabled_text = {color = "#1a1a1a"}

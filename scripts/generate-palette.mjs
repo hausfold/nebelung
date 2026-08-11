@@ -35,12 +35,32 @@ export const CONFIG = {
 	// OKLCH rather than sRGB so the result is perceptually even instead of
 	// crushing the dark end.
 	contrastBoost: 0,
+	// Extra push on JUST the six background neutrals (BACKGROUND below), darker
+	// only — the field/wallpaper-depth answer to "make it blacker" that
+	// contrastBoost can't give without also lightening text. 0 = the ramp
+	// contrastBoost alone produces. Only meaningful for the mocha flavor: in
+	// latte the background slots sit ABOVE the ramp's midpoint, so this is
+	// gated by flavor rather than derived from the ramp, and can never
+	// accidentally lighten latte's canvas. Keep it well under ~0.3 or crust
+	// clips near true black and the wallpaper's grain dither loses its floor.
+	darkBoost: 0,
 };
 
+// The six neutrals haus.wallpaper.depth's ladder walks for mocha — darkBoost's
+// scope. Named explicitly rather than derived from "L below the ramp's
+// midpoint" so it can never silently gain or lose a slot as the palette's own
+// numbers move; latte's equivalent field slots sit on the OTHER side of its
+// midpoint, which is exactly why darkBoost is flavor-gated instead.
+export const BACKGROUND = ["surface2", "surface1", "surface0", "base", "mantle", "crust"];
+
 // Palette variants: the FLAVOR axis (mocha = dark, latte = light) crossed with
-// the CONTRAST axis. `nebelung` is the theme as it has always been, and stays
-// byte-identical — its files keep their paths, so nothing downstream moves.
-// Every other variant renders alongside it rather than replacing it.
+// the CONTRAST axis. `nebelung` used to be byte-identical to CONFIG; it now
+// carries its own darkBoost (the default field wanted to sit darker than a
+// bare "preserve Mocha's lightness exactly" transform gives), so its paths
+// stay where they were but its background six no longer equal the config
+// defaults 1:1 — see the drift-guard tests, which build it from this entry
+// rather than from bare CONFIG. Every other variant renders alongside it
+// rather than replacing it.
 //
 // The two contrast boosts differ ON PURPOSE, and it isn't a tuning whim: a boost
 // pushes the ramp outward from its midpoint, and Mocha has ~0.2 of OKLCH
@@ -50,13 +70,14 @@ export const CONFIG = {
 // all twelve steps distinct; the tests assert both properties rather than
 // trusting these numbers.
 export const VARIANTS = {
-	nebelung: CONFIG,
+	nebelung: { ...CONFIG, darkBoost: 0.08 },
 	// For anyone who needs the interface to separate cleanly from its
 	// background: same hues, same accents, a ramp pulled apart. Verified against
 	// WCAG AAA in the tests rather than tuned by eye.
-	"nebelung-high-contrast": { ...CONFIG, contrastBoost: 0.35 },
+	"nebelung-high-contrast": { ...CONFIG, contrastBoost: 0.35, darkBoost: 0.08 },
 	// Light mode. Not a transform of the dark palette — a different SOURCE
-	// palette (Catppuccin Latte) run through the identical two rules.
+	// palette (Catppuccin Latte) run through the identical two rules. darkBoost
+	// is flavor-gated to a no-op here regardless.
 	"nebelung-latte": { ...CONFIG, flavor: "latte" },
 	"nebelung-latte-high-contrast": { ...CONFIG, flavor: "latte", contrastBoost: 0.2 },
 };
@@ -241,17 +262,26 @@ export function buildOverrides(config = CONFIG) {
 	const ramp = NEUTRALS.map((n) => hexToLch(source[n])[0]);
 	const mid = (Math.min(...ramp) + Math.max(...ramp)) / 2;
 	const boost = config.contrastBoost ?? 0;
+	const dark = config.darkBoost ?? 0;
 
 	for (const name of NEUTRALS) {
 		const [L0] = hexToLch(source[name]);
-		const L = Math.min(1, Math.max(0, mid + (L0 - mid) * (1 + boost)));
+		// darkBoost only ever touches the background six, and only for mocha —
+		// see BACKGROUND's comment for why it's gated by name+flavor rather than
+		// derived from which side of `mid` the slot falls on.
+		const extra = flavor === "mocha" && BACKGROUND.includes(name) ? dark : 0;
+		const L = Math.min(1, Math.max(0, mid + (L0 - mid) * (1 + boost + extra)));
 		const hex = lchToHex([L, config.neutralChroma, warmHueRad]);
 		out[name] = hex;
 		table.push([
 			name,
 			source[name],
 			hex,
-			boost ? `neutral→warm grey, contrast ×${1 + boost}` : "neutral→warm grey",
+			extra
+				? `neutral→warm grey, dark ×${1 + boost + extra}`
+				: boost
+					? `neutral→warm grey, contrast ×${1 + boost}`
+					: "neutral→warm grey",
 		]);
 	}
 	for (const name of ACCENTS) {

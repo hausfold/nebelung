@@ -103,14 +103,14 @@ test("committed palette/nebelung.hex.json matches generator output (drift guard)
 	const committed = JSON.parse(
 		readFileSync(new URL("../palette/nebelung.hex.json", import.meta.url)),
 	);
-	assert.deepEqual(committed, buildOverrides().out);
+	assert.deepEqual(committed, buildOverrides(VARIANTS.nebelung).out);
 });
 
 test("committed palette/nebelung.json matches generator output (drift guard)", () => {
 	const committed = JSON.parse(
 		readFileSync(new URL("../palette/nebelung.json", import.meta.url)),
 	);
-	assert.deepEqual(committed, { mocha: buildOverrides().out });
+	assert.deepEqual(committed, { mocha: buildOverrides(VARIANTS.nebelung).out });
 });
 
 test("every variant's committed palette files match generator output (drift guard)", () => {

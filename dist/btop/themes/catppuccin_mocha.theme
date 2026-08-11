@@ -1,5 +1,5 @@
 # Main background, empty for terminal default, need to be empty if you want transparent background
-theme[main_bg]="#202020"
+theme[main_bg]="#1a1a1a"
 
 # Main text color
 theme[main_fg]="#d7d7d7"
@@ -11,7 +11,7 @@ theme[title]="#d7d7d7"
 theme[hi_fg]="#8db4f3"
 
 # Background color of selected item in processes box
-theme[selected_bg]="#494949"
+theme[selected_bg]="#464646"
 
 # Foreground color of selected item in processes box
 theme[selected_fg]="#8db4f3"
@@ -23,7 +23,7 @@ theme[inactive_fg]="#858585"
 theme[graph_text]="#f3e1dd"
 
 # Background color of the percentage meters
-theme[meter_bg]="#494949"
+theme[meter_bg]="#464646"
 
 # Misc colors for processes box including mini cpu graphs, details memory graph and details status text
 theme[proc_misc]="#f3e1dd"

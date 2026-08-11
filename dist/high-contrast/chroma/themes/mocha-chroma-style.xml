@@ -1,11 +1,11 @@
 <style name="catppuccin-mocha">
-  <entry type="Background" style="bg:#090909 #ffffff"/>
+  <entry type="Background" style="bg:#060606 #ffffff"/>
   <entry type="CodeLine" style="#ffffff"/>
   <entry type="Error" style="#ed8fa9"/>
   <entry type="Other" style="#ffffff"/>
   <entry type="LineTableTD" style=""/>
   <entry type="LineTable" style=""/>
-  <entry type="LineHighlight" style="bg:#3d3d3d"/>
+  <entry type="LineHighlight" style="bg:#3a3a3a"/>
   <entry type="LineNumbersTable" style="#8e8e8e"/>
   <entry type="LineNumbers" style="#8e8e8e"/>
   <entry type="Keyword" style="#c9a8f1"/>
@@ -65,12 +65,12 @@
   <entry type="CommentSingle" style="italic #737373"/>
   <entry type="CommentMultiline" style="italic #737373"/>
   <entry type="CommentSpecial" style="italic #737373"/>
-  <entry type="CommentHashbang" style="italic #575757"/>
+  <entry type="CommentHashbang" style="italic #565656"/>
   <entry type="CommentPreproc" style="italic #737373"/>
   <entry type="CommentPreprocFile" style="bold #737373"/>
   <entry type="Generic" style="#ffffff"/>
-  <entry type="GenericInserted" style="bg:#222222 #abe1a6"/>
-  <entry type="GenericDeleted" style="bg:#222222 #ed8fa9"/>
+  <entry type="GenericInserted" style="bg:#1e1e1e #abe1a6"/>
+  <entry type="GenericDeleted" style="bg:#1e1e1e #ed8fa9"/>
   <entry type="GenericEmph" style="italic #ffffff"/>
   <entry type="GenericStrong" style="bold #ffffff"/>
   <entry type="GenericUnderline" style="underline #ffffff"/>

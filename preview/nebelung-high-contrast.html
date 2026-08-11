@@ -9,7 +9,7 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; padding: 40px;
-    background: #010101;
+    background: #000000;
     color: #ffffff;
     font: 14px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
   }
@@ -21,10 +21,10 @@
   .sw { border-radius: 8px; padding: 10px; height: 64px; display: flex;
         flex-direction: column; justify-content: flex-end; font-size: 11px; }
   .sw small { opacity: .85; }
-  .panel { background: #090909; border: 1px solid #222222;
+  .panel { background: #060606; border: 1px solid #1e1e1e;
            border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
-  .titlebar { background: #040404; padding: 10px 14px;
-              border-bottom: 1px solid #222222;
+  .titlebar { background: #020202; padding: 10px 14px;
+              border-bottom: 1px solid #1e1e1e;
               color: #e3e3e3; display: flex; gap: 8px; align-items: center; }
   .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
   .code { padding: 16px 18px; white-space: pre; }
@@ -36,8 +36,8 @@
   .cmt { color: #8e8e8e; font-style: italic; }
   .ty { color: #f7e2b5; }
   .op { color: #91dbe8; }
-  .sel { background: #3d3d3d; }
-  .term { background: #090909; }
+  .sel { background: #3a3a3a; }
+  .term { background: #060606; }
   .prompt .a { color: #abe1a6; } .prompt .b { color: #8db4f3; }
   .prompt .c { color: #9be0d5; }
 </style>
@@ -47,35 +47,35 @@
   <div class="sub">Mocha base, blue stripped → warm graphite · accents calmed</div>
 
   <div class="grid accents">
-    <div class="sw" style="background:#f3e1dd; color:#010101">rosewater<small>#f3e1dd</small></div>
-    <div class="sw" style="background:#efcece; color:#010101">flamingo<small>#efcece</small></div>
-    <div class="sw" style="background:#f2c4e5; color:#010101">pink<small>#f2c4e5</small></div>
-    <div class="sw" style="background:#c9a8f1; color:#010101">mauve<small>#c9a8f1</small></div>
-    <div class="sw" style="background:#ed8fa9; color:#010101">red<small>#ed8fa9</small></div>
-    <div class="sw" style="background:#e6a3ad; color:#010101">maroon<small>#e6a3ad</small></div>
-    <div class="sw" style="background:#f5b58e; color:#010101">peach<small>#f5b58e</small></div>
-    <div class="sw" style="background:#f7e2b5; color:#010101">yellow<small>#f7e2b5</small></div>
-    <div class="sw" style="background:#abe1a6; color:#010101">green<small>#abe1a6</small></div>
-    <div class="sw" style="background:#9be0d5; color:#010101">teal<small>#9be0d5</small></div>
-    <div class="sw" style="background:#91dbe8; color:#010101">sky<small>#91dbe8</small></div>
-    <div class="sw" style="background:#7dc6e7; color:#010101">sapphire<small>#7dc6e7</small></div>
-    <div class="sw" style="background:#8db4f3; color:#010101">blue<small>#8db4f3</small></div>
-    <div class="sw" style="background:#b5bff8; color:#010101">lavender<small>#b5bff8</small></div>
+    <div class="sw" style="background:#f3e1dd; color:#000000">rosewater<small>#f3e1dd</small></div>
+    <div class="sw" style="background:#efcece; color:#000000">flamingo<small>#efcece</small></div>
+    <div class="sw" style="background:#f2c4e5; color:#000000">pink<small>#f2c4e5</small></div>
+    <div class="sw" style="background:#c9a8f1; color:#000000">mauve<small>#c9a8f1</small></div>
+    <div class="sw" style="background:#ed8fa9; color:#000000">red<small>#ed8fa9</small></div>
+    <div class="sw" style="background:#e6a3ad; color:#000000">maroon<small>#e6a3ad</small></div>
+    <div class="sw" style="background:#f5b58e; color:#000000">peach<small>#f5b58e</small></div>
+    <div class="sw" style="background:#f7e2b5; color:#000000">yellow<small>#f7e2b5</small></div>
+    <div class="sw" style="background:#abe1a6; color:#000000">green<small>#abe1a6</small></div>
+    <div class="sw" style="background:#9be0d5; color:#000000">teal<small>#9be0d5</small></div>
+    <div class="sw" style="background:#91dbe8; color:#000000">sky<small>#91dbe8</small></div>
+    <div class="sw" style="background:#7dc6e7; color:#000000">sapphire<small>#7dc6e7</small></div>
+    <div class="sw" style="background:#8db4f3; color:#000000">blue<small>#8db4f3</small></div>
+    <div class="sw" style="background:#b5bff8; color:#000000">lavender<small>#b5bff8</small></div>
     </div>
 
   <div class="grid ramp">
-    <div class="sw" style="background:#010101; color:#ffffff; border:1px solid #222222"><small>crust</small></div>
-    <div class="sw" style="background:#040404; color:#ffffff; border:1px solid #222222"><small>mantle</small></div>
-    <div class="sw" style="background:#090909; color:#ffffff; border:1px solid #222222"><small>base</small></div>
-    <div class="sw" style="background:#222222; color:#ffffff; border:1px solid #222222"><small>surface0</small></div>
-    <div class="sw" style="background:#3d3d3d; color:#ffffff; border:1px solid #222222"><small>surface1</small></div>
-    <div class="sw" style="background:#575757; color:#ffffff; border:1px solid #222222"><small>surface2</small></div>
-    <div class="sw" style="background:#737373; color:#ffffff; border:1px solid #222222"><small>overlay0</small></div>
-    <div class="sw" style="background:#8e8e8e; color:#ffffff; border:1px solid #222222"><small>overlay1</small></div>
-    <div class="sw" style="background:#ababab; color:#ffffff; border:1px solid #222222"><small>overlay2</small></div>
-    <div class="sw" style="background:#c6c6c6; color:#ffffff; border:1px solid #222222"><small>subtext0</small></div>
-    <div class="sw" style="background:#e3e3e3; color:#ffffff; border:1px solid #222222"><small>subtext1</small></div>
-    <div class="sw" style="background:#ffffff; color:#ffffff; border:1px solid #222222"><small>text</small></div>
+    <div class="sw" style="background:#000000; color:#ffffff; border:1px solid #1e1e1e"><small>crust</small></div>
+    <div class="sw" style="background:#020202; color:#ffffff; border:1px solid #1e1e1e"><small>mantle</small></div>
+    <div class="sw" style="background:#060606; color:#ffffff; border:1px solid #1e1e1e"><small>base</small></div>
+    <div class="sw" style="background:#1e1e1e; color:#ffffff; border:1px solid #1e1e1e"><small>surface0</small></div>
+    <div class="sw" style="background:#3a3a3a; color:#ffffff; border:1px solid #1e1e1e"><small>surface1</small></div>
+    <div class="sw" style="background:#565656; color:#ffffff; border:1px solid #1e1e1e"><small>surface2</small></div>
+    <div class="sw" style="background:#737373; color:#ffffff; border:1px solid #1e1e1e"><small>overlay0</small></div>
+    <div class="sw" style="background:#8e8e8e; color:#ffffff; border:1px solid #1e1e1e"><small>overlay1</small></div>
+    <div class="sw" style="background:#ababab; color:#ffffff; border:1px solid #1e1e1e"><small>overlay2</small></div>
+    <div class="sw" style="background:#c6c6c6; color:#ffffff; border:1px solid #1e1e1e"><small>subtext0</small></div>
+    <div class="sw" style="background:#e3e3e3; color:#ffffff; border:1px solid #1e1e1e"><small>subtext1</small></div>
+    <div class="sw" style="background:#ffffff; color:#ffffff; border:1px solid #1e1e1e"><small>text</small></div>
     </div>
 
   <div class="panel">

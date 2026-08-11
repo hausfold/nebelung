@@ -21,12 +21,12 @@ evaluate-commands %sh{
     overlay2='rgb:ababab'
     overlay1='rgb:8e8e8e'
     overlay0='rgb:737373'
-    surface2='rgb:575757'
-    surface1='rgb:3d3d3d'
-    surface0='rgb:222222'
-    base='rgb:090909'
-    mantle='rgb:040404'
-    crust='rgb:010101'
+    surface2='rgb:565656'
+    surface1='rgb:3a3a3a'
+    surface0='rgb:1e1e1e'
+    base='rgb:060606'
+    mantle='rgb:020202'
+    crust='rgb:000000'
 
     echo "
         set-face global title  ${text}+b

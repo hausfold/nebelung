@@ -3,14 +3,14 @@ theme:
     text:
       primary: "#d7d7d7"
       secondary: "#abe1a6"
-      inverted: "#121212"
+      inverted: "#0c0c0c"
       faint: "#c3c3c3"
       warning: "#f7e2b5"
       success: "#abe1a6"
       error: "#ed8fa9"
     background:
-      selected: "#343434"
+      selected: "#303030"
     border:
       primary: "#abe1a6"
-      secondary: "#494949"
-      faint: "#343434"
+      secondary: "#464646"
+      faint: "#303030"

@@ -36,7 +36,7 @@
 ## Usage
 
 Click one of the following links to install the theme to your profile:
-- [🌿 Mocha](https://themes.ray.so?version=1&name=Catppuccin%20Mocha&colors=%23202020,%23202020,%23d7d7d7,%23717171,%23858585,%23ed8fa9,%23f5b58e,%23f7e2b5,%23abe1a6,%238db4f3,%23b5bff8,%23c9a8f1&appearance=dark)
+- [🌿 Mocha](https://themes.ray.so?version=1&name=Catppuccin%20Mocha&colors=%231a1a1a,%231a1a1a,%23d7d7d7,%23717171,%23858585,%23ed8fa9,%23f5b58e,%23f7e2b5,%23abe1a6,%238db4f3,%23b5bff8,%23c9a8f1&appearance=dark)
 
 ## 🙋 FAQ
 

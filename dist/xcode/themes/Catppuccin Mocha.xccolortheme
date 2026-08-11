@@ -23,11 +23,11 @@
 	<key>DVTConsoleExectuableOutputTextFont</key>
 	<string>SFMono-Bold - 14.0</string>
 	<key>DVTConsoleTextBackgroundColor</key>
-	<string>0.12549 0.12549 0.12549 1</string>
+	<string>0.101961 0.101961 0.101961 1</string>
 	<key>DVTConsoleTextInsertionPointColor</key>
 	<string>0.843137 0.843137 0.843137 1</string>
 	<key>DVTConsoleTextSelectionColor</key>
-	<string>0.286275 0.286275 0.286275 1</string>
+	<string>0.27451 0.27451 0.27451 1</string>
 	<key>DVTFontAndColorVersion</key>
 	<integer>1</integer>
 	<key>DVTMarkupTextBackgroundColor</key>
@@ -81,17 +81,17 @@
 	<key>DVTScrollbarMarkerWarningColor</key>
 	<string>0.937255 0.717647 0.34902 1</string>
 	<key>DVTSourceTextBackground</key>
-	<string>0.12549 0.12549 0.12549 1</string>
+	<string>0.101961 0.101961 0.101961 1</string>
 	<key>DVTSourceTextBlockDimBackgroundColor</key>
 	<string>0.5 0.5 0.5 1</string>
 	<key>DVTSourceTextCurrentLineHighlightColor</key>
-	<string>0.203922 0.203922 0.203922 1</string>
+	<string>0.188235 0.188235 0.188235 1</string>
 	<key>DVTSourceTextInsertionPointColor</key>
 	<string>0.682353 0.682353 0.682353 1</string>
 	<key>DVTSourceTextInvisiblesColor</key>
-	<string>0.360784 0.360784 0.360784 1</string>
+	<string>0.356863 0.356863 0.356863 1</string>
 	<key>DVTSourceTextSelectionColor</key>
-	<string>0.286275 0.286275 0.286275 1</string>
+	<string>0.27451 0.27451 0.27451 1</string>
 	<key>DVTSourceTextSyntaxColors</key>
 	<dict>
 		<key>xcode.syntax.attribute</key>

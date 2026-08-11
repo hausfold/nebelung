@@ -1,11 +1,11 @@
 <style name="catppuccin-mocha">
-  <entry type="Background" style="bg:#202020 #d7d7d7"/>
+  <entry type="Background" style="bg:#1a1a1a #d7d7d7"/>
   <entry type="CodeLine" style="#d7d7d7"/>
   <entry type="Error" style="#ed8fa9"/>
   <entry type="Other" style="#d7d7d7"/>
   <entry type="LineTableTD" style=""/>
   <entry type="LineTable" style=""/>
-  <entry type="LineHighlight" style="bg:#494949"/>
+  <entry type="LineHighlight" style="bg:#464646"/>
   <entry type="LineNumbersTable" style="#858585"/>
   <entry type="LineNumbers" style="#858585"/>
   <entry type="Keyword" style="#c9a8f1"/>
@@ -65,12 +65,12 @@
   <entry type="CommentSingle" style="italic #717171"/>
   <entry type="CommentMultiline" style="italic #717171"/>
   <entry type="CommentSpecial" style="italic #717171"/>
-  <entry type="CommentHashbang" style="italic #5c5c5c"/>
+  <entry type="CommentHashbang" style="italic #5b5b5b"/>
   <entry type="CommentPreproc" style="italic #717171"/>
   <entry type="CommentPreprocFile" style="bold #717171"/>
   <entry type="Generic" style="#d7d7d7"/>
-  <entry type="GenericInserted" style="bg:#343434 #abe1a6"/>
-  <entry type="GenericDeleted" style="bg:#343434 #ed8fa9"/>
+  <entry type="GenericInserted" style="bg:#303030 #abe1a6"/>
+  <entry type="GenericDeleted" style="bg:#303030 #ed8fa9"/>
   <entry type="GenericEmph" style="italic #d7d7d7"/>
   <entry type="GenericStrong" style="bold #d7d7d7"/>
   <entry type="GenericUnderline" style="underline #d7d7d7"/>

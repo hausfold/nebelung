@@ -1,10 +1,10 @@
-*background: #202020
+*background: #1a1a1a
 *foreground: #d7d7d7
 *cursorColor: #f3e1dd
 
 ! black
-*color0: #494949
-*color8: #5c5c5c
+*color0: #464646
+*color8: #5b5b5b
 
 ! red
 *color1: #ed8fa9

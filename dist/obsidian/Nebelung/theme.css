@@ -33,26 +33,26 @@ body.theme-light {
   --neb-overlay-2: #9a9a9a;
   --neb-overlay-1: #858585;
   --neb-overlay-0: #717171;
-  --neb-surface-2: #5c5c5c;
-  --neb-surface-1: #494949;
-  --neb-surface-0: #343434;
-  --neb-base: #202020;
-  --neb-mantle: #191919;
-  --neb-crust: #121212;
+  --neb-surface-2: #5b5b5b;
+  --neb-surface-1: #464646;
+  --neb-surface-0: #303030;
+  --neb-base: #1a1a1a;
+  --neb-mantle: #141414;
+  --neb-crust: #0c0c0c;
 
   /* Obsidian's neutral ramp. Keep the document on base and all persistent
    * chrome on mantle; deeper neutrals are reserved for transient surfaces. */
-  --neb-canvas: #202020;
-  --neb-chrome: #191919;
-  --neb-raised: #343434;
-  --color-base-00: #202020;
-  --color-base-05: #191919;
-  --color-base-10: #191919;
-  --color-base-20: #343434;
-  --color-base-25: #343434;
-  --color-base-30: #494949;
-  --color-base-35: #494949;
-  --color-base-40: #5c5c5c;
+  --neb-canvas: #1a1a1a;
+  --neb-chrome: #141414;
+  --neb-raised: #303030;
+  --color-base-00: #1a1a1a;
+  --color-base-05: #141414;
+  --color-base-10: #141414;
+  --color-base-20: #303030;
+  --color-base-25: #303030;
+  --color-base-30: #464646;
+  --color-base-35: #464646;
+  --color-base-40: #5b5b5b;
   --color-base-50: #717171;
   --color-base-60: #858585;
   --color-base-70: #9a9a9a;
@@ -81,28 +81,28 @@ body.theme-light {
   --color-accent-hsl: 267, 72%, 80%;
 
   /* Surfaces and text. */
-  --background-primary: #202020;
-  --background-primary-alt: #202020;
-  --background-secondary: #191919;
-  --background-secondary-alt: #191919;
-  --background-modifier-hover: color-mix(in srgb, #343434 72%, transparent);
-  --background-modifier-active-hover: color-mix(in srgb, #494949 78%, transparent);
+  --background-primary: #1a1a1a;
+  --background-primary-alt: #1a1a1a;
+  --background-secondary: #141414;
+  --background-secondary-alt: #141414;
+  --background-modifier-hover: color-mix(in srgb, #303030 72%, transparent);
+  --background-modifier-active-hover: color-mix(in srgb, #464646 78%, transparent);
   --background-modifier-border: transparent;
-  --background-modifier-border-hover: #494949;
+  --background-modifier-border-hover: #464646;
   --background-modifier-border-focus: #c9a8f1;
   --background-modifier-error: #ed8fa9;
   --background-modifier-error-hover: #e6a3ad;
   --background-modifier-success: #abe1a6;
-  --background-modifier-message: #343434;
-  --background-modifier-form-field: color-mix(in srgb, #121212 78%, transparent);
-  --background-modifier-form-field-highlighted: #343434;
+  --background-modifier-message: #303030;
+  --background-modifier-form-field: color-mix(in srgb, #0c0c0c 78%, transparent);
+  --background-modifier-form-field-highlighted: #303030;
   --background-modifier-box-shadow: rgba(0, 0, 0, 0.42);
   --background-modifier-cover: rgba(18, 18, 18, 0.72);
 
   --text-normal: #d7d7d7;
   --text-muted: #aeaeae;
   --text-faint: #717171;
-  --text-on-accent: #121212;
+  --text-on-accent: #0c0c0c;
   --text-on-accent-inverted: #d7d7d7;
   --text-error: #ed8fa9;
   --text-success: #abe1a6;
@@ -134,8 +134,8 @@ body.theme-light {
   --tab-radius-active: 8px;
   --callout-radius: 12px;
 
-  --interactive-normal: #343434;
-  --interactive-hover: #494949;
+  --interactive-normal: #303030;
+  --interactive-hover: #464646;
   --interactive-accent: #c9a8f1;
   --interactive-accent-hover: #b5bff8;
   --interactive-accent-hsl: var(--color-accent-hsl);
@@ -177,7 +177,7 @@ body.theme-light {
   --italic-color: #efcece;
 
   /* Markdown primitives. */
-  --code-background: color-mix(in srgb, #121212 78%, transparent);
+  --code-background: color-mix(in srgb, #0c0c0c 78%, transparent);
   --code-normal: #c3c3c3;
   --code-comment: #858585;
   --code-function: #f7e2b5;
@@ -195,15 +195,15 @@ body.theme-light {
   --blockquote-border-thickness: 2px;
   --blockquote-color: #c3c3c3;
   --blockquote-background-color: color-mix(in srgb, #c9a8f1 7%, transparent);
-  --hr-color: #343434;
+  --hr-color: #303030;
   --hr-thickness: 1px;
   --list-marker-color: #c9a8f1;
   --list-marker-color-hover: #b5bff8;
   --list-marker-color-collapsed: #f2c4e5;
 
   --tag-color: #91dbe8;
-  --tag-color-hover: #121212;
-  --tag-background: color-mix(in srgb, #91dbe8 13%, #191919);
+  --tag-color-hover: #0c0c0c;
+  --tag-background: color-mix(in srgb, #91dbe8 13%, #141414);
   --tag-background-hover: #91dbe8;
   --tag-border-color: transparent;
   --tag-border-color-hover: transparent;
@@ -213,7 +213,7 @@ body.theme-light {
 
   --checkbox-color: #c9a8f1;
   --checkbox-color-hover: #b5bff8;
-  --checkbox-marker-color: #121212;
+  --checkbox-marker-color: #0c0c0c;
   --checkbox-border-color: #717171;
   --checkbox-border-color-hover: #c9a8f1;
   --checkbox-radius: 5px;
@@ -241,15 +241,15 @@ body.theme-light {
   --callout-padding: 14px 16px;
 
   /* Graph, canvas, properties and navigation. */
-  --graph-line: #5c5c5c;
+  --graph-line: #5b5b5b;
   --graph-node: #c9a8f1;
   --graph-node-unresolved: #ed8fa9;
   --graph-node-focused: #f2c4e5;
   --graph-node-tag: #abe1a6;
   --graph-node-attachment: #7dc6e7;
   --graph-text: #c3c3c3;
-  --canvas-background: #202020;
-  --canvas-dot-pattern: #343434;
+  --canvas-background: #1a1a1a;
+  --canvas-dot-pattern: #303030;
   --canvas-color-1: var(--color-red-rgb);
   --canvas-color-2: var(--color-orange-rgb);
   --canvas-color-3: var(--color-yellow-rgb);
@@ -259,9 +259,9 @@ body.theme-light {
 
   --metadata-label-text-color: #aeaeae;
   --metadata-input-text-color: #d7d7d7;
-  --metadata-property-background: color-mix(in srgb, #191919 74%, transparent);
-  --metadata-property-background-hover: #343434;
-  --metadata-divider-color: #343434;
+  --metadata-property-background: color-mix(in srgb, #141414 74%, transparent);
+  --metadata-property-background-hover: #303030;
+  --metadata-divider-color: #303030;
   --metadata-label-background: transparent;
   --metadata-input-background: transparent;
 
@@ -269,15 +269,15 @@ body.theme-light {
   --nav-item-color-hover: #d7d7d7;
   --nav-item-color-active: #d7d7d7;
   --nav-item-color-selected: #d7d7d7;
-  --nav-item-background-hover: color-mix(in srgb, #343434 66%, transparent);
-  --nav-item-background-active: #343434;
-  --nav-item-background-selected: #343434;
+  --nav-item-background-hover: color-mix(in srgb, #303030 66%, transparent);
+  --nav-item-background-active: #303030;
+  --nav-item-background-selected: #303030;
   --nav-item-radius: 7px;
-  --nav-indentation-guide-color: #343434;
-  --indentation-guide-color: #343434;
+  --nav-indentation-guide-color: #303030;
+  --indentation-guide-color: #303030;
   --indentation-guide-color-active: #c9a8f1;
 
-  --tab-background-active: #343434;
+  --tab-background-active: #303030;
   --tab-text-color: #9a9a9a;
   --tab-text-color-active: #d7d7d7;
   --tab-text-color-focused: #c3c3c3;
@@ -287,18 +287,18 @@ body.theme-light {
   --tab-curve: 0;
   --tab-radius: 8px;
   --tab-radius-active: 8px;
-  --tab-container-background: #191919;
+  --tab-container-background: #141414;
 
-  --titlebar-background: #191919;
-  --titlebar-background-focused: #191919;
-  --ribbon-background: #191919;
-  --status-bar-background: #191919;
+  --titlebar-background: #141414;
+  --titlebar-background-focused: #141414;
+  --ribbon-background: #141414;
+  --status-bar-background: #141414;
   --status-bar-border-color: transparent;
   --divider-color: transparent;
   --divider-color-hover: #c9a8f1;
   --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: #494949;
-  --scrollbar-active-thumb-bg: #5c5c5c;
+  --scrollbar-thumb-bg: #464646;
+  --scrollbar-active-thumb-bg: #5b5b5b;
 
   --icon-color: #aeaeae;
   --icon-color-hover: #d7d7d7;
@@ -306,10 +306,10 @@ body.theme-light {
   --icon-color-focused: #b5bff8;
   --clickable-icon-radius: 7px;
 
-  --modal-background: #191919;
+  --modal-background: #141414;
   --modal-border-color: transparent;
   --prompt-border-color: transparent;
-  --menu-background: #191919;
+  --menu-background: #141414;
   --menu-border-color: transparent;
   --menu-shadow: 0 16px 42px -24px rgba(0, 0, 0, 0.82);
 }
@@ -409,7 +409,7 @@ body.theme-light {
 
 .theme-dark :is(.prompt, .suggestion-container, .menu),
 .theme-light :is(.prompt, .suggestion-container, .menu) {
-  background: #191919;
+  background: #141414;
 }
 
 .theme-dark .suggestion-item,
@@ -420,7 +420,7 @@ body.theme-light {
 
 .theme-dark .suggestion-item.is-selected,
 .theme-light .suggestion-item.is-selected {
-  background: #343434;
+  background: #303030;
   color: #d7d7d7;
 }
 
@@ -443,7 +443,7 @@ body.theme-light {
 .theme-light .mod-cta .setting-item-control button {
   border: 0;
   background: #c9a8f1;
-  color: #121212;
+  color: #0c0c0c;
   box-shadow: none;
   font-weight: 600;
 }
@@ -479,7 +479,7 @@ body.theme-light {
   padding: 1.05em 1.15em;
   border: 0;
   border-radius: 12px;
-  background: #121212;
+  background: #0c0c0c;
   box-shadow: none;
 }
 
@@ -499,19 +499,19 @@ body.theme-light {
 
 .theme-dark .markdown-rendered th,
 .theme-light .markdown-rendered th {
-  background: #191919;
+  background: #141414;
   color: #c3c3c3;
   font-weight: 650;
 }
 
 .theme-dark .markdown-rendered tr:nth-child(even) td,
 .theme-light .markdown-rendered tr:nth-child(even) td {
-  background: color-mix(in srgb, #191919 48%, transparent);
+  background: color-mix(in srgb, #141414 48%, transparent);
 }
 
 .theme-dark .callout,
 .theme-light .callout {
-  background: color-mix(in srgb, rgb(var(--callout-color)) 9%, #191919);
+  background: color-mix(in srgb, rgb(var(--callout-color)) 9%, #141414);
   box-shadow: inset 3px 0 rgb(var(--callout-color));
 }
 
@@ -520,7 +520,7 @@ body.theme-light {
   padding: 12px;
   border: 0;
   border-radius: 12px;
-  background: #191919;
+  background: #141414;
 }
 
 .theme-dark .status-bar,

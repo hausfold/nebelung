@@ -1,11 +1,11 @@
 name: Catppuccin Mocha
 foreground: '#ffffff'
-background: '#090909'
+background: '#060606'
 selection: null
 cursor: '#f3e1dd'
 cursorAccent: null
 colors:
-  - '#3d3d3d'
+  - '#3a3a3a'
   - '#ed8fa9'
   - '#abe1a6'
   - '#f7e2b5'
@@ -13,7 +13,7 @@ colors:
   - '#f2c4e5'
   - '#9be0d5'
   - '#e3e3e3'
-  - '#575757'
+  - '#565656'
   - '#ed8fa9'
   - '#abe1a6'
   - '#f7e2b5'

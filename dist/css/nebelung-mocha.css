@@ -29,12 +29,12 @@
   --nebelung-overlay2: #9a9a9a;
   --nebelung-overlay1: #858585;
   --nebelung-overlay0: #717171;
-  --nebelung-surface2: #5c5c5c;
-  --nebelung-surface1: #494949;
-  --nebelung-surface0: #343434;
-  --nebelung-base: #202020;
-  --nebelung-mantle: #191919;
-  --nebelung-crust: #121212;
+  --nebelung-surface2: #5b5b5b;
+  --nebelung-surface1: #464646;
+  --nebelung-surface0: #303030;
+  --nebelung-base: #1a1a1a;
+  --nebelung-mantle: #141414;
+  --nebelung-crust: #0c0c0c;
 
   /* Accents. */
   --nebelung-rosewater: #f3e1dd;

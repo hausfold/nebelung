@@ -1,43 +1,43 @@
 [colors.primary]
-background = "#090909"
+background = "#060606"
 foreground = "#ffffff"
 dim_foreground = "#8e8e8e"
 bright_foreground = "#ffffff"
 
 [colors.cursor]
-text = "#090909"
+text = "#060606"
 cursor = "#f3e1dd"
 
 [colors.vi_mode_cursor]
-text = "#090909"
+text = "#060606"
 cursor = "#b5bff8"
 
 [colors.search.matches]
-foreground = "#090909"
+foreground = "#060606"
 background = "#c6c6c6"
 
 [colors.search.focused_match]
-foreground = "#090909"
+foreground = "#060606"
 background = "#abe1a6"
 
 [colors.footer_bar]
-foreground = "#090909"
+foreground = "#060606"
 background = "#c6c6c6"
 
 [colors.hints.start]
-foreground = "#090909"
+foreground = "#060606"
 background = "#f7e2b5"
 
 [colors.hints.end]
-foreground = "#090909"
+foreground = "#060606"
 background = "#c6c6c6"
 
 [colors.selection]
-text = "#090909"
+text = "#060606"
 background = "#f3e1dd"
 
 [colors.normal]
-black = "#3d3d3d"
+black = "#3a3a3a"
 red = "#ed8fa9"
 green = "#abe1a6"
 yellow = "#f7e2b5"
@@ -47,7 +47,7 @@ cyan = "#9be0d5"
 white = "#e3e3e3"
 
 [colors.bright]
-black = "#575757"
+black = "#565656"
 red = "#ed8fa9"
 green = "#abe1a6"
 yellow = "#f7e2b5"
