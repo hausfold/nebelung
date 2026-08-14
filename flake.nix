@@ -67,7 +67,8 @@
       # `platform` (["darwin"] / ["linux"] / both) is the other filter a consumer
       # wants first: several ports are Linux-only tools that are `auto` but have
       # nothing to wire on a Mac.
-      # docs/ports.md is generated from this file (scripts/gen-ports-doc.mjs) and
+      # docs/ports.md and the README's port board are both generated from this
+      # file (scripts/gen-ports-doc.mjs) and
       # a test asserts each stored tier matches the select/install rule, so the
       # value read here can't drift from the rule that defines it.
       ports = builtins.fromJSON (builtins.readFile ./ports.meta.json);

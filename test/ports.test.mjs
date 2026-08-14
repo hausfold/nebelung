@@ -141,6 +141,18 @@ test("the doc table lists every port once, in ports.conf order", () => {
   assert.deepEqual(order.slice(-NON_WHISKERS.length), NON_WHISKERS);
 });
 
+// The board's own counts are generated, but the README says "N ports" in prose
+// too — outside the markers, where nothing would notice it going stale.
+test("every port count written in the README is the real one", () => {
+  const readme = readFileSync(join(root, "README.md"), "utf8");
+  const count = Object.keys(meta).length;
+  const claims = [...readme.matchAll(/(\d+) ports/g)].map((m) => Number(m[1]));
+  assert.ok(claims.length, "the README stopped saying how many ports there are");
+  for (const claimed of claims) {
+    assert.equal(claimed, count, `README claims ${claimed} ports, there are ${count}`);
+  }
+});
+
 // The board and the table are both grouped by category, so an empty shelf means
 // a category nobody is in — a renamed key, or one that outlived its ports.
 test("every category holds at least one port, and together they hold all of them", () => {

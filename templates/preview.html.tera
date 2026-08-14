@@ -1,9 +1,11 @@
 ---
 whiskers:
   version: "^2.0"
-# Overridden per render by build.sh (`--overrides '{"variant":"…"}'`) so the page
-# knows which of the four it is and can light up its own pill in the switcher.
+# Both overridden per render by build.sh (`--overrides`): the variant so the page
+# can light up its own pill in the switcher, and the port count so no number here
+# can outlive ports.meta.json.
 variant: nebelung
+ports: 0
 variants:
   - id: nebelung
     file: nebelung.html
@@ -148,7 +150,7 @@ variants:
   .sw:hover { transform: translateY(-2px); }
   .sw:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
   .sw span { font-size: 12px; font-weight: 600; }
-  .sw small { font-family: var(--mono); font-size: 10.5px; opacity: .8; }
+  .sw small { font-family: var(--mono); font-size: 10.5px; opacity: .92; }
   .ramp .sw { min-height: 62px; }
 
   /* ── mockups ─────────────────────────────────────────────── */
@@ -249,7 +251,7 @@ variants:
       <li><b id="ratio">—</b> text on base</li>
       <li><b>{{ variant }}</b> palette</li>
       <li>renders as catppuccin <b>{{ flavor.name }}</b></li>
-      <li><b>54</b> ports</li>
+      <li><b>{{ ports }}</b> ports</li>
     </ul>
   </div>
 
@@ -296,7 +298,7 @@ variants:
 
     <div class="panel">
       <pre class="code"><span class="prompt"><span class="a">~/code/nebelung</span> <span class="b">git:(</span><span class="c">main</span><span class="b">)</span></span> ./build.sh
-<span class="add">✓</span> rendered <span class="ty">54</span> ports against the <span class="ty">{{ variant }}</span> palette
+<span class="add">✓</span> rendered <span class="ty">{{ ports }}</span> ports against the <span class="ty">{{ variant }}</span> palette
 <span class="add">+</span><span class="add"> dist/ghostty/themes/catppuccin-{{ flavor.identifier }}.conf</span>
 <span class="del">-</span><span class="del"> dist/ghostty/themes/old.conf</span>
 <span class="cmt">→ preview → preview/{{ variant }}.html</span></pre>
@@ -344,10 +346,14 @@ variants:
   document.getElementById("ratio").textContent =
     r.toFixed(1) + ":1 " + (r >= 7 ? "AAA" : r >= 4.5 ? "AA" : "·");
 
-  // Each swatch labels itself with whichever end of the ramp it can be read on.
+  // Each swatch labels itself with whichever candidate it can be read on. Both
+  // ends of the ramp sit at the light end in Latte, so palette colours alone
+  // leave mid-lightness swatches around 2.5:1 — black and white are in the pool
+  // to keep every label above 4.5:1 in all four variants.
   for (const sw of document.querySelectorAll(".sw")) {
     const hex = sw.dataset.hex;
-    sw.style.color = ratio(hex, crust) >= ratio(hex, text) ? crust : text;
+    sw.style.color = [crust, text, "#000000", "#ffffff"]
+      .reduce((best, c) => (ratio(hex, c) > ratio(hex, best) ? c : best));
   }
 
   const toast = document.getElementById("toast");

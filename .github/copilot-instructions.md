@@ -17,9 +17,11 @@ The short version:
 - **Vendored templates are verbatim except where marked `NEBELUNG PATCH`.**
   Re-vendoring from upstream silently drops those patches — grep the marker
   first. Details in [`docs/ports.md`](../docs/ports.md).
-- **`ports.meta.json` is fenced by tests**, and the ports table in
-  `docs/ports.md` is *generated* from it: run `node scripts/gen-ports-doc.mjs`
-  after editing, or `node --test` fails.
+- **`ports.meta.json` is fenced by tests**, and *two* files are generated from
+  it: the per-category tables in `docs/ports.md` and the port board in
+  `README.md`. Both sit between `ports:begin`/`ports:end` markers — never
+  hand-edit inside those. Run `node scripts/gen-ports-doc.mjs` after editing, or
+  `node --test` fails.
 - **Per-variant `contrastBoost` values differ on purpose** (Latte has ~0.04 of
   OKLCH headroom above `base` where Mocha has ~0.2 below its). Don't "tidy" them
   into agreement — the tests assert all twelve ramp steps stay distinct.

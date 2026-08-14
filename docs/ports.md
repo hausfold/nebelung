@@ -210,14 +210,18 @@ flake's **`ports`** output, so a config manager can wire the `auto` ports itself
 patch the `activate` ones at activation time, and tell the user about the
 `manual` ones instead of silently doing nothing.
 
-The table above is generated from it — after editing, run:
+Two files are generated from it: the tables above, and the port board in the
+[README](../README.md#the-ports) whose links point at the anchors those tables
+carry. Both live between `ports:begin`/`ports:end` markers — don't hand-edit
+inside them. After editing the metadata, run:
 
 ```bash
-node scripts/gen-ports-doc.mjs           # rewrite the table
-node scripts/gen-ports-doc.mjs --check   # or just check it's in sync
+node scripts/gen-ports-doc.mjs           # rewrite both
+node scripts/gen-ports-doc.mjs --check   # or just check they're in sync
 ```
 
-`node --test` fails on a stale table, on a `tier` that disagrees with the
+`node --test` fails on a stale table or board, on a port outside every category
+in `CATEGORIES`, on a `tier` that disagrees with the
 `select`/`install` rule, on an unknown `install`/`select`/`tier`/`platform`
 value, on a port in `ports.conf` with no metadata, and on an advertised path
 that doesn't exist in `dist/`.

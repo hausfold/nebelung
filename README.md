@@ -41,6 +41,9 @@ One page per variant, each with the other three a click away — the top link pi
 the one matching your system. Every swatch copies its hex; below them the palette
 sits in an editor, a terminal and a scrap of UI.
 
+Four variants: two flavors crossed with two contrast levels. The default owns the
+`dist/` root, the rest nest inside it.
+
 | variant | source | `dist/` subdir | text on base |
 | --- | --- | --- | --- |
 | `nebelung` | Mocha | *(the root)* | 11.3:1 |
@@ -105,6 +108,7 @@ Every port is the same two moves: **drop a rendered file, name it in a config.**
 
 ```bash
 git clone --depth 1 https://github.com/hausfold/nebelung
+mkdir -p ~/.config/ghostty/themes
 cp nebelung/dist/ghostty/themes/catppuccin-mocha.conf ~/.config/ghostty/themes/
 echo 'theme = catppuccin-mocha' >> ~/.config/ghostty/config
 ```

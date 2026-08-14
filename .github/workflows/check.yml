@@ -33,6 +33,19 @@ jobs:
           done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung*.json' -not -name 'variants.json' -not -name 'ports.meta.json')
           [ "$fail" = 0 ] && echo "dist/ is in sync"
           exit "$fail"
+      # The previews are what GitHub Pages publishes, so a template edit that
+      # never had ./build.sh run on it would put a stale page on the web.
+      # preview/index.html is hand-written and rendered by nothing — it has no
+      # counterpart in the build output, which is why this walks the output side.
+      - name: preview/ matches the built output
+        run: |
+          fail=0
+          for f in result/preview/*.html; do
+            b="$(basename "$f")"
+            cmp -s "preview/$b" "$f" || { echo "::error::preview/$b differs from the built output"; fail=1; }
+          done
+          [ "$fail" = 0 ] && echo "preview/ is in sync"
+          exit "$fail"
 
   unit:
     name: palette unit tests + shellcheck
