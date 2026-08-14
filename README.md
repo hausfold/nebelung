@@ -1,48 +1,31 @@
 <div align="center">
 
-<img src="./assets/nebelung-banner.png" alt="nebelung" width="720">
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/nebelung-banner-latte.png">
+  <img src="./assets/nebelung-banner.png" alt="nebelung" width="720">
+</picture>
 
 **Mocha with the blue stripped out**
 
 a silver-mist [Catppuccin](https://catppuccin.com) flavor · 54 ports · dark and light
 
-<img src="./assets/mocha-vs-nebelung.png" alt="the same zellij session — lazygit and Neovim in Ghostty — running Catppuccin Mocha above and Nebelung below: blue-tinted neutrals versus true-gray neutrals" width="560">
+### [open the preview ↗](https://hausfold.github.io/nebelung/preview/)
+
+<sub>lands on the variant matching your system — the other three are a click away</sub>
 
 </div>
 
 ---
 
-Catppuccin's entire neutral ramp (`base` → `text`) carries a single ~240° blue
-hue. Nebelung **rewrites the ramp to pure grey** — chroma 0, every neutral exactly
-R = G = B, each colour's perceptual lightness left where it was — and **calms the
-14 accents** to ×0.9 so they sit against true grey instead of a slightly-blue base.
-Same structure, same slots, same ports; the blue cast is the only thing that
-leaves. Named for a cat breed the colour of high fog.
-
-Nothing here is hand-tuned. One OKLCH script generates every variant, and each
+Catppuccin's neutral ramp (`base` → `text`) carries a single ~240° blue hue.
+Nebelung **rewrites it to pure grey** — chroma 0, every neutral exactly R = G = B,
+each colour's perceptual lightness left where it was — and **calms the 14 accents**
+to ×0.9. Nothing is hand-tuned: one OKLCH script generates every variant, and each
 port is an upstream [whiskers](https://whiskers.catppuccin.com) template rendered
-into the flavor slot it already had — so ports track Catppuccin and only the
-colours change. Those same two rules pointed at Latte give a real light theme,
-not an inversion. → [how the palette is built](docs/palette.md)
-
-## see it
-
-<div align="center">
-
-### [open the preview ↗](https://hausfold.github.io/nebelung/preview/)
-
-**[dark ↗](https://hausfold.github.io/nebelung/preview/nebelung.html)** · **[light ↗](https://hausfold.github.io/nebelung/preview/nebelung-latte.html)**
-
-<sub>high contrast: <a href="https://hausfold.github.io/nebelung/preview/nebelung-high-contrast.html">dark ↗</a> · <a href="https://hausfold.github.io/nebelung/preview/nebelung-latte-high-contrast.html">light ↗</a></sub>
-
-</div>
-
-One page per variant, each with the other three a click away — the top link picks
-the one matching your system. Every swatch copies its hex; below them the palette
-sits in an editor, a terminal and a scrap of UI.
-
-Four variants: two flavors crossed with two contrast levels. The default owns the
-`dist/` root, the rest nest inside it.
+into the flavor slot it already had, so ports track Catppuccin and only the colours
+change. The same two rules pointed at Latte give a real light theme, not an
+inversion. Named for a cat breed the colour of high fog.
+→ [how the palette is built](docs/palette.md)
 
 | variant | source | `dist/` subdir | text on base |
 | --- | --- | --- | --- |
@@ -129,7 +112,7 @@ inputs.nebelung.url = "github:hausfold/nebelung";
 - [Install](docs/install.md) — by hand, by variant, as a flake, on the web
 - [Nix](docs/nix.md) — flake outputs (`palette`, `palettes`, `variants`, `ports`, `checks`)
 - [Palette internals](docs/palette.md) — layout, tuning knobs, and why the two contrast boosts differ
-- [Theming & accents](https://nebelhaus.com/guides/theming/) — picking an accent inside the rice
+- [Theming & accents](https://hausfold.co/docs/haus/guides/theming/) — picking an accent inside the rice
 
 <div align="center">
 
