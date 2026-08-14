@@ -11,21 +11,9 @@ a silver-mist [Catppuccin](https://catppuccin.com) flavor · 54 ports · dark an
 
 ### [open the preview ↗](https://hausfold.github.io/nebelung/preview/)
 
-<sub>lands on the variant matching your system — the other three are a click away</sub>
-
 </div>
 
 ---
-
-Catppuccin's neutral ramp (`base` → `text`) carries a single ~240° blue hue.
-Nebelung **rewrites it to pure grey** — chroma 0, every neutral exactly R = G = B,
-each colour's perceptual lightness left where it was — and **calms the 14 accents**
-to ×0.9. Nothing is hand-tuned: one OKLCH script generates every variant, and each
-port is an upstream [whiskers](https://whiskers.catppuccin.com) template rendered
-into the flavor slot it already had, so ports track Catppuccin and only the colours
-change. The same two rules pointed at Latte give a real light theme, not an
-inversion. Named for a cat breed the colour of high fog.
-→ [how the palette is built](docs/palette.md)
 
 | variant | source | `dist/` subdir | text on base |
 | --- | --- | --- | --- |

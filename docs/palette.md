@@ -11,12 +11,15 @@ Nebelung applies exactly two rules to it:
 2. **Accents are calmed to ×0.9 chroma** — so the 14 accents sit against true
    grey instead of a slightly-blue base.
 
-Nothing downstream is hand-tuned: same structure, same slots, same ports. Each
-port is an upstream whiskers template rendered into the flavor slot it already
-had, so ports track Catppuccin and only the colours change. Pointed at Latte
-those same two rules give a real light theme rather than an inversion of the
-dark one — Latte's own lightnesses are preserved, so it stays a light palette
-that happens to be grey.
+Nothing is hand-tuned. One OKLCH script (`scripts/generate-palette.mjs`)
+generates every variant from those two rules, and each port is an upstream
+[whiskers](https://whiskers.catppuccin.com) template rendered into the flavor
+slot it already had — same structure, same slots, same ports, so ports track
+Catppuccin and only the colours change. Pointed at Latte the same two rules give
+a real light theme rather than an inversion of the dark one: Latte's own
+lightnesses are preserved, so it stays a light palette that happens to be grey.
+
+Named for a cat breed the colour of high fog.
 
 ## Repo layout
 
