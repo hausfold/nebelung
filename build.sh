@@ -92,10 +92,11 @@ while IFS='|' read -r variant flavor dir; do
   render_ports "$palette" "$flavor" "$out"
   # One preview per variant — light mode especially is a thing you check by eye,
   # and the default keeps its historical preview/nebelung.html path. The variant
-  # name goes in as a frontmatter override so the page can mark its own pill in
-  # the switcher; preview/index.html is hand-written and never rendered here.
+  # name and its dist subdir go in as frontmatter overrides so the page can mark
+  # its own pill in the switcher and print the dist/ path it actually rendered
+  # to; preview/index.html is hand-written and never rendered here.
   whiskers templates/preview.html.tera -f "$flavor" --color-overrides "$palette" \
-    --overrides "{\"variant\":\"$variant\",\"ports\":$PORT_COUNT}" \
+    --overrides "{\"variant\":\"$variant\",\"dir\":\"$dir\",\"ports\":$PORT_COUNT}" \
     > "preview/$variant.html"
   echo "✓ preview → preview/$variant.html"
   echo "rendered $count port(s) against the $variant palette"

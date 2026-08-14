@@ -34,7 +34,7 @@ inputs.nebelung.url = "github:hausfold/nebelung";
 ## Inside the rice
 
 Picking an accent and applying it is a single option — see
-[Theming & accents](https://nebelhaus.com/guides/theming/) on nebelhaus.com.
+[Theming & accents](https://hausfold.co/docs/haus/guides/theming/).
 
 Hacking on the palette inside the wider rice? `bench try` in the
 [workshop](https://github.com/hausfold/workshop) rebuilds your machine against

@@ -52,6 +52,14 @@
   a { color: inherit; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--pad) 64px; }
 
+  /* Every piece of the page's OWN prose — bar, hero, headings, footer — stays at
+     or above 4.5:1 in all four variants, which sets a floor of `subtext1` for
+     secondary text: Latte's ramp is compressed at the light end, so `subtext0`
+     lands at 3.7:1 on `crust` and the overlays at 2.0–3.5:1. The mockups below
+     are deliberately exempt — line numbers in `overlay0`, comments in
+     `overlay1`, is what the theme actually does in an editor, and "fixing" them
+     here would show a theme nobody gets. */
+
   /* ── top bar ─────────────────────────────────────────────── */
   .top {
     position: sticky; top: 0; z-index: 10;
@@ -85,16 +93,17 @@
     display: inline-flex; flex-direction: column; gap: 1px;
     padding: 6px 12px; border-radius: 999px;
     border: 1px solid var(--surface0); background: var(--mantle);
-    color: var(--subtext0); text-decoration: none;
+    color: var(--subtext1); text-decoration: none;
     font-size: 12.5px; line-height: 1.25; white-space: nowrap;
     transition: border-color .15s, color .15s, background .15s;
   }
-  .pill small { font-size: 10.5px; color: var(--overlay1); }
+  /* Size, not colour, subordinates the note: dimming it even to 85% drops it
+     under 4.5:1 on Latte's mantle. */
+  .pill small { font-size: 10.5px; color: inherit; }
   .pill:hover { border-color: var(--overlay0); color: var(--text); }
   .pill[aria-current="page"] {
     background: var(--surface0); border-color: var(--overlay0); color: var(--text);
   }
-  .pill[aria-current="page"] small { color: var(--subtext0); }
 
   /* ── hero ────────────────────────────────────────────────── */
   .hero { padding: clamp(28px, 6vw, 56px) 0 clamp(20px, 4vw, 32px); }
@@ -102,10 +111,10 @@
     margin: 0; font-size: clamp(28px, 7vw, 42px); font-weight: 600;
     letter-spacing: -.02em;
   }
-  h1 .dim { color: var(--overlay1); font-weight: 400; }
+  h1 .dim { color: var(--subtext1); font-weight: 400; }
   .lede {
     margin: 10px 0 0; max-width: 52ch;
-    color: var(--subtext0); font-size: clamp(14px, 3.4vw, 16px);
+    color: var(--subtext1); font-size: clamp(14px, 3.4vw, 16px);
   }
   .facts {
     list-style: none; display: flex; flex-wrap: wrap; gap: 8px;
@@ -114,7 +123,7 @@
   .facts li {
     background: var(--mantle); border: 1px solid var(--surface0);
     border-radius: 999px; padding: 5px 12px;
-    font-size: 12.5px; color: var(--subtext0);
+    font-size: 12.5px; color: var(--subtext1);
   }
   .facts b { color: var(--text); font-family: var(--mono); font-weight: 600; }
 
@@ -122,12 +131,12 @@
   section { margin-top: clamp(30px, 6vw, 46px); }
   h2 {
     margin: 0 0 14px; font-size: 13px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .12em; color: var(--overlay2);
+    text-transform: uppercase; letter-spacing: .12em; color: var(--text);
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
   }
   h2 .hint {
     text-transform: none; letter-spacing: 0; font-weight: 400;
-    font-size: 12px; color: var(--overlay1);
+    font-size: 12px; color: var(--subtext1);
   }
 
   .grid { display: grid; gap: 8px; }
@@ -204,10 +213,10 @@
   footer {
     margin-top: clamp(40px, 8vw, 64px); padding-top: 22px;
     border-top: 1px solid var(--surface0);
-    color: var(--overlay1); font-size: 13px;
+    color: var(--subtext1); font-size: 13px;
     display: flex; flex-wrap: wrap; gap: 8px 18px;
   }
-  footer a { color: var(--subtext0); }
+  footer a { color: var(--text); }
   #toast {
     position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 12px);
     background: var(--surface0); color: var(--text);
@@ -314,8 +323,8 @@
     <div class="panel">
       <pre class="code"><span class="prompt"><span class="a">~/code/nebelung</span> <span class="b">git:(</span><span class="c">main</span><span class="b">)</span></span> ./build.sh
 <span class="add">✓</span> rendered <span class="ty">54</span> ports against the <span class="ty">nebelung-latte</span> palette
-<span class="add">+</span><span class="add"> dist/ghostty/themes/catppuccin-latte.conf</span>
-<span class="del">-</span><span class="del"> dist/ghostty/themes/old.conf</span>
+<span class="add">+</span><span class="add"> dist/latte/ghostty/themes/catppuccin-latte.conf</span>
+<span class="del">-</span><span class="del"> dist/latte/ghostty/themes/old.conf</span>
 <span class="cmt">→ preview → preview/nebelung-latte.html</span></pre>
     </div>
 

@@ -1,5 +1,26 @@
 # nebelung palette internals
 
+## What the two rules do
+
+Catppuccin's neutral ramp (`base` → `text`) carries a single ~240° blue hue.
+Nebelung applies exactly two rules to it:
+
+1. **Neutrals go to chroma 0** — every step of the ramp becomes exactly
+   R = G = B, with each colour's perceptual (OKLCH) lightness left where it was.
+   The ramp keeps its spacing; only the blue cast leaves.
+2. **Accents are calmed to ×0.9 chroma** — so the 14 accents sit against true
+   grey instead of a slightly-blue base.
+
+Nothing is hand-tuned. One OKLCH script (`scripts/generate-palette.mjs`)
+generates every variant from those two rules, and each port is an upstream
+[whiskers](https://whiskers.catppuccin.com) template rendered into the flavor
+slot it already had — same structure, same slots, same ports, so ports track
+Catppuccin and only the colours change. Pointed at Latte the same two rules give
+a real light theme rather than an inversion of the dark one: Latte's own
+lightnesses are preserved, so it stays a light palette that happens to be grey.
+
+Named for a cat breed the colour of high fog.
+
 ## Repo layout
 
 ```
@@ -10,9 +31,8 @@ palette/
   nebelung-*.json     # …and the same pair per variant
 scripts/
   generate-palette.mjs# regenerates every variant via OKLCH color math
-  gen-hero.mjs        # recomposes the README hero from the live palette
 templates/            # vendored upstream port .tera templates
-assets/               # README images (hero composed from assets/scenes/)
+assets/               # README images (the banner, dark and light)
 dist/                 # rendered themes, ready to install (variants in subdirs)
 preview/*.html        # visual swatch + mockup per variant, through whiskers
 ports.conf            # port manifest: name | template | output | extra args
@@ -49,21 +69,3 @@ Edit the `CONFIG` block at the top of `scripts/generate-palette.mjs`:
 
 Re-run `node scripts/generate-palette.mjs` (or `./build.sh`) and re-open
 `preview/nebelung.html` to judge.
-
-## The README hero
-
-`assets/mocha-vs-nebelung.png` is composed, not drawn. The two halves are real
-screenshots of the same zellij session — lazygit and Neovim in Ghostty — one
-running Catppuccin Mocha, one running Nebelung; they live in `assets/scenes/`
-(whole window, 2048px wide). What's drawn around them — the labels, each base's
-hex and its measured OKLCH chroma — is read from `palette/`, so a recolor can't
-leave the hero lying:
-
-```bash
-node scripts/gen-hero.mjs          # → assets/mocha-vs-nebelung.png (1080×1350)
-node scripts/gen-hero.mjs --html   # stop at the throwaway HTML, to iterate on it
-```
-
-Reshooting the scenes is the one manual step: same window, same session, flip
-the theme between the two shots, crop both the same. macOS-only for now — it screenshots with headless Google Chrome at 2x and downscales with
-`sips`.
