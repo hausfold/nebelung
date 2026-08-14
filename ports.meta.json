@@ -1,6 +1,7 @@
 {
   "ghostty": {
     "title": "Ghostty",
+    "category": "terminal",
     "path": "ghostty/themes/catppuccin-mocha.conf",
     "platform": [
       "darwin",
@@ -18,6 +19,7 @@
   },
   "kitty": {
     "title": "Kitty",
+    "category": "terminal",
     "path": "kitty/themes/mocha.conf",
     "platform": [
       "darwin",
@@ -31,6 +33,7 @@
   },
   "alacritty": {
     "title": "Alacritty",
+    "category": "terminal",
     "path": "alacritty/catppuccin-mocha.toml",
     "platform": [
       "darwin",
@@ -44,6 +47,7 @@
   },
   "starship": {
     "title": "Starship",
+    "category": "shell",
     "path": "starship/themes/mocha.toml",
     "platform": [
       "darwin",
@@ -61,6 +65,7 @@
   },
   "btop": {
     "title": "btop",
+    "category": "tui",
     "path": "btop/themes/catppuccin_mocha.theme",
     "platform": [
       "darwin",
@@ -78,6 +83,7 @@
   },
   "tmux": {
     "title": "tmux",
+    "category": "multiplexer",
     "path": "tmux/themes/catppuccin_mocha_tmux.conf",
     "platform": [
       "darwin",
@@ -91,6 +97,7 @@
   },
   "slack": {
     "title": "Slack",
+    "category": "app",
     "path": "slack/README.md",
     "platform": [
       "darwin",
@@ -104,6 +111,7 @@
   },
   "zellij": {
     "title": "Zellij",
+    "category": "multiplexer",
     "path": "zellij/themes/nebelung.kdl",
     "platform": [
       "darwin",
@@ -121,6 +129,7 @@
   },
   "delta": {
     "title": "delta",
+    "category": "git",
     "path": "delta/catppuccin.gitconfig",
     "platform": [
       "darwin",
@@ -138,6 +147,7 @@
   },
   "fzf": {
     "title": "fzf",
+    "category": "shell",
     "path": "fzf/themes/catppuccin-fzf-mocha.sh",
     "pathNote": "(+ fish/nu/ps1/rc)",
     "platform": [
@@ -152,6 +162,7 @@
   },
   "lsd": {
     "title": "lsd",
+    "category": "tui",
     "path": "lsd/themes/catppuccin-mocha/colors.yaml",
     "platform": [
       "darwin",
@@ -169,6 +180,7 @@
   },
   "glow": {
     "title": "glow",
+    "category": "tui",
     "path": "glow/themes/mocha/catppuccin-mocha-<accent>.json",
     "platform": [
       "darwin",
@@ -185,6 +197,7 @@
   },
   "bat": {
     "title": "bat",
+    "category": "tui",
     "path": "bat/themes/Catppuccin Mocha.tmTheme",
     "platform": [
       "darwin",
@@ -205,6 +218,7 @@
   },
   "zsh-syntax-highlighting": {
     "title": "zsh-syntax-highlighting",
+    "category": "shell",
     "path": "zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh",
     "platform": [
       "darwin",
@@ -218,6 +232,7 @@
   },
   "obsidian": {
     "title": "Obsidian",
+    "category": "app",
     "path": "obsidian/Nebelung/",
     "platform": [
       "darwin",
@@ -236,6 +251,7 @@
   },
   "lazygit": {
     "title": "lazygit",
+    "category": "git",
     "path": "lazygit/themes/mocha/<accent>.yml",
     "platform": [
       "darwin",
@@ -252,6 +268,7 @@
   },
   "yazi": {
     "title": "yazi",
+    "category": "tui",
     "path": "yazi/themes/mocha/catppuccin-mocha-<accent>.toml",
     "platform": [
       "darwin",
@@ -265,6 +282,7 @@
   },
   "zen": {
     "title": "Zen",
+    "category": "app",
     "path": "zen/themes/Mocha/<Accent>/userChrome.css",
     "pathNote": "(+ `userContent.css`)",
     "platform": [
@@ -284,6 +302,7 @@
   },
   "opencode": {
     "title": "opencode",
+    "category": "app",
     "path": "opencode/nebelung.json",
     "platform": [
       "darwin",
@@ -301,6 +320,7 @@
   },
   "helix": {
     "title": "Helix",
+    "category": "editor",
     "path": "helix/themes/default/catppuccin_mocha.toml",
     "pathNote": "(+ `no_italics/`)",
     "platform": [
@@ -319,6 +339,7 @@
   },
   "xcode": {
     "title": "Xcode",
+    "category": "editor",
     "path": "xcode/themes/Catppuccin Mocha.xccolortheme",
     "platform": [
       "darwin"
@@ -331,6 +352,7 @@
   },
   "gh-dash": {
     "title": "gh-dash",
+    "category": "git",
     "path": "gh-dash/themes/mocha/catppuccin-mocha-<accent>.yml",
     "platform": [
       "darwin",
@@ -347,6 +369,7 @@
   },
   "mpv": {
     "title": "mpv",
+    "category": "tui",
     "path": "mpv/themes/mocha/<accent>.conf",
     "platform": [
       "darwin",
@@ -360,6 +383,7 @@
   },
   "bottom": {
     "title": "bottom",
+    "category": "tui",
     "path": "bottom/themes/mocha.toml",
     "platform": [
       "darwin",
@@ -373,6 +397,7 @@
   },
   "gitui": {
     "title": "gitui",
+    "category": "git",
     "path": "gitui/themes/catppuccin-mocha.ron",
     "platform": [
       "darwin",
@@ -386,6 +411,7 @@
   },
   "micro": {
     "title": "micro",
+    "category": "editor",
     "path": "micro/themes/catppuccin-mocha.micro",
     "pathNote": "(+ `-transparent`)",
     "platform": [
@@ -404,6 +430,7 @@
   },
   "rio": {
     "title": "Rio",
+    "category": "terminal",
     "path": "rio/themes/catppuccin-mocha.toml",
     "platform": [
       "darwin",
@@ -421,6 +448,7 @@
   },
   "warp": {
     "title": "Warp",
+    "category": "terminal",
     "path": "warp/themes/catppuccin_mocha.yml",
     "platform": [
       "darwin",
@@ -434,6 +462,7 @@
   },
   "fish": {
     "title": "fish",
+    "category": "shell",
     "path": "fish/themes/catppuccin-mocha.theme",
     "pathNote": "(+ `static/`)",
     "platform": [
@@ -451,6 +480,7 @@
   },
   "raycast": {
     "title": "Raycast",
+    "category": "app",
     "path": "raycast/README.md",
     "platform": [
       "darwin"
@@ -463,6 +493,7 @@
   },
   "dark-reader": {
     "title": "Dark Reader",
+    "category": "app",
     "path": "dark-reader/README.md",
     "platform": [
       "darwin",
@@ -476,6 +507,7 @@
   },
   "zed": {
     "title": "Zed",
+    "category": "editor",
     "path": "zed/themes/catppuccin-<accent>.json",
     "pathNote": "(+ `catppuccin-no-italics-<accent>.json`)",
     "platform": [
@@ -494,6 +526,7 @@
   },
   "emacs": {
     "title": "Emacs",
+    "category": "editor",
     "path": "emacs/catppuccin-definitions.el",
     "platform": [
       "darwin",
@@ -511,6 +544,7 @@
   },
   "sublime-text": {
     "title": "Sublime Text",
+    "category": "editor",
     "path": "sublime-text/themes/Catppuccin Mocha.sublime-color-scheme",
     "platform": [
       "darwin",
@@ -528,6 +562,7 @@
   },
   "kakoune": {
     "title": "Kakoune",
+    "category": "editor",
     "path": "kakoune/colors/catppuccin_mocha.kak",
     "platform": [
       "darwin",
@@ -545,6 +580,7 @@
   },
   "jetbrains": {
     "title": "JetBrains",
+    "category": "editor",
     "path": "jetbrains/themes/mocha.xml",
     "pathNote": "+ `mocha.theme.json` (+ `-no-italics` / `-islands`)",
     "platform": [
@@ -559,6 +595,7 @@
   },
   "foot": {
     "title": "foot",
+    "category": "terminal",
     "path": "foot/themes/catppuccin-mocha.ini",
     "platform": [
       "linux"
@@ -571,6 +608,7 @@
   },
   "konsole": {
     "title": "Konsole",
+    "category": "terminal",
     "path": "konsole/themes/catppuccin-mocha.colorscheme",
     "platform": [
       "linux"
@@ -583,6 +621,7 @@
   },
   "tabby": {
     "title": "Tabby",
+    "category": "terminal",
     "path": "tabby/themes/catppuccin-mocha.yaml",
     "platform": [
       "darwin",
@@ -596,6 +635,7 @@
   },
   "xresources": {
     "title": "Xresources",
+    "category": "terminal",
     "path": "xresources/themes/mocha.Xresources",
     "platform": [
       "linux"
@@ -611,6 +651,7 @@
   },
   "k9s": {
     "title": "k9s",
+    "category": "tui",
     "path": "k9s/themes/catppuccin-mocha.yaml",
     "pathNote": "(+ `-transparent`)",
     "platform": [
@@ -629,6 +670,7 @@
   },
   "skim": {
     "title": "skim",
+    "category": "shell",
     "path": "skim/README.md",
     "platform": [
       "darwin",
@@ -645,6 +687,7 @@
   },
   "spotify-player": {
     "title": "spotify-player",
+    "category": "tui",
     "path": "spotify-player/theme.toml",
     "platform": [
       "darwin",
@@ -662,6 +705,7 @@
   },
   "zsh-fsh": {
     "title": "zsh-fsh",
+    "category": "shell",
     "path": "zsh-fsh/themes/catppuccin-mocha.ini",
     "platform": [
       "darwin",
@@ -678,6 +722,7 @@
   },
   "obs": {
     "title": "OBS",
+    "category": "app",
     "path": "obs/themes/Catppuccin_Mocha.ovt",
     "pathNote": "**and** `obs/themes/Catppuccin.obt`",
     "platform": [
@@ -692,6 +737,7 @@
   },
   "zathura": {
     "title": "zathura",
+    "category": "app",
     "path": "zathura/themes/catppuccin-mocha",
     "platform": [
       "linux"
@@ -704,6 +750,7 @@
   },
   "chroma": {
     "title": "chroma",
+    "category": "web",
     "path": "chroma/themes/mocha-chroma-style.css",
     "pathNote": "(+ `.xml`)",
     "platform": [
@@ -718,6 +765,7 @@
   },
   "css": {
     "title": "CSS / Tailwind",
+    "category": "web",
     "path": "css/nebelung-mocha.css",
     "pathNote": "(+ `nebelung-mocha.tailwind.css`)",
     "platform": [
@@ -732,6 +780,7 @@
   },
   "sc-im": {
     "title": "sc-im",
+    "category": "tui",
     "path": "sc-im/themes/mocha",
     "platform": [
       "darwin",
@@ -745,6 +794,7 @@
   },
   "tty": {
     "title": "tty",
+    "category": "terminal",
     "path": "tty/themes/mocha.txt",
     "platform": [
       "linux"
@@ -760,6 +810,7 @@
   },
   "telegram": {
     "title": "Telegram",
+    "category": "app",
     "path": "telegram/themes/mocha/{android,desktop,ios,macos}",
     "platform": [
       "darwin",
@@ -773,6 +824,7 @@
   },
   "qbittorrent": {
     "title": "qBittorrent",
+    "category": "app",
     "path": "qbittorrent/themes/catppuccin-mocha/",
     "pathNote": "(+ `themes/icons/`)",
     "platform": [
@@ -790,6 +842,7 @@
   },
   "vscode": {
     "title": "VS Code / Cursor",
+    "category": "editor",
     "path": "vscode/settings.json",
     "platform": [
       "darwin",
@@ -806,6 +859,7 @@
   },
   "stylus": {
     "title": "Stylus",
+    "category": "app",
     "path": "stylus/nebelung-stylus.json",
     "pathNote": "(+ README)",
     "platform": [

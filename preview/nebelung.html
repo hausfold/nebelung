@@ -3,103 +3,380 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Nebelung — Mocha preview</title>
+<title>Nebelung — dark, normal contrast</title>
+<meta name="description" content="Live preview of the Nebelung palette (nebelung) — 14 accents, 12 neutrals, and the theme in an editor and a terminal." />
+<meta name="color-scheme" content="dark light" />
 <style>
-  :root { color-scheme: dark; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 40px;
-    background: #121212;
-    color: #d7d7d7;
-    font: 14px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  :root {
+    color-scheme: dark;
+    --rosewater: #f3e1dd;
+    --flamingo: #efcece;
+    --pink: #f2c4e5;
+    --mauve: #c9a8f1;
+    --red: #ed8fa9;
+    --maroon: #e6a3ad;
+    --peach: #f5b58e;
+    --yellow: #f7e2b5;
+    --green: #abe1a6;
+    --teal: #9be0d5;
+    --sky: #91dbe8;
+    --sapphire: #7dc6e7;
+    --blue: #8db4f3;
+    --lavender: #b5bff8;
+    --text: #d7d7d7;
+    --subtext1: #c3c3c3;
+    --subtext0: #aeaeae;
+    --overlay2: #9a9a9a;
+    --overlay1: #858585;
+    --overlay0: #717171;
+    --surface2: #5c5c5c;
+    --surface1: #494949;
+    --surface0: #343434;
+    --base: #202020;
+    --mantle: #191919;
+    --crust: #121212;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --pad: clamp(18px, 4vw, 44px);
+    --radius: 14px;
   }
-  h1 { font-size: 20px; margin: 0 0 4px; }
-  .sub { color: #aeaeae; margin-bottom: 28px; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--crust);
+    color: var(--text);
+    font: 15px/1.55 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--pad) 64px; }
+
+  /* ── top bar ─────────────────────────────────────────────── */
+  .top {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--crust) 88%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--surface0);
+  }
+  .top .wrap {
+    padding: 12px var(--pad); display: flex; flex-wrap: wrap;
+    gap: 10px 16px; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    font: 600 15px/1 var(--sans); letter-spacing: .02em;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 9px;
+  }
+  .brand .fog {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--text), var(--overlay0));
+  }
+  .switch { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    display: inline-flex; flex-direction: column; gap: 1px;
+    padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--surface0); background: var(--mantle);
+    color: var(--subtext0); text-decoration: none;
+    font-size: 12.5px; line-height: 1.25; white-space: nowrap;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .pill small { font-size: 10.5px; color: var(--overlay1); }
+  .pill:hover { border-color: var(--overlay0); color: var(--text); }
+  .pill[aria-current="page"] {
+    background: var(--surface0); border-color: var(--overlay0); color: var(--text);
+  }
+  .pill[aria-current="page"] small { color: var(--subtext0); }
+
+  /* ── hero ────────────────────────────────────────────────── */
+  .hero { padding: clamp(28px, 6vw, 56px) 0 clamp(20px, 4vw, 32px); }
+  h1 {
+    margin: 0; font-size: clamp(28px, 7vw, 42px); font-weight: 600;
+    letter-spacing: -.02em;
+  }
+  h1 .dim { color: var(--overlay1); font-weight: 400; }
+  .lede {
+    margin: 10px 0 0; max-width: 52ch;
+    color: var(--subtext0); font-size: clamp(14px, 3.4vw, 16px);
+  }
+  .facts {
+    list-style: none; display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 22px 0 0; padding: 0;
+  }
+  .facts li {
+    background: var(--mantle); border: 1px solid var(--surface0);
+    border-radius: 999px; padding: 5px 12px;
+    font-size: 12.5px; color: var(--subtext0);
+  }
+  .facts b { color: var(--text); font-family: var(--mono); font-weight: 600; }
+
+  /* ── sections ────────────────────────────────────────────── */
+  section { margin-top: clamp(30px, 6vw, 46px); }
+  h2 {
+    margin: 0 0 14px; font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .12em; color: var(--overlay2);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
+  }
+  h2 .hint {
+    text-transform: none; letter-spacing: 0; font-weight: 400;
+    font-size: 12px; color: var(--overlay1);
+  }
+
   .grid { display: grid; gap: 8px; }
-  .accents { grid-template-columns: repeat(7, 1fr); margin-bottom: 28px; }
-  .ramp { grid-template-columns: repeat(12, 1fr); margin-bottom: 28px; }
-  .sw { border-radius: 8px; padding: 10px; height: 64px; display: flex;
-        flex-direction: column; justify-content: flex-end; font-size: 11px; }
-  .sw small { opacity: .85; }
-  .panel { background: #202020; border: 1px solid #343434;
-           border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
-  .titlebar { background: #191919; padding: 10px 14px;
-              border-bottom: 1px solid #343434;
-              color: #c3c3c3; display: flex; gap: 8px; align-items: center; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
-  .code { padding: 16px 18px; white-space: pre; }
-  .ln { color: #717171; user-select: none; margin-right: 16px; }
-  .kw { color: #c9a8f1; }
-  .fn { color: #8db4f3; }
-  .str { color: #abe1a6; }
-  .num { color: #f5b58e; }
-  .cmt { color: #858585; font-style: italic; }
-  .ty { color: #f7e2b5; }
-  .op { color: #91dbe8; }
-  .sel { background: #494949; }
-  .term { background: #202020; }
-  .prompt .a { color: #abe1a6; } .prompt .b { color: #8db4f3; }
-  .prompt .c { color: #9be0d5; }
+  .accents { grid-template-columns: repeat(auto-fill, minmax(min(100%, 118px), 1fr)); }
+  /* 74px keeps all twelve steps on one line at full width — the ramp reads as a
+     ramp — and wraps to three or four per row on a phone. */
+  .ramp { grid-template-columns: repeat(auto-fill, minmax(min(100%, 74px), 1fr)); }
+  .sw {
+    -webkit-appearance: none; appearance: none;
+    font: inherit; text-align: left; cursor: copy;
+    border: 1px solid color-mix(in srgb, var(--overlay0) 45%, transparent);
+    border-radius: 10px; padding: 10px; min-height: 74px;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 1px;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .sw:hover { transform: translateY(-2px); }
+  .sw:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+  .sw span { font-size: 12px; font-weight: 600; }
+  .sw small { font-family: var(--mono); font-size: 10.5px; opacity: .8; }
+  .ramp .sw { min-height: 62px; }
+
+  /* ── mockups ─────────────────────────────────────────────── */
+  .panel {
+    background: var(--base); border: 1px solid var(--surface0);
+    border-radius: var(--radius); overflow: hidden; margin-bottom: 14px;
+  }
+  .titlebar {
+    background: var(--mantle); padding: 9px 14px;
+    border-bottom: 1px solid var(--surface0); color: var(--subtext1);
+    display: flex; gap: 7px; align-items: center;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .titlebar .name { margin-left: 6px; }
+  .code {
+    padding: 14px 16px; margin: 0; overflow-x: auto;
+    font-family: var(--mono); font-size: clamp(11.5px, 2.9vw, 13px);
+    line-height: 1.7; white-space: pre;
+  }
+  .ln { color: var(--overlay0); user-select: none; margin-right: 14px; }
+  .kw { color: var(--mauve); }
+  .fn { color: var(--blue); }
+  .str { color: var(--green); }
+  .num { color: var(--peach); }
+  .cmt { color: var(--overlay1); font-style: italic; }
+  .ty { color: var(--yellow); }
+  .op { color: var(--sky); }
+  .sel { background: var(--surface1); }
+  .add { color: var(--green); }
+  .del { color: var(--red); }
+  .prompt .a { color: var(--green); } .prompt .b { color: var(--blue); }
+  .prompt .c { color: var(--teal); }
+
+  /* a small slice of app chrome — the accents doing UI work, not syntax work */
+  .ui { padding: 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .btn {
+    border: 0; border-radius: 9px; padding: 8px 15px;
+    font: 600 13px/1 var(--sans); cursor: default;
+    background: var(--mauve); color: var(--base);
+  }
+  .btn.ghost { background: var(--surface0); color: var(--text); }
+  .tag {
+    border-radius: 999px; padding: 4px 11px; font-size: 12px;
+    font-family: var(--mono);
+    border: 1px solid currentColor;
+  }
+  .tag.ok { color: var(--green); }
+  .tag.warn { color: var(--yellow); }
+  .tag.err { color: var(--red); }
+  .bar { flex: 1 1 160px; height: 7px; border-radius: 999px; background: var(--surface0); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 62%; background: var(--teal); }
+
+  /* ── footer + toast ──────────────────────────────────────── */
+  footer {
+    margin-top: clamp(40px, 8vw, 64px); padding-top: 22px;
+    border-top: 1px solid var(--surface0);
+    color: var(--overlay1); font-size: 13px;
+    display: flex; flex-wrap: wrap; gap: 8px 18px;
+  }
+  footer a { color: var(--subtext0); }
+  #toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 12px);
+    background: var(--surface0); color: var(--text);
+    border: 1px solid var(--overlay0); border-radius: 999px;
+    padding: 8px 16px; font-family: var(--mono); font-size: 12.5px;
+    opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s;
+  }
+  #toast.on { opacity: 1; transform: translate(-50%, 0); }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 </style>
 </head>
 <body>
-  <h1>Nebelung</h1>
-  <div class="sub">Mocha base, blue stripped → warm graphite · accents calmed</div>
 
-  <div class="grid accents">
-    <div class="sw" style="background:#f3e1dd; color:#121212">rosewater<small>#f3e1dd</small></div>
-    <div class="sw" style="background:#efcece; color:#121212">flamingo<small>#efcece</small></div>
-    <div class="sw" style="background:#f2c4e5; color:#121212">pink<small>#f2c4e5</small></div>
-    <div class="sw" style="background:#c9a8f1; color:#121212">mauve<small>#c9a8f1</small></div>
-    <div class="sw" style="background:#ed8fa9; color:#121212">red<small>#ed8fa9</small></div>
-    <div class="sw" style="background:#e6a3ad; color:#121212">maroon<small>#e6a3ad</small></div>
-    <div class="sw" style="background:#f5b58e; color:#121212">peach<small>#f5b58e</small></div>
-    <div class="sw" style="background:#f7e2b5; color:#121212">yellow<small>#f7e2b5</small></div>
-    <div class="sw" style="background:#abe1a6; color:#121212">green<small>#abe1a6</small></div>
-    <div class="sw" style="background:#9be0d5; color:#121212">teal<small>#9be0d5</small></div>
-    <div class="sw" style="background:#91dbe8; color:#121212">sky<small>#91dbe8</small></div>
-    <div class="sw" style="background:#7dc6e7; color:#121212">sapphire<small>#7dc6e7</small></div>
-    <div class="sw" style="background:#8db4f3; color:#121212">blue<small>#8db4f3</small></div>
-    <div class="sw" style="background:#b5bff8; color:#121212">lavender<small>#b5bff8</small></div>
-    </div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="https://github.com/hausfold/nebelung"><span class="fog"></span>nebelung</a>
+    <nav class="switch" aria-label="variant">
+      <a class="pill" href="nebelung.html" aria-current="page">dark<small>normal contrast</small></a>
+      <a class="pill" href="nebelung-high-contrast.html">dark<small>high contrast</small></a>
+      <a class="pill" href="nebelung-latte.html">light<small>normal contrast</small></a>
+      <a class="pill" href="nebelung-latte-high-contrast.html">light<small>high contrast</small></a>
+    </nav>
+  </div>
+</header>
 
-  <div class="grid ramp">
-    <div class="sw" style="background:#121212; color:#d7d7d7; border:1px solid #343434"><small>crust</small></div>
-    <div class="sw" style="background:#191919; color:#d7d7d7; border:1px solid #343434"><small>mantle</small></div>
-    <div class="sw" style="background:#202020; color:#d7d7d7; border:1px solid #343434"><small>base</small></div>
-    <div class="sw" style="background:#343434; color:#d7d7d7; border:1px solid #343434"><small>surface0</small></div>
-    <div class="sw" style="background:#494949; color:#d7d7d7; border:1px solid #343434"><small>surface1</small></div>
-    <div class="sw" style="background:#5c5c5c; color:#d7d7d7; border:1px solid #343434"><small>surface2</small></div>
-    <div class="sw" style="background:#717171; color:#d7d7d7; border:1px solid #343434"><small>overlay0</small></div>
-    <div class="sw" style="background:#858585; color:#d7d7d7; border:1px solid #343434"><small>overlay1</small></div>
-    <div class="sw" style="background:#9a9a9a; color:#d7d7d7; border:1px solid #343434"><small>overlay2</small></div>
-    <div class="sw" style="background:#aeaeae; color:#d7d7d7; border:1px solid #343434"><small>subtext0</small></div>
-    <div class="sw" style="background:#c3c3c3; color:#d7d7d7; border:1px solid #343434"><small>subtext1</small></div>
-    <div class="sw" style="background:#d7d7d7; color:#d7d7d7; border:1px solid #343434"><small>text</small></div>
-    </div>
+<div class="wrap">
 
-  <div class="panel">
-    <div class="titlebar">
-      <span class="dot" style="background:#ed8fa9"></span>
-      <span class="dot" style="background:#f7e2b5"></span>
-      <span class="dot" style="background:#abe1a6"></span>
-      <span style="margin-left:6px">nebelung.rs</span>
+  <div class="hero">
+    <h1>dark<span class="dim"> · normal contrast</span></h1>
+    <p class="lede">
+      Catppuccin with the ~240° blue lifted out of the neutrals: chroma 0 down the
+      whole ramp, accents calmed to ×0.9. Same structure, same slots — grey where
+      the blue was.
+    </p>
+    <ul class="facts">
+      <li><b id="ratio">—</b> text on base</li>
+      <li><b>nebelung</b> palette</li>
+      <li>renders as catppuccin <b>Mocha</b></li>
+      <li><b>54</b> ports</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>accents <span class="hint">click a swatch to copy its hex</span></h2>
+    <div class="grid accents">
+      <button class="sw" data-hex="#f3e1dd" style="background:#f3e1dd"><span>rosewater</span><small>#f3e1dd</small></button>
+      <button class="sw" data-hex="#efcece" style="background:#efcece"><span>flamingo</span><small>#efcece</small></button>
+      <button class="sw" data-hex="#f2c4e5" style="background:#f2c4e5"><span>pink</span><small>#f2c4e5</small></button>
+      <button class="sw" data-hex="#c9a8f1" style="background:#c9a8f1"><span>mauve</span><small>#c9a8f1</small></button>
+      <button class="sw" data-hex="#ed8fa9" style="background:#ed8fa9"><span>red</span><small>#ed8fa9</small></button>
+      <button class="sw" data-hex="#e6a3ad" style="background:#e6a3ad"><span>maroon</span><small>#e6a3ad</small></button>
+      <button class="sw" data-hex="#f5b58e" style="background:#f5b58e"><span>peach</span><small>#f5b58e</small></button>
+      <button class="sw" data-hex="#f7e2b5" style="background:#f7e2b5"><span>yellow</span><small>#f7e2b5</small></button>
+      <button class="sw" data-hex="#abe1a6" style="background:#abe1a6"><span>green</span><small>#abe1a6</small></button>
+      <button class="sw" data-hex="#9be0d5" style="background:#9be0d5"><span>teal</span><small>#9be0d5</small></button>
+      <button class="sw" data-hex="#91dbe8" style="background:#91dbe8"><span>sky</span><small>#91dbe8</small></button>
+      <button class="sw" data-hex="#7dc6e7" style="background:#7dc6e7"><span>sapphire</span><small>#7dc6e7</small></button>
+      <button class="sw" data-hex="#8db4f3" style="background:#8db4f3"><span>blue</span><small>#8db4f3</small></button>
+      <button class="sw" data-hex="#b5bff8" style="background:#b5bff8"><span>lavender</span><small>#b5bff8</small></button>
     </div>
-    <div class="code"><span class="ln">1</span><span class="cmt">// strip the blue, keep the cat</span>
+  </section>
+
+  <section>
+    <h2>neutrals <span class="hint">crust → text, chroma 0 all the way</span></h2>
+    <div class="grid ramp">
+      <button class="sw" data-hex="#121212" style="background:#121212"><span>crust</span><small>#121212</small></button>
+      <button class="sw" data-hex="#191919" style="background:#191919"><span>mantle</span><small>#191919</small></button>
+      <button class="sw" data-hex="#202020" style="background:#202020"><span>base</span><small>#202020</small></button>
+      <button class="sw" data-hex="#343434" style="background:#343434"><span>surface0</span><small>#343434</small></button>
+      <button class="sw" data-hex="#494949" style="background:#494949"><span>surface1</span><small>#494949</small></button>
+      <button class="sw" data-hex="#5c5c5c" style="background:#5c5c5c"><span>surface2</span><small>#5c5c5c</small></button>
+      <button class="sw" data-hex="#717171" style="background:#717171"><span>overlay0</span><small>#717171</small></button>
+      <button class="sw" data-hex="#858585" style="background:#858585"><span>overlay1</span><small>#858585</small></button>
+      <button class="sw" data-hex="#9a9a9a" style="background:#9a9a9a"><span>overlay2</span><small>#9a9a9a</small></button>
+      <button class="sw" data-hex="#aeaeae" style="background:#aeaeae"><span>subtext0</span><small>#aeaeae</small></button>
+      <button class="sw" data-hex="#c3c3c3" style="background:#c3c3c3"><span>subtext1</span><small>#c3c3c3</small></button>
+      <button class="sw" data-hex="#d7d7d7" style="background:#d7d7d7"><span>text</span><small>#d7d7d7</small></button>
+    </div>
+  </section>
+
+  <section>
+    <h2>in situ</h2>
+
+    <div class="panel">
+      <div class="titlebar">
+        <span class="dot" style="background:var(--red)"></span>
+        <span class="dot" style="background:var(--yellow)"></span>
+        <span class="dot" style="background:var(--green)"></span>
+        <span class="name">nebelung.rs</span>
+      </div>
+      <pre class="code"><span class="ln">1</span><span class="cmt">// strip the blue, keep the cat</span>
 <span class="ln">2</span><span class="kw">use</span> catppuccin<span class="op">::</span><span class="ty">Flavor</span>;
 <span class="ln">3</span>
 <span class="ln">4</span><span class="kw">pub fn</span> <span class="fn">neutralize</span>(c<span class="op">:</span> <span class="ty">Color</span>) <span class="op">-></span> <span class="ty">Color</span> {
-<span class="ln">5</span>    <span class="kw">let</span> warm <span class="op">=</span> <span class="num">70.0</span>; <span class="cmt">// hue°</span>
-<span class="ln">6</span><span class="sel">    c.with_hue(warm).with_chroma(<span class="num">0.008</span>)</span>
+<span class="ln">5</span>    <span class="kw">let</span> keep <span class="op">=</span> c.<span class="fn">lightness</span>(); <span class="cmt">// perceptual, untouched</span>
+<span class="ln">6</span><span class="sel">    c.<span class="fn">with_chroma</span>(<span class="num">0.0</span>).<span class="fn">with_lightness</span>(keep)</span>
 <span class="ln">7</span>}
 <span class="ln">8</span>
-<span class="ln">9</span><span class="kw">let</span> name <span class="op">=</span> <span class="str">"nebelung"</span>;</div>
-  </div>
+<span class="ln">9</span><span class="kw">let</span> name <span class="op">=</span> <span class="str">"nebelung"</span>;</pre>
+    </div>
 
-  <div class="panel term">
-    <div class="code"><span class="prompt"><span class="a">~/code/nebelung</span> <span class="b">git:(</span><span class="c">main</span><span class="b">)</span></span> just build
-<span style="color:#abe1a6">✓</span> rendered <span style="color:#f7e2b5">7</span> ports against the nebelung palette
-<span style="color:#858585">→</span> dist/ updated</div>
-  </div>
+    <div class="panel">
+      <pre class="code"><span class="prompt"><span class="a">~/code/nebelung</span> <span class="b">git:(</span><span class="c">main</span><span class="b">)</span></span> ./build.sh
+<span class="add">✓</span> rendered <span class="ty">54</span> ports against the <span class="ty">nebelung</span> palette
+<span class="add">+</span><span class="add"> dist/ghostty/themes/catppuccin-mocha.conf</span>
+<span class="del">-</span><span class="del"> dist/ghostty/themes/old.conf</span>
+<span class="cmt">→ preview → preview/nebelung.html</span></pre>
+    </div>
+
+    <div class="panel">
+      <div class="ui">
+        <button class="btn">Apply theme</button>
+        <button class="btn ghost">Cancel</button>
+        <span class="tag ok">passing</span>
+        <span class="tag warn">3 stale</span>
+        <span class="tag err">1 failed</span>
+        <span class="bar"><i></i></span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>the same palette, 4 ways</span>
+    <a href="https://github.com/hausfold/nebelung">repo</a>
+    <a href="https://github.com/hausfold/nebelung/blob/main/docs/ports.md">ports</a>
+    <a href="https://github.com/hausfold/nebelung/blob/main/docs/install.md">install</a>
+  </footer>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // Contrast and label colours are computed from the rendered palette rather
+  // than baked in, so a retune of the ramp can never leave this page lying.
+  const lum = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+      .map((c) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const ratio = (a, b) => {
+    const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+  };
+
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const text = css("--text"), base = css("--base"), crust = css("--crust");
+
+  const r = ratio(text, base);
+  document.getElementById("ratio").textContent =
+    r.toFixed(1) + ":1 " + (r >= 7 ? "AAA" : r >= 4.5 ? "AA" : "·");
+
+  // Each swatch labels itself with whichever end of the ramp it can be read on.
+  for (const sw of document.querySelectorAll(".sw")) {
+    const hex = sw.dataset.hex;
+    sw.style.color = ratio(hex, crust) >= ratio(hex, text) ? crust : text;
+  }
+
+  const toast = document.getElementById("toast");
+  let timer;
+  const flash = (msg) => {
+    toast.textContent = msg;
+    toast.classList.add("on");
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove("on"), 1400);
+  };
+  for (const sw of document.querySelectorAll(".sw")) {
+    sw.addEventListener("click", async () => {
+      const hex = sw.dataset.hex;
+      try {
+        await navigator.clipboard.writeText(hex);
+        flash("copied " + hex);
+      } catch {
+        flash(hex);
+      }
+    });
+  }
+</script>
 </body>
 </html>

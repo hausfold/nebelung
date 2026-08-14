@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nebelung — preview</title>
+<meta name="robots" content="noindex" />
+<style>
+  /* Hand-written, not rendered by whiskers: this file is the door, not a
+     variant. build.sh writes preview/<variant>.html beside it and never touches
+     this one. Neutral greys so it can't be wrong in either mode. */
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    background: #eff1f5; color: #4c4f69;
+    font: 15px/1.6 ui-sans-serif, -apple-system, system-ui, sans-serif;
+    padding: 24px; text-align: center;
+  }
+  @media (prefers-color-scheme: dark) { body { background: #121212; color: #d7d7d7; } }
+  a { color: inherit; }
+  ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+</style>
+<script>
+  // Land the reader in their own mode. The four variants are real pages with a
+  // switcher in the header, so this only picks the first one.
+  var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  location.replace(dark ? "nebelung.html" : "nebelung-latte.html");
+</script>
+</head>
+<body>
+  <noscript>
+    <p>Pick a variant:</p>
+    <ul>
+      <li><a href="nebelung.html">dark</a> · <a href="nebelung-high-contrast.html">dark, high contrast</a></li>
+      <li><a href="nebelung-latte.html">light</a> · <a href="nebelung-latte-high-contrast.html">light, high contrast</a></li>
+    </ul>
+  </noscript>
+</body>
+</html>

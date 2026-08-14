@@ -41,18 +41,31 @@ colored.
   full list: [`docs/ports.md`](docs/ports.md). Colour-free companion files a port
   needs go in `templates/<port>/static/`, copied into its output verbatim.
 - `ports.conf` → which ports get rendered.
-- `ports.meta.json` → what INSTALLING each rendered port takes: `dest`, how it gets
-  there (`install`), what makes it the active theme (`select`), where its tool runs
-  (`platform`), and the derived `tier` — `auto` (a rebuild can do the whole thing),
+- `ports.meta.json` → what INSTALLING each rendered port takes: which shelf it
+  sits on (`category`), `dest`, how it gets there (`install`), what makes it the
+  active theme (`select`), where its tool runs (`platform`), and the derived
+  `tier` — `auto` (a rebuild can do the whole thing),
   `activate` (the "which theme" setting lives in a file the app rewrites, so it
   needs an idempotent activation patch), `manual` (no file interface for selecting
   it; a human clicks or pastes).
   Exposed as the flake's `ports` output so `nebelhaus` can wire what it can and
   *report* what it can't. Hand-written, but fenced by tests: the ports.conf and
   ports.meta.json port sets must match, `tier` must agree with `select`/`install`,
-  and every advertised path must exist in `dist/`. The ports table in
-  `docs/ports.md` is **generated** from it — `node scripts/gen-ports-doc.mjs` after
-  editing, or `node --test` fails.
+  every port must land in one of the `CATEGORIES` in `scripts/gen-ports-doc.mjs`,
+  and every advertised path must exist in `dist/`. **Two** files are generated
+  from it — the per-category tables in `docs/ports.md` and the port board in
+  `README.md` (between the `ports:begin`/`ports:end` markers; the board's links
+  point at the anchors the tables carry). Run `node scripts/gen-ports-doc.mjs`
+  after editing either, or `node --test` fails. Never hand-edit inside those
+  markers.
+- `templates/preview.html.tera` → the live preview, rendered once per variant into
+  `preview/<variant>.html` (build.sh passes the variant name in as a frontmatter
+  override so the page can mark its own pill in the switcher). GitHub Pages serves
+  the repo root of **main**, so the pages the README links —
+  `hausfold.github.io/nebelung/preview/…` — only move on merge. `preview/index.html`
+  is hand-written, never rendered: it bounces the reader to the light or dark page
+  by `prefers-color-scheme`. `.nojekyll` at the root keeps Pages a plain static
+  serve.
 - **Variants** (`VARIANTS` in `scripts/generate-palette.mjs`) → the flavor axis
   (mocha = dark, latte = light) crossed with the contrast axis. Adding or retuning
   one is a single entry there; the palette pair, the `palette/variants.json`
