@@ -18,11 +18,14 @@ import {
   SELECT_KINDS,
   TIERS,
   PLATFORMS,
+  CATEGORIES,
+  CATEGORY_KEYS,
   deriveTier,
   readMeta,
   readConfPorts,
   portOrder,
-  renderDoc,
+  portsIn,
+  renderDocs,
 } from "../scripts/gen-ports-doc.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -48,7 +51,7 @@ test("metadata covers exactly the rendered ports", () => {
 
 test("every entry is well-formed", () => {
   for (const [name, p] of Object.entries(meta)) {
-    for (const field of ["title", "path", "install", "select", "tier", "howto"]) {
+    for (const field of ["title", "category", "path", "install", "select", "tier", "howto"]) {
       assert.equal(typeof p[field], "string", `${name}.${field} must be a string`);
       assert.ok(p[field].length, `${name}.${field} must not be empty`);
     }
@@ -57,6 +60,7 @@ test("every entry is well-formed", () => {
       p.dest === null || typeof p.dest === "string",
       `${name}.dest must be a string or null`,
     );
+    assert.ok(CATEGORY_KEYS.includes(p.category), `${name}.category: ${p.category}`);
     assert.ok(INSTALL_KINDS.includes(p.install), `${name}.install: ${p.install}`);
     assert.ok(SELECT_KINDS.includes(p.select), `${name}.select: ${p.select}`);
     assert.ok(TIERS.includes(p.tier), `${name}.tier: ${p.tier}`);
@@ -124,9 +128,10 @@ test("glow headings follow the rendered accent", () => {
   }
 });
 
-test("docs/ports.md is generated from the metadata, not maintained beside it", () => {
-  const { doc, next } = renderDoc();
-  assert.equal(next, doc, "docs/ports.md is stale — run `node scripts/gen-ports-doc.mjs`");
+test("the docs table and the README board are generated, not maintained beside it", () => {
+  for (const { label, doc, next } of renderDocs()) {
+    assert.equal(next, doc, `${label} is stale — run \`node scripts/gen-ports-doc.mjs\``);
+  }
 });
 
 test("the doc table lists every port once, in ports.conf order", () => {
@@ -134,4 +139,28 @@ test("the doc table lists every port once, in ports.conf order", () => {
   assert.equal(order.length, Object.keys(meta).length);
   assert.equal(new Set(order).size, order.length);
   assert.deepEqual(order.slice(-NON_WHISKERS.length), NON_WHISKERS);
+});
+
+// The board's own counts are generated, but the README says "N ports" in prose
+// too — outside the markers, where nothing would notice it going stale.
+test("every port count written in the README is the real one", () => {
+  const readme = readFileSync(join(root, "README.md"), "utf8");
+  const count = Object.keys(meta).length;
+  const claims = [...readme.matchAll(/(\d+) ports/g)].map((m) => Number(m[1]));
+  assert.ok(claims.length, "the README stopped saying how many ports there are");
+  for (const claimed of claims) {
+    assert.equal(claimed, count, `README claims ${claimed} ports, there are ${count}`);
+  }
+});
+
+// The board and the table are both grouped by category, so an empty shelf means
+// a category nobody is in — a renamed key, or one that outlived its ports.
+test("every category holds at least one port, and together they hold all of them", () => {
+  let seen = 0;
+  for (const { key, label } of CATEGORIES) {
+    const names = portsIn(key, meta);
+    assert.ok(names.length, `category ${key} (${label}) has no ports`);
+    seen += names.length;
+  }
+  assert.equal(seen, Object.keys(meta).length, "some port sits outside every category");
 });

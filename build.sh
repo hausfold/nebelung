@@ -28,6 +28,13 @@ if [[ "${1:-}" != "--no-gen" ]]; then
 fi
 [[ -f "$MANIFEST" ]] || { echo "missing $MANIFEST (run without --no-gen)"; exit 1; }
 
+# How many ports there are is a fact about ports.meta.json, not something the
+# preview template should carry a copy of — it goes in as a render override.
+PORT_COUNT="$(node -e '
+  const { readFileSync } = require("node:fs");
+  console.log(Object.keys(JSON.parse(readFileSync(process.argv[1], "utf8"))).length);
+' "$ROOT/ports.meta.json")"
+
 # Clean dist once so ports that emit into a shared tree (e.g. zen's two
 # templates) don't wipe each other.
 rm -rf dist
@@ -84,8 +91,11 @@ while IFS='|' read -r variant flavor dir; do
   echo "→ variant: $variant (catppuccin $flavor → $out/)"
   render_ports "$palette" "$flavor" "$out"
   # One preview per variant — light mode especially is a thing you check by eye,
-  # and the default keeps its historical preview/nebelung.html path.
+  # and the default keeps its historical preview/nebelung.html path. The variant
+  # name goes in as a frontmatter override so the page can mark its own pill in
+  # the switcher; preview/index.html is hand-written and never rendered here.
   whiskers templates/preview.html.tera -f "$flavor" --color-overrides "$palette" \
+    --overrides "{\"variant\":\"$variant\",\"ports\":$PORT_COUNT}" \
     > "preview/$variant.html"
   echo "✓ preview → preview/$variant.html"
   echo "rendered $count port(s) against the $variant palette"
