@@ -84,7 +84,16 @@ variants:
     width: 11px; height: 11px; border-radius: 50%;
     background: linear-gradient(135deg, var(--text), var(--overlay0));
   }
-  .switch { display: flex; flex-wrap: wrap; gap: 6px; }
+  /* One row, always: on a phone the pills scroll sideways rather than wrapping
+     into a second row that doubles the height of a bar pinned to the top. The
+     clipped last pill is the affordance; the scrollbar itself is hidden because
+     it would sit on the bar's bottom border. */
+  .switch {
+    display: flex; gap: 6px; flex: 0 1 auto; min-width: 0; margin-left: auto;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .switch::-webkit-scrollbar { display: none; }
   .pill {
     display: inline-flex; flex-direction: column; gap: 1px;
     padding: 6px 12px; border-radius: 999px;
@@ -355,6 +364,37 @@ variants:
     sw.style.color = [crust, text, "#000000", "#ffffff"]
       .reduce((best, c) => (ratio(hex, c) > ratio(hex, best) ? c : best));
   }
+
+  // Narrow enough and the pills scroll sideways, which can leave the page you're
+  // on parked off-screen. Centre it, measured off the rects rather than
+  // offsetLeft — the pills' offsetParent is the sticky bar, not the strip they
+  // sit in. Sideways only, so it can't disturb the vertical scroll below.
+  const here = document.querySelector('.switch .pill[aria-current="page"]');
+  if (here) {
+    const nav = here.parentElement;
+    nav.scrollLeft += here.getBoundingClientRect().left - nav.getBoundingClientRect().left
+      - (nav.clientWidth - here.offsetWidth) / 2;
+  }
+
+  // The pills are this same page in another palette, so switching between two of
+  // them is a comparison, not a new read: hand the scroll offset to the next page
+  // and pick it up there. Consumed on arrival, so a reload or a fresh visit still
+  // starts at the top. sessionStorage is unavailable on some file:// origins —
+  // there the pages just behave as they did before.
+  const SCROLL_KEY = "nebelung:preview:scroll";
+  try {
+    const handoff = sessionStorage.getItem(SCROLL_KEY);
+    sessionStorage.removeItem(SCROLL_KEY);
+    if (handoff !== null) window.scrollTo(0, Number(handoff));
+    for (const pill of document.querySelectorAll(".switch .pill")) {
+      pill.addEventListener("click", (e) => {
+        // A modified click opens a new tab; this one stays where it is, and its
+        // own offset would go stale sitting in storage unread.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
+      });
+    }
+  } catch {}
 
   const toast = document.getElementById("toast");
   let timer;
