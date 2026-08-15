@@ -48,7 +48,7 @@ colored.
   `activate` (the "which theme" setting lives in a file the app rewrites, so it
   needs an idempotent activation patch), `manual` (no file interface for selecting
   it; a human clicks or pastes).
-  Exposed as the flake's `ports` output so `nebelhaus` can wire what it can and
+  Exposed as the flake's `ports` output so `haus` can wire what it can and
   *report* what it can't. Hand-written, but fenced by tests: the ports.conf and
   ports.meta.json port sets must match, `tier` must agree with `select`/`install`,
   every port must land in one of the `CATEGORIES` in `scripts/gen-ports-doc.mjs`,
@@ -82,7 +82,7 @@ colored.
   subdir. Never give `nebelung` a subdir — that would move every consumer path in
   the family at once (there's a test pinning it).
 - `packages.<system>.default` → the built theme tree (every port rendered), consumed by
-  `nebelhaus` via `${nebelung.packages.${system}.default}/<tool>/...`.
+  `haus` via `${nebelung.packages.${system}.default}/<tool>/...`.
 - `checks.<system>` → `nix flake check` runs the palette unit tests + `build.sh`
   shellcheck (mirrors CI's `unit` job) — local check == CI without pushing.
 
@@ -94,11 +94,16 @@ Edit the palette (`palette/`), rebuild:
 nix build            # renders every port with the new palette
 ```
 
-Then push, and in `nebelhaus`: `nix flake update nebelung` + push; in a consumer:
-`nix flake update nebelhaus` + rebuild. **One palette edit recolors every tool at once.**
+Then push, and in `haus`: `nix flake update nebelung` + push; in a consumer:
+`nix flake update <whatever your flake names the haus input>` + rebuild. **One
+palette edit recolors every tool at once.**
 
 For fast iteration from a consumer without the push/relock loop, override against this
-local checkout: `--override-input nebelhaus/nebelung "path:$HOME/code/workshop/nebelung"`.
+local checkout: `--override-input nebelhaus/nebelung "path:$HOME/code/workshop/nebelung"`
+— the first segment is the CONSUMER's input name, not a repo name, so it is
+whatever that flake calls haus. `bench` passes `nebelhaus` because this machine's
+config still does; Nix does not error on an override for an unknown input, it
+silently ignores it (rename note §11.2).
 
 When you open the PR for a `worktree-*` branch, give it a **What / Why / Verify / Watch-out**
 body (see the workshop ship skill's Step 3) — the session that wrote the code is gone by the
@@ -110,7 +115,7 @@ points back to when it feels several PRs together.
 
 Add a whiskers template under `templates/`, register it in `ports.conf`, add its entry
 to `ports.meta.json` (the tests fail without one), run `node scripts/gen-ports-doc.mjs`,
-rebuild. Then wire the rendered file into the tool's config over in `nebelhaus`
+rebuild. Then wire the rendered file into the tool's config over in `haus`
 (usually `hearth`).
 
 ## Before you open a PR
@@ -139,7 +144,7 @@ it silently.
 ## Conventions
 
 - MIT, public. The palette is the source of truth — don't hardcode hex values in
-  `nebelhaus`; inject `nebelung.palette` or reference the rendered theme tree (`packages.<system>.default`).
+  `haus`; inject `nebelung.palette` or reference the rendered theme tree (`packages.<system>.default`).
 - **A Swift/Xcode app can't consume this flake.** `trill` (the notification
   compositor) builds outside Nix and takes no `nebelung` input, so it hand-copies
   these hex literals into its own Swift source — a palette change here must be

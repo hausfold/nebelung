@@ -20,7 +20,7 @@ test('Obsidian output is an installable Nebelung theme', () => {
   assert.equal(manifest.name, 'Nebelung');
   assert.match(manifest.version, /^\d+\.\d+\.\d+$/);
   assert.match(manifest.minAppVersion, /^\d+\.\d+\.\d+$/);
-  assert.equal(manifest.author, 'nebelhaus');
+  assert.equal(manifest.author, 'hausfold');
   assert.match(theme, /body\.theme-dark,\s*body\.theme-light/);
 });
 

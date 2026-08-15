@@ -1,7 +1,7 @@
 # nebelung on Nix
 
 You don't need to install any port by hand if you consume this repo as a flake —
-that's how the [nebelhaus](https://github.com/hausfold/haus) rice themes
+that's how the [haus](https://github.com/hausfold/haus) desktop themes
 everything.
 
 ```nix

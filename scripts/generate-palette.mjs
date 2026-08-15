@@ -65,7 +65,7 @@ export const VARIANTS = {
 // to its root. The default variant keeps the root itself so every path that
 // existed before any variant did still resolves. MIRRORED in two places that
 // must agree with this one: `render_ports` in build.sh (which reads the
-// generated palette/variants.json) and nebelhaus's modules/lib/nebelung.nix
+// generated palette/variants.json) and haus's modules/lib/nebelung.nix
 // (which builds the same subdir from haus.theme.flavor/contrast).
 export const variantDir = (name) => (name === "nebelung" ? "" : name.replace(/^nebelung-/, ""));
 

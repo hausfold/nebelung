@@ -10,7 +10,7 @@ whiskers:
    rewrites just the rendered one — the other three were stock Catppuccin
    sections in a Nebelung gitconfig. `current` is captured before the loop
    shadows `flavor`; consumers set features = catppuccin-<flavor> to match the
-   variant they are on, which is what nebelhaus already does. #}
+   variant they are on, which is what haus already does. #}
 {%- set current = flavor.identifier -%}
 {%- for identifier, flavor in flavors -%}
 {%- if identifier == current -%}

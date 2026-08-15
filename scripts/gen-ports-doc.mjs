@@ -8,7 +8,7 @@
 // ports.conf says WHICH ports get rendered and from what; ports.meta.json says
 // where each one's output has to land and what makes it active. That second
 // file is the machine-readable half of what the docs table used to only say in
-// prose — a consumer (nebelhaus) reads it from the flake's `ports` output to
+// prose — a consumer (haus) reads it from the flake's `ports` output to
 // decide which ports it can wire on its own and which ones need a human. The
 // docs are generated from it so the two can't drift.
 //
