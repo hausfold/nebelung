@@ -1,6 +1,6 @@
 // Tests for the port metadata. Run with `node --test`.
 //
-// ports.meta.json is a hand-written file that a consumer (nebelhaus) reads from
+// ports.meta.json is a hand-written file that a consumer (haus) reads from
 // the flake's `ports` output to decide what it can wire on its own. Nothing
 // generates it, so these are the guards that keep it honest: it covers exactly
 // the ports that get rendered, its stored tiers match the rule that defines
