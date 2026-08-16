@@ -140,6 +140,15 @@
         {
           default = nebelung-themes;
           nebelung-themes = nebelung-themes;
+
+          # The agent skill: `ai/SKILL.md` plus a `references/palette.md`
+          # rendered from `palette/*.hex.json` at build time, so an agent
+          # quoting a hex at the user is quoting THIS revision's palette
+          # rather than a number someone copied once. haus's AI room will
+          # install it into every agent client once its side lands. Its own derivation —
+          # `nebelung-themes` runs whiskers over every port, and a sentence of
+          # prose has no business paying for that. See nix/skill.nix.
+          nebelung-skill = pkgs.callPackage ./nix/skill.nix { };
         }
       );
     };

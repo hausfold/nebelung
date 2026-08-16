@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - run: nix build --print-build-logs
+      - run: nix build .#default .#nebelung-skill --print-build-logs
       # dist/ is committed for non-nix users; it must always equal what the
       # flake builds from palette + templates. Compare both directions:
       # every committed file matches, and nothing rendered is missing.

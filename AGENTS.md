@@ -118,6 +118,44 @@ to `ports.meta.json` (the tests fail without one), run `node scripts/gen-ports-d
 rebuild. Then wire the rendered file into the tool's config over in `haus`
 (usually `terminal`).
 
+## The agent surface (`ai/SKILL.md`)
+
+**Don't confuse it with this file.** `AGENTS.md` is for an agent working **on**
+nebelung, from a checkout. [`ai/SKILL.md`](./ai/SKILL.md) is for an agent
+**using** the palette — on a stranger's Mac, with no checkout, about to pick a
+colour for an HTML page, a chart or a script's output. Its whole job is to make
+that agent stop inventing colours.
+
+It is bound by the family standard, [the workshop's
+`notes/agent-surface.md`](https://github.com/hausfold/workshop/blob/main/notes/agent-surface.md) —
+≤150 lines, and the `description` frontmatter names **the phrases a user says**.
+
+**Half of it is generated, and that half is the point.** `nix/skill.nix` renders
+`references/palette.md` from `palette/*.hex.json` — every role, every hex, all
+four variants — so the numbers an agent quotes are this revision's, not a copy
+someone made once. Hand-writing a hex into `ai/SKILL.md` would be wrong the
+first time the palette regenerates, and an agent quoting a stale `base` at the
+user is worse than an agent with no palette at all, because it looks
+deliberate. Keep the prose to what can't drift: what each role *means*, and
+pick-by-role-not-by-eye.
+
+The build fails on missing or unterminated frontmatter, on a file past 150
+lines, on a palette reference that rendered no `base`, and on any variant in
+`palette/variants.json` that didn't make it onto the page — an empty or partial
+render would teach the agent this machine has no colours, which it would then
+act on by inventing them.
+
+⚠️ **The `haus.*` option names in `ai/SKILL.md` are hand-written and this repo
+has nothing that would notice a rename.** `haus.theme.accent` was
+`nebelhaus.theme.accent` inside the last month. That is the same drift the hexes
+are generated to avoid, so the file carries a Trap telling the agent to check
+haus's own generated `references/options.md` before believing them. Prefer not
+to add more.
+
+`pkgs.nebelung-skill` is what haus's AI room will install once its side lands.
+It is its own derivation because `nebelung-themes` runs whiskers over every
+port, and prose shouldn't pay for that.
+
 ## Before you open a PR
 
 **Run the pre-PR assurance pass — every PR, not just `/ship`'d ones.** The session that
