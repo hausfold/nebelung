@@ -14,9 +14,12 @@
 # the user is worse than an agent with no palette at all, because it looks
 # deliberate.
 #
-# Shape is fixed by the family standard (the workshop's notes/agent-surface.md):
-# `$out/<name>/SKILL.md`, plus `references/` beside it. Skill names are globally
-# unique across the family — they all land in one shared `~/.claude/skills/`.
+# `$out/<tool>/SKILL.md` plus `references/` beside it is the family standard's
+# §6 layout (the workshop's notes/agent-surface.md): one nesting level, named
+# for the skill, so a consumer links a directory already called the right thing.
+# haus's own skill is flat, `$out/SKILL.md` — it predates the standard and is
+# the one exception rather than the pattern. Skill names are globally unique
+# across the family: they all land in one shared `~/.claude/skills/`.
 {
   lib,
   runCommand,
@@ -71,16 +74,39 @@ runCommand "nebelung-skill"
       } >> "$ref"
     '') names}
 
-    # Guards. A skill with no frontmatter is invisible — every client routes on
-    # `name` and `description` — and a palette reference that rendered empty
-    # would teach the agent this machine has no colours, which is worse than
-    # having no skill at all. Fail the build rather than ship either.
-    head -1 "$out/nebelung/SKILL.md" | grep -qx -- '---' \
+    skill="$out/nebelung/SKILL.md"
+
+    # The frontmatter, and ONLY the frontmatter. Every client routes on `name`
+    # and `description`, so a header that is missing, never closed, or whose
+    # keys only appear down in the body produces a skill that installs, lists,
+    # and never loads — indistinguishable, from the user's side, from the agent
+    # not knowing nebelung exists.
+    head -1 "$skill" | grep -qx -- '---' \
       || { echo "ai/SKILL.md does not open with YAML frontmatter" >&2; exit 1; }
-    grep -q '^name: nebelung$' "$out/nebelung/SKILL.md" \
-      || { echo "ai/SKILL.md has no 'name: nebelung' line" >&2; exit 1; }
-    grep -q '^description: .\{80,\}' "$out/nebelung/SKILL.md" \
-      || { echo "ai/SKILL.md's description is missing or too short to route on" >&2; exit 1; }
+    front="$(tail -n +2 "$skill" | sed -n '1,/^---$/p')"
+    printf '%s\n' "$front" | grep -qx -- '---' \
+      || { echo "ai/SKILL.md's frontmatter block is never closed" >&2; exit 1; }
+
+    printf '%s\n' "$front" | grep -q '^name: nebelung$' \
+      || { echo "ai/SKILL.md's frontmatter has no 'name: nebelung' line" >&2; exit 1; }
+    # One PHYSICAL line, by design: these guards are grep, and a description
+    # written as a YAML folded scalar (`>-` plus an indented body) is valid YAML
+    # that would silently stop being checked. The standard says one line.
+    printf '%s\n' "$front" | grep -qE '^description: .{80,}' \
+      || { echo "ai/SKILL.md's description is missing, too short to route on, or wrapped onto a second line" >&2; exit 1; }
+
+    # A routing document that grew into a manual stops being read as one.
+    lines=$(wc -l < "$skill")
+    [ "$lines" -le 150 ] \
+      || { echo "ai/SKILL.md is $lines lines; the standard caps a routing document at 150" >&2; exit 1; }
+
+    # And the generated half. A palette reference that rendered empty would
+    # teach the agent this machine has no colours — which it would then act on,
+    # inventing them, which is the exact thing this whole file exists to stop.
     grep -q '^| `base` | `#' "$ref" \
       || { echo "references/palette.md rendered no base colour — the render is broken" >&2; exit 1; }
+    for v in ${lib.concatStringsSep " " names}; do
+      grep -q "^## \`$v\`$" "$ref" \
+        || { echo "references/palette.md is missing the $v variant" >&2; exit 1; }
+    done
   ''

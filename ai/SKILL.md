@@ -30,7 +30,11 @@ can't tell, **support both** — emit CSS custom properties with a
 
 ## The roles, and how to use them
 
-Twelve greys, ordered darkest-surface to lightest-text, then fourteen accents.
+Twelve greys running **background end → foreground end**, then fourteen
+accents. Note the direction is by *role*, not by lightness: `crust`/`mantle`/
+`base` are the background end in every variant, which means they are the darkest
+greys in `nebelung` and the lightest in `nebelung-latte`. Reading them as
+"darkest" is how you end up painting a light grey behind light text.
 
 | role | use it for |
 |---|---|
@@ -60,9 +64,12 @@ Conventional semantics: `red` error · `peach` warning · `green` success ·
 - **The colour is going somewhere else.** A client's site, a public README, an
   app with its own brand — those have their own palette, and this one is a
   personal theme.
-- **Accessibility is the actual requirement.** Nebelung's normal variants are
-  not guaranteed WCAG AA for every pairing; the high-contrast variants exist for
-  that. Check the contrast ratio rather than assuming.
+- **Accessibility is the actual requirement.** The primary pairing is
+  comfortable — the README publishes `text` on `base` at 11.3:1 (`nebelung`) and
+  19.9:1 (`nebelung-latte`), both AAA. But no variant is guaranteed AA for
+  *every* pairing, and the high-contrast ones don't fix all of them either:
+  `overlay0` on `base` is under 4.5:1 in both. Compute the ratio for the pair
+  you are actually using rather than trusting the variant's name.
 - **You want to change how a tool is themed.** That's a template in the nebelung
   repo (agents work there from a checkout) or a `haus.theme.*` setting — not
   something to hand-edit into a dotfile, which the next rebuild reverts.
@@ -76,8 +83,14 @@ Conventional semantics: `red` error · `peach` warning · `green` success ·
   user to run something that doesn't exist.
 - **The JSON stores hex without `#`.** `"base": "202020"`. Every consumer adds
   the hash itself; `references/palette.md` has already added it.
-- **Blue is deliberately desaturated.** Nebelung is Mocha *with the blue
-  stripped* — if a colour looks flatter than the Catppuccin you remember, that
-  is the theme, not a bug.
+- **The whole palette is calmer than the Catppuccin you remember, and the
+  `blue` role is not a special case.** Two separate rules: the greys are taken
+  to zero chroma (that is the "blue stripped" part — it is about the
+  *neutrals*), and all fourteen accents are calmed to 90% chroma. So `blue` is
+  as reliable as any other accent; nothing here is a bug to work around.
 - **Don't hand-edit a rendered theme file** in `~/.config`. On a haus machine
   they are generated, and the next rebuild overwrites them.
+- **The `haus.*` names in this file are hand-written, unlike the hexes.** If
+  `haus.theme.accent` doesn't exist on the machine you're on, it was renamed —
+  check the haus skill's generated `references/options.md`, which can't be
+  stale, before telling the user the option is gone.

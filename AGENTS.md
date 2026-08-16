@@ -139,12 +139,22 @@ user is worse than an agent with no palette at all, because it looks
 deliberate. Keep the prose to what can't drift: what each role *means*, and
 pick-by-role-not-by-eye.
 
-The build fails on missing frontmatter and on a palette reference that rendered
-no `base` — an empty render would teach the agent this machine has no colours.
+The build fails on missing or unterminated frontmatter, on a file past 150
+lines, on a palette reference that rendered no `base`, and on any variant in
+`palette/variants.json` that didn't make it onto the page — an empty or partial
+render would teach the agent this machine has no colours, which it would then
+act on by inventing them.
 
-`pkgs.nebelung-skill` is what haus's AI room installs. It is its own derivation
-because `nebelung-themes` runs whiskers over every port, and prose shouldn't pay
-for that.
+⚠️ **The `haus.*` option names in `ai/SKILL.md` are hand-written and this repo
+has nothing that would notice a rename.** `haus.theme.accent` was
+`nebelhaus.theme.accent` inside the last month. That is the same drift the hexes
+are generated to avoid, so the file carries a Trap telling the agent to check
+haus's own generated `references/options.md` before believing them. Prefer not
+to add more.
+
+`pkgs.nebelung-skill` is what haus's AI room will install once its side lands.
+It is its own derivation because `nebelung-themes` runs whiskers over every
+port, and prose shouldn't pay for that.
 
 ## Before you open a PR
 
