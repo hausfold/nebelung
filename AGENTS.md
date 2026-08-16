@@ -118,6 +118,14 @@ to `ports.meta.json` (the tests fail without one), run `node scripts/gen-ports-d
 rebuild. Then wire the rendered file into the tool's config over in `haus`
 (usually `terminal`).
 
+**If the new port has a UI worth looking at — a GUI app, or a TUI that isn't just the
+sixteen colours in another frame — say so and ask me for a screenshot.** Nothing in
+this repo can take one: [`docs/gallery.md`](docs/gallery.md) is hand-shot, out of a
+logged-in session, and the only way it stays honest is you noticing the gap and
+telling me. One line at the end of the turn, not a blocking question. Shots go in
+`assets/gallery/` at 1200×750, named after the port; anything still showing a
+"shot pending" tile there is waiting on me.
+
 ## The agent surface (`ai/SKILL.md`)
 
 **Don't confuse it with this file.** `AGENTS.md` is for an agent working **on**
