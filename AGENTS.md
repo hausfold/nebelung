@@ -116,7 +116,7 @@ points back to when it feels several PRs together.
 Add a whiskers template under `templates/`, register it in `ports.conf`, add its entry
 to `ports.meta.json` (the tests fail without one), run `node scripts/gen-ports-doc.mjs`,
 rebuild. Then wire the rendered file into the tool's config over in `haus`
-(usually `hearth`).
+(usually `terminal`).
 
 ## Before you open a PR
 
