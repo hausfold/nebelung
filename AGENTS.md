@@ -99,11 +99,12 @@ Then push, and in `haus`: `nix flake update nebelung` + push; in a consumer:
 palette edit recolors every tool at once.**
 
 For fast iteration from a consumer without the push/relock loop, override against this
-local checkout: `--override-input nebelhaus/nebelung "path:$HOME/code/workshop/nebelung"`
+local checkout: `--override-input haus/nebelung "path:$HOME/code/workshop/nebelung"`
 — the first segment is the CONSUMER's input name, not a repo name, so it is
-whatever that flake calls haus. `bench` passes `nebelhaus` because this machine's
-config still does; Nix does not error on an override for an unknown input, it
-silently ignores it (rename note §11.2).
+whatever that flake calls haus. `bench` reads it off the consumer's
+`flake.lock` rather than guessing, because Nix does not error on an override for
+an unknown input — it silently ignores it, and the build reports your branch
+while building the pinned layer.
 
 When you open the PR for a `worktree-*` branch, give it a **What / Why / Verify / Watch-out**
 body (see the workshop ship skill's Step 3) — the session that wrote the code is gone by the
@@ -146,8 +147,8 @@ render would teach the agent this machine has no colours, which it would then
 act on by inventing them.
 
 ⚠️ **The `haus.*` option names in `ai/SKILL.md` are hand-written and this repo
-has nothing that would notice a rename.** `haus.theme.accent` was
-`nebelhaus.theme.accent` inside the last month. That is the same drift the hexes
+has nothing that would notice a rename.** The rooms were renamed under
+`haus.*` inside the last month. That is the same drift the hexes
 are generated to avoid, so the file carries a Trap telling the agent to check
 haus's own generated `references/options.md` before believing them. Prefer not
 to add more.
