@@ -12,7 +12,7 @@ The short version:
   truth for colors** across the [hausfold](https://github.com/hausfold) family.
 - **This repo owns the colors and nothing else.** A change about a tool's
   *behavior or config* — which tools exist, how the shell/bar/WM are set up —
-  belongs in the rice (`nebelhaus`), even if it would work here. Palette and
+  belongs in the layer (`haus`), even if it would work here. Palette and
   theme-template changes only.
 - **Vendored templates are verbatim except where marked `NEBELUNG PATCH`.**
   Re-vendoring from upstream silently drops those patches — grep the marker
