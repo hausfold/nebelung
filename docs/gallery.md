@@ -7,9 +7,10 @@ always current; this page is the part that needs a real window open.
 
 Shots are the default `nebelung` variant (Mocha) unless a caption says otherwise.
 
-> **Two of the five are still placeholders.** Slack and Obsidian show a *shot
-> pending* tile — both need their content picked by hand, because the real windows
-> are full of private messages and notes. The other three are real.
+> **One of the five is still a placeholder.** Slack shows a *shot pending* tile —
+> it's the one frame that can't be staged, because there's no throwaway Slack the
+> way there's a throwaway vault or a private browser window. The other four are
+> real.
 
 ## the browser
 
@@ -47,11 +48,14 @@ the screen came out of.
 Preferences ▸ Themes. That string only reaches the sidebar and the top bar, so this
 is the whole of what the port can do.
 
-<img src="../assets/gallery/obsidian.png" alt="placeholder tile — Obsidian, shot pending" width="100%">
+<img src="../assets/gallery/obsidian.png" alt="Obsidian showing this repo’s palette doc under the Nebelung theme" width="100%">
 
 [Obsidian](ports.md#p-obsidian) — a full theme folder, so unlike Slack it reaches
-the editor, headings and code blocks. Dark mode; the theme renders for light too,
-but Obsidian's own light defaults leak through more.
+the editor, the headings and the inline code. The vault is a throwaway holding this
+repo's own `docs/`, built by following the port's install steps exactly: drop
+`dist/obsidian/Nebelung/` into `<vault>/.obsidian/themes/`, set
+`"cssTheme": "Nebelung"` in `appearance.json`. So the shot doubles as a check that
+those two lines are still the whole install.
 
 ## what isn't here
 
@@ -83,10 +87,12 @@ window rather than the screen), centre-crops to 16:10, fits to 2400×1500, and p
 the window back where it came from — including if it fails partway. macOS only, and
 it wants AeroSpace; everything else ships with the OS.
 
-What the script can't do is compose the frame. The terminal shot is a throwaway
-Zellij session built from a layout file rather than a live one, so it never carries
-session content that shouldn't be public, and the YouTube frame is a private window
-for the same reason. Pick the frame, then run the script.
+What the script can't do is compose the frame, and composing it is where the care
+goes — every one of these is staged so it carries nothing private. The terminal is a
+throwaway Zellij session built from a layout file rather than a live one; YouTube is
+a logged-out private window; Obsidian is a scratch vault holding this repo's own
+docs. Slack is the one with no such trick available, which is why it's still a tile.
+Stage the frame, then run the script.
 
 That makes a re-shoot a re-run — which is what makes the auto-generated terminal
 tier above worth building rather than just wishing for.
