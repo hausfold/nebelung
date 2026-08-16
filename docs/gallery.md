@@ -7,23 +7,27 @@ always current; this page is the part that needs a human with the app open.
 
 Shots are the default `nebelung` variant (Mocha) unless a caption says otherwise.
 
+> **Every frame below is a placeholder.** The tiles say *shot pending* because they
+> are — the captions describe what goes there, not what you're looking at. Real
+> shots land as they're taken.
+
 ## the browser
 
-<img src="../assets/gallery/zen-github.png" alt="GitHub in a Nebelung-themed Zen window" width="100%">
+<img src="../assets/gallery/zen-github.png" alt="placeholder tile — GitHub in Zen, shot pending" width="100%">
 
 GitHub through [Zen](ports.md#p-zen) and [Stylus](ports.md#p-stylus) — the browser
 chrome and the page are two different ports, which is why this is one frame and not
 two. Zen colours the tab strip, sidebar and URL bar from `userChrome.css`; the page
 itself is a Stylus userstyle.
 
-<img src="../assets/gallery/zen-youtube.png" alt="YouTube in a Nebelung-themed Zen window" width="100%">
+<img src="../assets/gallery/zen-youtube.png" alt="placeholder tile — YouTube in Zen, shot pending" width="100%">
 
 Same two ports on a page that fights back — YouTube is the one that shows whether
 the surface ramp holds up under someone else's thumbnails.
 
 ## the terminal
 
-<img src="../assets/gallery/terminal.png" alt="Ghostty running Zellij, Starship and lazygit in Nebelung" width="100%">
+<img src="../assets/gallery/terminal.png" alt="placeholder tile — Ghostty, Zellij, Starship and lazygit, shot pending" width="100%">
 
 Four ports in one frame: [Ghostty](ports.md#p-ghostty) draws the 16 colours,
 [Zellij](ports.md#p-zellij) the pane frames and status bar,
@@ -33,13 +37,13 @@ values, so one of them stands in for the rest.
 
 ## the apps
 
-<img src="../assets/gallery/slack.png" alt="Slack themed with the Nebelung sidebar string" width="100%">
+<img src="../assets/gallery/slack.png" alt="placeholder tile — Slack, shot pending" width="100%">
 
-[Slack](ports.md#p-slack) — a paste-a-string port: eight hexes into
-Preferences ▸ Themes. Slack only lets you colour the sidebar, so this is the whole
-of what the port can do.
+[Slack](ports.md#p-slack) — a paste-a-string port: ten hexes into
+Preferences ▸ Themes. That string only reaches the sidebar and the top bar, so this
+is the whole of what the port can do.
 
-<img src="../assets/gallery/obsidian.png" alt="An Obsidian vault using the Nebelung theme" width="100%">
+<img src="../assets/gallery/obsidian.png" alt="placeholder tile — Obsidian, shot pending" width="100%">
 
 [Obsidian](ports.md#p-obsidian) — a full theme folder, so unlike Slack it reaches
 the editor, headings and code blocks. Dark mode; the theme renders for light too,
