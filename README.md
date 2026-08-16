@@ -71,8 +71,7 @@ is [docs/ports.md](docs/ports.md), generated from
 [`ports.meta.json`](ports.meta.json) and exposed as the flake's `ports` output.
 
 **Want to see them?** [docs/gallery.md](docs/gallery.md) — the browser, the
-terminal, Slack and Obsidian. Five frames, still placeholders while the shots
-get taken.
+terminal, Slack and Obsidian, in five frames.
 
 **Missing a port Catppuccin has?** [Open an issue](https://github.com/hausfold/nebelung/issues/new)
 or a PR — anything with a whiskers template is about three lines to add.
@@ -101,7 +100,7 @@ inputs.nebelung.url = "github:hausfold/nebelung";
 ## more
 
 - [Ports](docs/ports.md) — every output path and how to install it
-- [Gallery](docs/gallery.md) — the ports you can't judge from a hex list (shots pending)
+- [Gallery](docs/gallery.md) — the ports you can't judge from a hex list
 - [Install](docs/install.md) — by hand, by variant, as a flake, on the web
 - [Nix](docs/nix.md) — flake outputs (`palette`, `palettes`, `variants`, `ports`, `checks`)
 - [Palette internals](docs/palette.md) — layout, tuning knobs, and why the two contrast boosts differ
