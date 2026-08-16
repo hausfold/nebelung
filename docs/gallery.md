@@ -69,16 +69,27 @@ Deliberately, not by omission:
 
 ## how these were taken
 
-Not by hand, and not by a screenshot farm. Each one is a real window on a machine
-with the ports installed, captured by window id — `screencapture -o -x -l<id>` —
-after the window is parked alone on an empty
-[AeroSpace](https://github.com/nikitabobko/AeroSpace) workspace so nothing tiles
-beside it, then centre-cropped to 16:10 and fitted to 2400×1500. The terminal frame
-is a throwaway Zellij session built from a layout file, not a live one, so it never
-carries session content that shouldn't be public.
+Not by hand, and not by a screenshot farm — by
+[`scripts/shoot.sh`](../scripts/shoot.sh):
 
-That means a re-shoot is a re-run, not an afternoon — which is what makes the
-auto-generated terminal tier above worth doing rather than just wishing for.
+```bash
+scripts/shoot.sh 'Ghostty' assets/gallery/terminal.png
+```
+
+It finds the window by title, parks it alone on an empty
+[AeroSpace](https://github.com/nikitabobko/AeroSpace) workspace so nothing tiles
+beside it, captures it by window id (`screencapture -o -x -l<id>`, which grabs the
+window rather than the screen), centre-crops to 16:10, fits to 2400×1500, and puts
+the window back where it came from — including if it fails partway. macOS only, and
+it wants AeroSpace; everything else ships with the OS.
+
+What the script can't do is compose the frame. The terminal shot is a throwaway
+Zellij session built from a layout file rather than a live one, so it never carries
+session content that shouldn't be public, and the YouTube frame is a private window
+for the same reason. Pick the frame, then run the script.
+
+That makes a re-shoot a re-run — which is what makes the auto-generated terminal
+tier above worth building rather than just wishing for.
 
 ## missing a shot?
 

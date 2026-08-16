@@ -119,12 +119,19 @@ rebuild. Then wire the rendered file into the tool's config over in `haus`
 (usually `terminal`).
 
 **If the new port has a UI worth looking at — a GUI app, or a TUI that isn't just the
-sixteen colours in another frame — say so and ask me for a screenshot.** Nothing in
-this repo can take one: [`docs/gallery.md`](docs/gallery.md) is hand-shot, out of a
-logged-in session, and the only way it stays honest is you noticing the gap and
-telling me. One line at the end of the turn, not a blocking question. Shots go in
-`assets/gallery/` at 1200×750, named after the port; anything still showing a
+sixteen colours in another frame — say so and ask me for a screenshot.**
+[`docs/gallery.md`](docs/gallery.md) is shot off real windows on this Mac, so nothing
+in CI will ever notice the gap — only you will. One line at the end of the turn, not
+a blocking question. Shots go in
+`assets/gallery/` at 2400×1500, named after the port; anything still showing a
 "shot pending" tile there is waiting on me.
+
+You *can* take the shot yourself once the frame is composed and I've said what goes
+in it — `scripts/shoot.sh '<window title>' assets/gallery/<port>.png` drives a real
+window on this Mac. **Compose the frame so it carries nothing private**: a throwaway
+session rather than a live one, a logged-out browser window rather than mine. These
+land in a public repo, permanently, so when the only honest frame would show real
+messages, notes or channel names, stop and ask me to pick it.
 
 ## The agent surface (`ai/SKILL.md`)
 
