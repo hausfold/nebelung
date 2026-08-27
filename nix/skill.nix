@@ -15,7 +15,7 @@
 # deliberate.
 #
 # `$out/<tool>/SKILL.md` plus `references/` beside it is the family standard's
-# §6 layout (the workshop's notes/agent-surface.md): one nesting level, named
+# The layout the family standard fixes (the workshop's docs/agent-surface.md): one nesting level, named
 # for the skill, so a consumer links a directory already called the right thing.
 # haus's own skill is flat, `$out/SKILL.md` — it predates the standard and is
 # the one exception rather than the pattern. Skill names are globally unique

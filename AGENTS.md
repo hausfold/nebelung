@@ -122,7 +122,7 @@ colour for an HTML page, a chart or a script's output. Its whole job is to make
 that agent stop inventing colours.
 
 It is bound by the family standard, [the workshop's
-`notes/agent-surface.md`](https://github.com/hausfold/workshop/blob/main/notes/agent-surface.md)
+`docs/agent-surface.md`](https://github.com/hausfold/workshop/blob/main/docs/agent-surface.md)
 — ≤150 lines, and the `description` frontmatter names **the phrases a user
 says**.
 
