@@ -31,11 +31,11 @@ inputs.nebelung.url = "github:hausfold/nebelung";
   `build.sh` shellcheck (the same as CI's `unit` job), so `nix flake check` == CI
   without pushing.
 
-## Inside the rice
+## Inside a haus desktop
 
 Picking an accent and applying it is a single option — see
-[Theming & accents](https://hausfold.co/docs/haus/guides/theming/).
+[the Appearance room](https://hausfold.co/docs/haus/rooms/appearance/).
 
-Hacking on the palette inside the wider rice? `bench try` in the
+Hacking on the palette inside the wider desktop? `bench try` in the
 [workshop](https://github.com/hausfold/workshop) rebuilds your machine against
 this local checkout — no push/re-lock loop.
