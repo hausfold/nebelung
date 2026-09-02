@@ -154,7 +154,7 @@ Nebelung, at ${contrast === 'high' ? 'high' : 'normal'} contrast — so light an
 dark both look right. Which one a style uses is that style's own
 \`lightFlavor\` / \`darkFlavor\` var, and the **accent** is likewise a per-style
 \`accentColor\` var defaulting to \`mauve\`. Those live in Stylus's own storage,
-not in this file: set them in the Stylus UI, or have your rice stamp them into
+not in this file: set them in the Stylus UI, or have your desktop stamp them into
 the bundle before importing.
 `;
 
