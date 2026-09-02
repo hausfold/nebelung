@@ -45,7 +45,7 @@ still resolves.
 
 ## as a flake
 
-Consuming the flake skips the copying — that's how the rice themes everything:
+Consuming the flake skips the copying — that's how haus themes everything:
 
 ```nix
 inputs.nebelung.url = "github:hausfold/nebelung";
