@@ -211,7 +211,8 @@ CI keeps the committed `dist/` honest by rebuilding and diffing on every push.
 
 [`ports.meta.json`](../ports.meta.json) is the second manifest: for each port,
 where its output has to land (`dest`), how it gets there (`install`), what makes
-it the active theme (`select`), where its tool runs (`platform`), and the
+it the active theme (`select`), where its tool runs (`platform`), any other file
+that has to land beside `path` for the port to work (`alsoPlace`), and the
 resulting `tier`. It's exposed as the
 flake's **`ports`** output, so a config manager can wire the `auto` ports itself,
 patch the `activate` ones at activation time, and tell the user about the
@@ -230,5 +231,7 @@ node scripts/gen-ports-doc.mjs --check   # or just check they're in sync
 `node --test` fails on a stale table or board, on a port outside every category
 in `CATEGORIES`, on a `tier` that disagrees with the
 `select`/`install` rule, on an unknown `install`/`select`/`tier`/`platform`
-value, on a port in `ports.conf` with no metadata, and on an advertised path
-that doesn't exist in `dist/`.
+value, on a port in `ports.conf` with no metadata, on a `pathNote` that reads
+like a requirement rather than an optional extra (those belong in `alsoPlace`,
+where an installer can see them), and on an advertised path — `path` or
+`alsoPlace` — that doesn't exist in `dist/`.
