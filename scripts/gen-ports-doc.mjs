@@ -73,13 +73,16 @@ export const TIERS = ["auto", "activate", "manual"];
 export const PLATFORMS = ["darwin", "linux"];
 
 // A port is one file — `path` — except where it isn't, and the difference has to
-// be readable by a machine. `alsoPlace` names the other files that must land
-// beside it or the theme doesn't work at all: OBS's `.ovt` extends a base `.obt`
-// and OBS silently drops a variant whose base is missing. A consumer installing
-// from this file copies `path` plus these. `pathNote` is the opposite — markdown
-// for the table naming OPTIONAL extras (a `-transparent` twin, a `static/` dir)
-// that a reader might want and nothing needs. The test enforces the split: a
-// note may only ever read `(+ …)`, so a requirement can't hide in prose again.
+// be readable by a machine. `alsoPlace` names the other files the install needs
+// beside it, the ones the port's own `howto` tells you to place as well: OBS's
+// `.ovt` extends a base `.obt` and the app drops a variant whose base is
+// missing, qBittorrent's `.qrc` won't compile without the icons it references,
+// JetBrains's `.theme.json` is the UI half of the same theme. Anything
+// installing from this file takes `path` plus these. `pathNote` is for the
+// opposite kind of extra — an alternative you'd take INSTEAD (a `-transparent`
+// twin, a `no_italics/` dir, the same theme in another shell's dialect), which
+// is why it stays markdown for the table. The test enforces the split: a note
+// may only ever read `(+ …)`, so a requirement can't hide in prose again.
 
 // The contract. ports.meta.json stores `tier` explicitly so the flake can read
 // it verbatim without reimplementing this in Nix; the test asserts every stored

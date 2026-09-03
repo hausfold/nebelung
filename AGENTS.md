@@ -43,17 +43,20 @@ Nothing about *how* tools are configured, only how they're colored.
 - `ports.conf` → which ports get rendered.
 - `ports.meta.json` → what INSTALLING each rendered port takes: which shelf it
   sits on (`category`), `dest`, how it gets there (`install`), what makes it the
-  active theme (`select`), where its tool runs (`platform`), any second file it
-  can't work without (`alsoPlace` — a required companion is data an installer can
-  act on; `pathNote` is prose, and only ever for OPTIONAL extras, which a test
-  now holds), and the derived `tier` — `auto` (a rebuild can do the whole thing), `activate` (the "which
-  theme" setting lives in a file the app rewrites, so it needs an idempotent
-  activation patch), `manual` (no file interface for selecting it; a human
-  clicks or pastes). Exposed as the flake's `ports` output so `haus` can wire
-  what it can and *report* what it can't. Hand-written, but fenced by tests: the
-  `ports.conf` and `ports.meta.json` port sets must match, `tier` must agree with
-  `select`/`install`, every port must land in one of the `CATEGORIES` in
-  `scripts/gen-ports-doc.mjs`, and every advertised path must exist in `dist/`.
+  active theme (`select`), where its tool runs (`platform`), the other files its
+  install needs beside `path` (`alsoPlace` — data an installer can act on, while
+  `pathNote` stays prose and only ever for an alternative you'd take instead; a
+  test holds that line), and the derived `tier` — `auto` (a rebuild can do the
+  whole thing), `activate` (the "which theme" setting lives in a file the app
+  rewrites, so it needs an idempotent activation patch), `manual` (no file
+  interface for selecting it; a human clicks or pastes). Exposed as the flake's
+  `ports` output so `haus` can wire what it can and *report* what it can't.
+  Hand-written, but fenced by tests: the `ports.conf` and `ports.meta.json`
+  port sets must match, `tier` must agree with `select`/`install`, every port
+  must land in one of the `CATEGORIES` in
+  `scripts/gen-ports-doc.mjs`, every advertised path (`path` and `alsoPlace`)
+  must exist in `dist/`, and a `pathNote` must read `(+ …)` — a requirement in
+  that column is what shipped OBS's port half-installed.
   **Two** files are generated from it — the per-category tables in
   `docs/ports.md` and the port board in `README.md` (between the
   `ports:begin`/`ports:end` markers; the board's links point at the anchors the

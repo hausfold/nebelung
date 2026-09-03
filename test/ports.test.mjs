@@ -78,9 +78,10 @@ test("every entry is well-formed", () => {
 // The bug this split exists to prevent: OBS's `.ovt` is dead without the `.obt`
 // base it extends, and that base lived only in `pathNote` — markdown prose. A
 // consumer installing from this file has `path`, so it copied one file, and OBS
-// dropped the theme without logging anything. Required companions are data
-// (`alsoPlace`, which a consumer places alongside `path`); notes stay for the
-// OPTIONAL extras they were meant for, which is why one may only read `(+ …)`.
+// dropped the theme without logging anything. What the install NEEDS is data
+// (`alsoPlace`, placed alongside `path`); a note is for an alternative you'd
+// take instead, which is why one may only ever read `(+ …)`. The shape is all
+// this can check — that a note isn't hiding a requirement is on the author.
 test("a file the port can't work without is data, not a note", () => {
   for (const [name, p] of Object.entries(meta)) {
     if (p.alsoPlace !== undefined) {
