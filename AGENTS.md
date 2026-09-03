@@ -43,8 +43,10 @@ Nothing about *how* tools are configured, only how they're colored.
 - `ports.conf` → which ports get rendered.
 - `ports.meta.json` → what INSTALLING each rendered port takes: which shelf it
   sits on (`category`), `dest`, how it gets there (`install`), what makes it the
-  active theme (`select`), where its tool runs (`platform`), and the derived
-  `tier` — `auto` (a rebuild can do the whole thing), `activate` (the "which
+  active theme (`select`), where its tool runs (`platform`), any second file it
+  can't work without (`alsoPlace` — a required companion is data an installer can
+  act on; `pathNote` is prose, and only ever for OPTIONAL extras, which a test
+  now holds), and the derived `tier` — `auto` (a rebuild can do the whole thing), `activate` (the "which
   theme" setting lives in a file the app rewrites, so it needs an idempotent
   activation patch), `manual` (no file interface for selecting it; a human
   clicks or pastes). Exposed as the flake's `ports` output so `haus` can wire

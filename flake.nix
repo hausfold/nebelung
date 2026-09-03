@@ -67,6 +67,11 @@
       # `platform` (["darwin"] / ["linux"] / both) is the other filter a consumer
       # wants first: several ports are Linux-only tools that are `auto` but have
       # nothing to wire on a Mac.
+      # `alsoPlace` is rare (OBS, JetBrains) and easy to miss: the OTHER files
+      # that have to land beside `path` for the port to work at all. Install
+      # `path` alone for one of those and the app drops the theme without
+      # logging anything — OBS's variant extends a base `.obt` it then can't
+      # find. Anything walking this file installs `path` ++ `alsoPlace or []`.
       # docs/ports.md and the README's port board are both generated from this
       # file (scripts/gen-ports-doc.mjs) and
       # a test asserts each stored tier matches the select/install rule, so the

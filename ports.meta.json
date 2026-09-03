@@ -582,7 +582,10 @@
     "title": "JetBrains",
     "category": "editor",
     "path": "jetbrains/themes/mocha.xml",
-    "pathNote": "+ `mocha.theme.json` (+ `-no-italics` / `-islands`)",
+    "alsoPlace": [
+      "jetbrains/themes/mocha.theme.json"
+    ],
+    "pathNote": "(+ `-no-italics` / `-islands`)",
     "platform": [
       "darwin",
       "linux"
@@ -724,7 +727,9 @@
     "title": "OBS",
     "category": "app",
     "path": "obs/themes/Catppuccin_Mocha.ovt",
-    "pathNote": "**and** `obs/themes/Catppuccin.obt`",
+    "alsoPlace": [
+      "obs/themes/Catppuccin.obt"
+    ],
     "platform": [
       "darwin",
       "linux"
