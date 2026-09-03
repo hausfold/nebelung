@@ -464,7 +464,6 @@
     "title": "fish",
     "category": "shell",
     "path": "fish/themes/catppuccin-mocha.theme",
-    "pathNote": "(+ `static/`)",
     "platform": [
       "darwin",
       "linux"
@@ -476,7 +475,7 @@
       "fish_config theme choose catppuccin-mocha"
     ],
     "tier": "auto",
-    "howto": "copy into `~/.config/fish/themes/`, then `fish_config theme choose catppuccin-mocha` (the theme name is the filename) — the light variants ship `static/` only (upstream's dynamic theme is dark-flavor-only)"
+    "howto": "copy into `~/.config/fish/themes/`, then `fish_config theme choose catppuccin-mocha` (the theme name is the filename)"
   },
   "raycast": {
     "title": "Raycast",
@@ -582,7 +581,10 @@
     "title": "JetBrains",
     "category": "editor",
     "path": "jetbrains/themes/mocha.xml",
-    "pathNote": "+ `mocha.theme.json` (+ `-no-italics` / `-islands`)",
+    "alsoPlace": [
+      "jetbrains/themes/mocha.theme.json"
+    ],
+    "pathNote": "(+ `-no-italics` / `-islands`)",
     "platform": [
       "darwin",
       "linux"
@@ -724,7 +726,9 @@
     "title": "OBS",
     "category": "app",
     "path": "obs/themes/Catppuccin_Mocha.ovt",
-    "pathNote": "**and** `obs/themes/Catppuccin.obt`",
+    "alsoPlace": [
+      "obs/themes/Catppuccin.obt"
+    ],
     "platform": [
       "darwin",
       "linux"
@@ -826,7 +830,9 @@
     "title": "qBittorrent",
     "category": "app",
     "path": "qbittorrent/themes/catppuccin-mocha/",
-    "pathNote": "(+ `themes/icons/`)",
+    "alsoPlace": [
+      "qbittorrent/themes/icons/"
+    ],
     "platform": [
       "darwin",
       "linux"

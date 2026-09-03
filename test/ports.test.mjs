@@ -75,6 +75,42 @@ test("every entry is well-formed", () => {
   }
 });
 
+// The bug this split exists to prevent: OBS's `.ovt` is dead without the `.obt`
+// base it extends, and that base lived only in `pathNote` — markdown prose. A
+// consumer installing from this file has `path`, so it copied one file, and OBS
+// dropped the theme without logging anything. What the install NEEDS is data
+// (`alsoPlace`, placed alongside `path`); a note is for an alternative you'd
+// take instead, which is why one may only ever read `(+ …)`. The shape is all
+// this can check — that a note isn't hiding a requirement is on the author.
+test("a file the port can't work without is data, not a note", () => {
+  for (const [name, p] of Object.entries(meta)) {
+    if (p.alsoPlace !== undefined) {
+      assert.ok(
+        Array.isArray(p.alsoPlace) && p.alsoPlace.length,
+        `${name}.alsoPlace must be a non-empty array`,
+      );
+      for (const extra of p.alsoPlace) {
+        assert.equal(typeof extra, "string", `${name}.alsoPlace entries must be strings`);
+        assert.ok(extra.length, `${name}.alsoPlace has an empty entry`);
+        assert.notEqual(extra, p.path, `${name}.alsoPlace repeats its own path`);
+      }
+      assert.equal(
+        new Set(p.alsoPlace).size,
+        p.alsoPlace.length,
+        `${name}.alsoPlace lists the same file twice`,
+      );
+    }
+    if (p.pathNote !== undefined) {
+      assert.match(
+        p.pathNote,
+        /^\(\+ /,
+        `${name}.pathNote reads like a requirement — if the port needs that file, ` +
+          `it belongs in alsoPlace, where an installer can see it`,
+      );
+    }
+  }
+});
+
 // The flake reads `tier` verbatim so it doesn't have to reimplement the rule in
 // Nix. That's only safe while the stored value agrees with the rule.
 test("stored tier matches the rule that defines it", () => {
@@ -95,20 +131,19 @@ test("a select of gui is the only thing that makes a port manual", () => {
 test("advertised output paths exist in dist/", () => {
   const skipped = [];
   for (const [name, p] of Object.entries(meta)) {
-    if (/[<>{}]/.test(p.path)) {
-      skipped.push(name);
-      continue;
+    for (const path of [p.path, ...(p.alsoPlace ?? [])]) {
+      if (/[<>{}]/.test(path)) {
+        skipped.push([name, path]);
+        continue;
+      }
+      assert.ok(existsSync(join(root, "dist", path)), `${name}: dist/${path} does not exist`);
     }
-    assert.ok(
-      existsSync(join(root, "dist", p.path)),
-      `${name}: dist/${p.path} does not exist`,
-    );
   }
   // Every accent-matrix port renders under a directory we can still check: trim
   // the path back to the last slash before the placeholder and assert that
   // directory exists and rendered something.
-  for (const name of skipped) {
-    const dir = meta[name].path.split(/[<>{]/)[0].replace(/[^/]*$/, "");
+  for (const [name, path] of skipped) {
+    const dir = path.split(/[<>{]/)[0].replace(/[^/]*$/, "");
     assert.ok(existsSync(join(root, "dist", dir)), `${name}: dist/${dir} does not exist`);
     assert.ok(readdirSync(join(root, "dist", dir)).length, `${name}: dist/${dir} is empty`);
   }

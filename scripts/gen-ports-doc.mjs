@@ -72,6 +72,18 @@ export const TIERS = ["auto", "activate", "manual"];
 // wire a Wayland terminal on macOS. Most ports list both.
 export const PLATFORMS = ["darwin", "linux"];
 
+// A port is one file — `path` — except where it isn't, and the difference has to
+// be readable by a machine. `alsoPlace` names the other files the install needs
+// beside it, the ones the port's own `howto` tells you to place as well: OBS's
+// `.ovt` extends a base `.obt` and the app drops a variant whose base is
+// missing, qBittorrent's `.qrc` won't compile without the icons it references,
+// JetBrains's `.theme.json` is the UI half of the same theme. Anything
+// installing from this file takes `path` plus these. `pathNote` is for the
+// opposite kind of extra — an alternative you'd take INSTEAD (a `-transparent`
+// twin, a `no_italics/` dir, the same theme in another shell's dialect), which
+// is why it stays markdown for the table. The test enforces the split: a note
+// may only ever read `(+ …)`, so a requirement can't hide in prose again.
+
 // The contract. ports.meta.json stores `tier` explicitly so the flake can read
 // it verbatim without reimplementing this in Nix; the test asserts every stored
 // tier matches what this returns, so the two can't disagree.
@@ -123,7 +135,10 @@ export const renderTable = (meta = readMeta()) => {
   const sections = CATEGORIES.flatMap(({ key, label }) => {
     const rows = portsIn(key, meta).map((name) => {
       const p = meta[name];
-      const out = "`" + p.path + "`" + (p.pathNote ? ` ${p.pathNote}` : "");
+      const also = p.alsoPlace?.length
+        ? ` **and** ${p.alsoPlace.map((x) => "`" + x + "`").join(", ")}`
+        : "";
+      const out = "`" + p.path + "`" + also + (p.pathNote ? ` ${p.pathNote}` : "");
       const title = `<a name="${anchor(name)}"></a>${cell(p.title, name)}`;
       return `| ${title} | ${cell(out, name)} | ${p.tier} | ${cell(p.howto, name)} |`;
     });
