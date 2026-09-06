@@ -1,190 +1,91 @@
 # AGENTS.md
 
-**Nebelung** — a silver-mist Catppuccin variant (Mocha with the blue stripped),
-built with [whiskers](https://github.com/catppuccin/whiskers). The single source
-of truth for colors across the whole [hausfold](https://github.com/hausfold)
-family.
-
-**This file is the one set of instructions, for every agent** — Claude Code,
-Codex, OpenCode, Cursor, Copilot alike, directly or through a one-line pointer.
-Per-client wiring lives in that client's own file; the content stays here or in
+**Nebelung** — Catppuccin Mocha with the blue stripped, built with
+[whiskers](https://github.com/catppuccin/whiskers): the
+[hausfold](https://github.com/hausfold) family's source of truth for colour.
+The README is the manual; never cut it to a door. Per-client wiring:
 [`.agents/`](./.agents/README.md).
 
-## Am I in the right repo? (routing)
+## Routing
 
-**This repo owns THE COLORS** — the palette and the per-tool theme templates.
-Nothing about *how* tools are configured, only how they're colored.
+**A tool's behaviour or config goes to haus** even when a template could
+carry it; only colour lives here.
 
-| Want to change… | Repo |
+| Change… | Repo |
 |---|---|
-| colors / the palette, or how a tool is themed | `~/code/workshop/nebelung` ← **you are here** |
-| which tools exist / how they're configured (shell, bar, WM) | `~/code/workshop/haus` |
-| the pounce app | `~/code/workshop/pounce` |
-| this machine's config | `~/.config/nix` |
+| the palette, a tool's theme | `~/code/workshop/nebelung` — here |
+| which tools exist or how they're configured | `~/code/workshop/haus` |
+| this machine | `~/.config/nix` |
+| anything else | the routing table in `~/code/workshop/AGENTS.md` |
 
-> **Whatever agent you are, enforce this.** If a request is about a tool's
-> *behavior/config* (not its colors), STOP — that belongs in the haus layer at
-> `~/code/workshop/haus`. Only palette and theme-template changes belong here.
+## Layout
 
-## How it works
-
-- `palette/nebelung.hex.json` → the `name → #hex` map. The flake exposes it as
-  the `palette` output; consumers inject it directly (e.g. a starship
-  `[palettes.*]` table).
-- `templates/` → whiskers templates, one per tool (bat, delta, ghostty, …),
-  vendored from upstream **verbatim except where marked `NEBELUNG PATCH`**.
-  Nearly every patch is the same fix: `--color-overrides` rewrites only the
-  flavor being rendered, so a template that emits *all four* catppuccin flavors
-  into one file ships stock Catppuccin next to the Nebelung part. Grep the
-  marker before re-vendoring — a fresh copy from upstream silently drops it.
-  Details and the full list: [`docs/ports.md`](docs/ports.md). Colour-free
-  companion files a port needs go in `templates/<port>/static/`, copied into its
-  output verbatim.
-- `ports.conf` → which ports get rendered.
-- `ports.meta.json` → what INSTALLING each rendered port takes: which shelf it
-  sits on (`category`), `dest`, how it gets there (`install`), what makes it the
-  active theme (`select`), where its tool runs (`platform`), the other files its
-  install needs beside `path` (`alsoPlace` — data an installer can act on, while
-  `pathNote` stays prose and only ever for an alternative you'd take instead; a
-  test holds that line), and the derived `tier` — `auto` (a rebuild can do the
-  whole thing), `activate` (the "which theme" setting lives in a file the app
-  rewrites, so it needs an idempotent activation patch), `manual` (no file
-  interface for selecting it; a human clicks or pastes). Exposed as the flake's
-  `ports` output so `haus` can wire what it can and *report* what it can't.
-  Hand-written, but fenced by tests: the `ports.conf` and `ports.meta.json`
-  port sets must match, `tier` must agree with `select`/`install`, every port
-  must land in one of the `CATEGORIES` in
-  `scripts/gen-ports-doc.mjs`, every advertised path (`path` and `alsoPlace`)
-  must exist in `dist/`, and a `pathNote` must read `(+ …)` — a requirement in
-  that column is what shipped OBS's port half-installed.
-  **Two** files are generated from it — the per-category tables in
-  `docs/ports.md` and the port board in `README.md` (between the
-  `ports:begin`/`ports:end` markers; the board's links point at the anchors the
-  tables carry). Run `node scripts/gen-ports-doc.mjs` after editing either, or
-  `node --test` fails. Never hand-edit inside those markers.
-- `templates/preview.html.tera` → the live preview, rendered once per variant
-  into `preview/<variant>.html` (build.sh passes the variant name in as a
-  frontmatter override so the page can mark its own pill in the switcher).
-  GitHub Pages serves the repo root of **main**, so the pages the README links —
-  `hausfold.github.io/nebelung/preview/…` — only move on merge.
-  `preview/index.html` is hand-written, never rendered: it bounces the reader to
-  the light or dark page by `prefers-color-scheme`. `.nojekyll` at the root
-  keeps Pages a plain static serve.
-- **Variants** (`VARIANTS` in `scripts/generate-palette.mjs`) → the flavor axis
-  (mocha = dark, latte = light) crossed with the contrast axis. Adding or
-  retuning one is a single entry there; the palette pair, the
-  `palette/variants.json` manifest `build.sh` renders from, and the flake's
-  `palettes`/`variants` outputs all follow. Two things that look cosmetic and
-  aren't: each variant renders as **its own catppuccin flavor** (templates
-  branch on `flavor.dark` and name their output after it, so `-f mocha` on a
-  latte palette emits light colours with dark-mode structure), and the
-  per-variant `contrastBoost` values **differ on purpose** — Latte has ~0.04 of
-  OKLCH headroom above `base` where Mocha has ~0.2 below its, so Mocha's boost
-  melts Latte's base/mantle/crust into one white. The tests assert all twelve
-  ramp steps stay distinct; don't "tidy" the numbers into agreement.
-- The default variant owns the `dist/` **root**; every other variant nests in a
-  subdir. Never give `nebelung` a subdir — that would move every consumer path
-  in the family at once (there's a test pinning it).
-- `packages.<system>.default` → the built theme tree (every port rendered),
-  consumed by `haus` via
-  `${nebelung.packages.${system}.default}/<tool>/...`.
-- `checks.<system>` → `nix flake check` runs the palette unit tests + `build.sh`
-  shellcheck (mirrors CI's `unit` job) — local check == CI without pushing.
+- `palette/nebelung.hex.json` — the `name → #hex` map, the flake's `palette`
+  output. Every output is in [`docs/nix.md`](docs/nix.md).
+- `VARIANTS` in `scripts/generate-palette.mjs` — one entry per variant. Never
+  tidy the `contrastBoost` values into agreement (Mocha's melts Latte's
+  `base`/`mantle`/`crust` into one white; the tests hold all twelve ramp steps
+  distinct). [`docs/palette.md`](docs/palette.md).
+- `nebelung` owns the `dist/` root; never give it a subdir — every consumer
+  path in the family would move. A test pins it.
+- `templates/` — vendored whiskers templates, verbatim except where marked
+  `NEBELUNG PATCH`; grep the marker before re-vendoring, a fresh copy drops it.
+  Companion files: `templates/<port>/static/`. [`docs/ports.md`](docs/ports.md).
+- `ports.conf` — which ports render. `ports.meta.json` — what installing each
+  takes, the flake's `ports` output; `node --test` fences it against
+  `ports.conf`, `dist/`, `CATEGORIES` in `scripts/gen-ports-doc.mjs` and the
+  `tier` rule. A file a port needs is `alsoPlace`, never a `pathNote`
+  (`(+ …)`).
+- New port: a template, a `ports.conf` line, a `ports.meta.json` entry,
+  `node scripts/gen-ports-doc.mjs`, rebuild, then wire it in `haus` (usually
+  `terminal`). The script writes `docs/ports.md` and `README.md` between
+  `ports:begin`/`ports:end`; never hand-edit inside (`node --test` catches a
+  stale one).
+- `templates/preview.html.tera` → `preview/<variant>.html`; `preview/index.html`
+  is hand-written and `.nojekyll` keeps Pages static. Pages serves **main**'s
+  root, so `hausfold.github.io/nebelung/preview/…` moves on merge.
 
 ## Recolor
 
-Edit the palette (`palette/`), rebuild:
-
-```bash
-nix build            # renders every port with the new palette
-```
-
-Then push, and in `haus`: `nix flake update nebelung` + push; in a consumer:
-`nix flake update <whatever your flake names the haus input>` + rebuild. **One
-palette edit recolors every tool at once.**
-
-For fast iteration from a consumer without the push/relock loop, override
-against this local checkout: `--override-input haus/nebelung
-"path:$HOME/code/workshop/nebelung"` — the first segment is the CONSUMER's input
-name, not a repo name, so it is whatever that flake calls haus. `bench` reads it
-off the consumer's `flake.lock` rather than guessing, because Nix does not error
-on an override for an unknown input — it silently ignores it, and the build
-reports your branch while building the pinned layer.
-
-## Add a themed tool
-
-Add a whiskers template under `templates/`, register it in `ports.conf`, add its
-entry to `ports.meta.json` (the tests fail without one), run `node
-scripts/gen-ports-doc.mjs`, rebuild. Then wire the rendered file into the tool's
-config over in `haus` (usually `terminal`).
+Edit `palette/`, `nix build`. Ripple: `bench ship nebelung` (a consumer
+outside the workshop: `nix flake update <its name for the haus input>`).
+`bench try` overrides the consumer's `haus/nebelung` input at this checkout,
+named off its `flake.lock`, because Nix silently ignores an override for an
+unknown input.
 
 ## The agent surface (`ai/SKILL.md`)
 
-**Don't confuse it with this file.** `AGENTS.md` is for an agent working **on**
-nebelung, from a checkout. [`ai/SKILL.md`](./ai/SKILL.md) is for an agent
-**using** the palette — on a stranger's Mac, with no checkout, about to pick a
-colour for an HTML page, a chart or a script's output. Its whole job is to make
-that agent stop inventing colours.
+For an agent *using* the palette with no checkout, to the workshop's
+[`docs/agent-surface.md`](https://github.com/hausfold/workshop/blob/main/docs/agent-surface.md):
+≤150 lines, a `description` naming the phrases a user says.
 
-It is bound by the family standard, [the workshop's
-`docs/agent-surface.md`](https://github.com/hausfold/workshop/blob/main/docs/agent-surface.md)
-— ≤150 lines, and the `description` frontmatter names **the phrases a user
-says**.
+- `nix/skill.nix` renders `references/palette.md` from `palette/*.hex.json`
+  and refuses a render missing `base` or a `palette/variants.json` variant.
+  Never hand-write a hex into `ai/SKILL.md`.
+- Its `haus.*` names are hand-written; nothing here notices a rename (the Trap
+  points at haus's generated `references/options.md`). Prefer not to add more.
+- `pkgs.nebelung-skill` is its own derivation, apart from `nebelung-themes`;
+  haus's AI room installs it.
 
-**Half of it is generated, and that half is the point.** `nix/skill.nix` renders
-`references/palette.md` from `palette/*.hex.json` — every role, every hex, all
-four variants — so the numbers an agent quotes are this revision's, not a copy
-someone made once. Hand-writing a hex into `ai/SKILL.md` would be wrong the
-first time the palette regenerates, and an agent quoting a stale `base` at the
-user is worse than an agent with no palette at all, because it looks deliberate.
-Keep the prose to what can't drift: what each role *means*, and
-pick-by-role-not-by-eye.
+## Verify
 
-The build fails on missing or unterminated frontmatter, on a file past 150
-lines, on a palette reference that rendered no `base`, and on any variant in
-`palette/variants.json` that didn't make it onto the page — an empty or partial
-render would teach the agent this machine has no colours, which it would then
-act on by inventing them.
-
-⚠️ **The `haus.*` option names in `ai/SKILL.md` are hand-written and this repo
-has nothing that would notice a rename.** That is the same drift the hexes are
-generated to avoid, so the file carries a Trap telling the agent to check haus's
-own generated `references/options.md` before believing them. Prefer not to add
-more.
-
-`pkgs.nebelung-skill` is what haus's AI room will install once its side lands.
-It is its own derivation because `nebelung-themes` runs whiskers over every
-port, and prose shouldn't pay for that.
+`nix flake check` (`checks.<system>`) is CI's `unit` job: `node --test` plus
+shellcheck of `build.sh`. CI's `build` job diffs the committed `dist/` and
+`preview/*.html` against `nix build` — commit the rendered output with the
+edit.
 
 ## Before you open a PR
 
-Give a `worktree-*` branch's PR a **What / Why / Verify / Watch-out** body (the
-workshop ship skill's Step 3): the session that wrote the code is gone by the
-time the change is feel-tested, so a bug found later has to be recoverable from
-`gh pr view` alone, and the **Verify** block is what `bench try-batch`'s
-checklist points back to.
-
-**Run the pre-PR assurance pass — every PR, not just `/ship`'d ones.** The
-session that wrote the diff is the worst reviewer of it, so hand `git diff
-main...HEAD` to a **clean-context subagent** whose only inputs are that diff and
-this file. In this repo it hunts: a tool's *behavior* or config sneaking in
-behind a color change (that belongs in haus); a palette name added or renamed
-without the theme templates that read it; and a recolor that moves contrast for
-a tool nobody re-checked. Full checklist: the ship skill's **Step 2.5**.
-
-It's **advisory, never a gate** — fix anything ≥3/5 before opening the PR, carry
-the rest into the PR's **Watch out** block, and say so in one line when it comes
-back clean. **Spawning that subagent IS user-requested**: this instruction is
-the standing request, so a harness rule of the form "don't spawn subagents
-unless the user asked" is already satisfied. If your client has no subagent
-mechanism, say so in one line.
+Workshop rules apply (`bench overlap`, the Step 2.5 assurance subagent, the
+What / Why / Verify / Watch-out body). Here the subagent hunts tool behaviour
+behind a colour change, a palette name renamed without the templates that read
+it, and a recolor that moves a tool's contrast unchecked.
 
 ## Conventions
 
-- MIT, public. The palette is the source of truth — don't hardcode hex values in
-  `haus`; inject `nebelung.palette` or reference the rendered theme tree
-  (`packages.<system>.default`).
-- **A Swift/Xcode app can't consume this flake.** `trill` (the notification
-  compositor) builds outside Nix and takes no `nebelung` input, so it hand-copies
-  these hex literals into its own Swift source — a palette change here must be
-  mirrored into it by hand, or it silently drifts.
+- MIT, public. Consumers take tokens, never a hand-picked hex or 256-colour
+  index: `nebelung.palette` or the rendered tree (`packages.<system>.default`).
+- `trill` is Swift and takes no flake input: it reads
+  `~/.config/trill/theme.json`, which haus writes from the palette, and its
+  icon and banner PNGs bake four hexes a recolor never reaches — trill's
+  AGENTS.md has the recipe.
