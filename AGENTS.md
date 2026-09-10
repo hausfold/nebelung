@@ -32,9 +32,11 @@ carry it; only colour lives here.
   `NEBELUNG PATCH`; grep the marker before re-vendoring, a fresh copy drops it.
   Companion files: `templates/<port>/static/`. [`docs/ports.md`](docs/ports.md).
 - `ports.conf` — which ports render. `ports.meta.json` — what installing each
-  takes, the flake's `ports` output; `node --test` fences it against
-  `ports.conf`, `dist/`, `CATEGORIES` in `scripts/gen-ports-doc.mjs` and the
-  `tier` rule. A file a port needs is `alsoPlace`, never a `pathNote`
+  takes (`category`, `dest`, `install`, `select`, `platform`, `alsoPlace`,
+  `pathNote`, and `tier`: `auto`, `activate` or `manual`, derived from
+  `select`/`install`), the flake's `ports` output; `node --test` fences it
+  against `ports.conf`, `dist/`, `CATEGORIES` in `scripts/gen-ports-doc.mjs`
+  and the `tier` rule. A file a port needs is `alsoPlace`, never a `pathNote`
   (`(+ …)`).
 - New port: a template, a `ports.conf` line, a `ports.meta.json` entry,
   `node scripts/gen-ports-doc.mjs`, rebuild, then wire it in `haus` (usually
