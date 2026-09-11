@@ -22,7 +22,7 @@ inputs.nebelung.url = "github:hausfold/nebelung";
 - **`palettes`** — the same shape for every variant, keyed by variant name. What
   a consumer following a light-mode or contrast setting reads.
 
-- **`variants`** — `name → { flavor, dir }`. `flavor` is the catppuccin flavor
+- **`variants`** — `name → { flavor, contrast, dir }`. `flavor` is the catppuccin flavor
   the variant rendered as, which is what a consumer needs to build the
   flavor-named paths whiskers emits (`catppuccin-latte.conf` vs
   `catppuccin-mocha.conf`); `dir` is its subdirectory, `""` for the default.

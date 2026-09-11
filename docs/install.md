@@ -57,7 +57,7 @@ xdg.configFile."ghostty/themes/catppuccin-mocha.conf".source =
 programs.starship.settings.palettes.nebelung = nebelung.palette;
 
 # variants are data, not paths to guess — this one is
-# { dir = "latte-high-contrast"; flavor = "latte"; }
+# { dir = "latte-high-contrast"; flavor = "latte"; contrast = "high"; }
 lightTheme = with nebelung.variants."nebelung-latte-high-contrast";
   "${nebelung.packages.${pkgs.system}.default}/${dir}/ghostty/themes/catppuccin-${flavor}.conf";
 ```
