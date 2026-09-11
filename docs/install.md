@@ -15,11 +15,8 @@ cp nebelung/dist/ghostty/themes/catppuccin-mocha.conf ~/.config/ghostty/themes/
 echo 'theme = catppuccin-mocha' >> ~/.config/ghostty/config
 ```
 
-Reload Ghostty (`cmd+shift+,`) and you're in Nebelung.
-
-The file keeps its upstream **Catppuccin** name on purpose: Nebelung renders into
-the flavor slot each template already has, so `catppuccin-mocha` *is* the Nebelung
-theme. Nothing else about the port changes.
+Reload Ghostty (`cmd+shift+,`) and you're in Nebelung. The upstream
+**Catppuccin** filename is deliberate — nothing else about the port changes.
 
 ## picking a variant
 
@@ -40,8 +37,8 @@ echo 'theme = catppuccin-latte' >> ~/.config/ghostty/config
 | `nebelung-latte` | Latte | `latte/` | 7.0:1 |
 | `nebelung-latte-high-contrast` | Latte | `latte-high-contrast/` | 9.9:1 |
 
-The default keeps the tree root so every path that existed before variants did
-still resolves.
+The default owning the root is what keeps every unqualified `dist/<port>/…`
+path valid.
 
 ## as a flake
 
@@ -101,5 +98,5 @@ only one of them ever defines `:root`. They render into sibling dirs —
 
 Needs [`whiskers`](https://whiskers.catppuccin.com)
 (`brew install catppuccin/tap/whiskers`) and Node for the palette generator.
-Recoloring: edit `palette/`, run `nix build`, and every port follows in one pass
-— [the palette internals](palette.md) has the knobs.
+Recoloring is [the palette internals](palette.md) — edit `palette/`, `nix build`,
+and every port follows in one pass.
