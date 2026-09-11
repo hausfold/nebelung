@@ -45,7 +45,7 @@
       # (dist/ for the default, dist/<variants.<name>.dir>/ for the rest).
       palettes = builtins.mapAttrs (name: _: readHexMap name) variantManifest;
 
-      # The manifest itself: name -> { flavor, dir }. `flavor` is the catppuccin
+      # The manifest itself: name -> { flavor, contrast, dir }. `flavor` is the catppuccin
       # flavor the variant was rendered as, which a consumer needs in order to
       # build the flavor-named paths whiskers emits (catppuccin-latte.conf vs
       # catppuccin-mocha.conf, zen/themes/Latte/ vs /Mocha/). `dir` is its

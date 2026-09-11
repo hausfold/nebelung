@@ -99,7 +99,7 @@ inputs.nebelung.url = "github:hausfold/nebelung";
 - [Ports](docs/ports.md) — every output path and how to install it
 - [Install](docs/install.md) — by hand, by variant, as a flake, on the web
 - [Nix](docs/nix.md) — flake outputs (`palette`, `palettes`, `variants`, `ports`, `checks`)
-- [Palette internals](docs/palette.md) — layout, tuning knobs, and why the two contrast boosts differ
+- [Palette internals](docs/palette.md) — where the colour lives, tuning knobs, and why the two contrast boosts differ
 - [The Appearance room](https://hausfold.co/docs/haus/rooms/appearance/) — picking an accent inside a haus desktop
 
 <div align="center">
