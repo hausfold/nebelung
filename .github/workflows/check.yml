@@ -30,36 +30,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: nixbuild/nix-quick-install-action@v35
-        with:
-          # `nix store gc` before the save would otherwise evict the flake
-          # inputs and the intermediate derivations — everything the next run
-          # wants and only the final `result` is rooted — and the restored
-          # cache would be worth nothing. These two make what the build used
-          # reachable, which is what makes it survive.
-          nix_conf: |
-            keep-env-derivations = true
-            keep-outputs = true
-      # Without this the job spent ~3m40s of its ~4m compiling whiskers (a Rust
-      # CLI that is not in cache.nixos.org) from source on EVERY run, for a
-      # palette that changes underneath it and a compiler that doesn't. The key
-      # is the flake inputs, so a palette edit reuses the store and only the
-      # render re-runs; a lock bump is the only thing that pays full price.
-      #
-      # A PR restores the cache main last saved (GitHub scopes caches to a ref
-      # and lets a branch read its base), so the saving half only ever happens
-      # on main.
+      # Without this the job spent ~3m40s of its ~4m30s compiling whiskers (a
+      # Rust CLI that is not in cache.nixos.org) from source on EVERY run, for
+      # a palette that changes underneath it and a compiler that doesn't. The
+      # key is the flake inputs, so a palette edit reuses that build and pays
+      # only for the render; a lock bump is the only thing that pays in full.
       - name: Restore the Nix store
         uses: nix-community/cache-nix-action@v7
         with:
           primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock', '**/*.nix') }}
           restore-prefixes-first-match: nix-${{ runner.os }}-
-          # GitHub evicts least-recently-used once a repo passes 10G; keeping our
-          # own store under 2G means we never make that decision for it.
-          gc-max-store-size-linux: 2G
+          # Only a push to main writes a cache, and this line is what makes
+          # that true — GitHub's ref scoping governs READS, not writes. Left on
+          # the default, every PR would upload its own multi-gigabyte copy
+          # scoped to `refs/pull/N/merge`, two open PRs would push the repo past
+          # GitHub's 10 GB budget, and its LRU eviction would take the main
+          # entry this whole thing exists for.
+          save: ${{ github.event_name != 'pull_request' }}
           purge: true
           purge-prefixes: nix-${{ runner.os }}-
           purge-created: 0
           purge-primary-key: never
+      # No `gc-max-store-size-*` is set, so the action collects no garbage and
+      # saves the store whole. That is deliberate: `nix build` roots its own
+      # outputs through `./result`, but NOT the flake inputs or the source
+      # derivations, and a collector run before the save would take exactly the
+      # paths the next run wants. The cost is that the store carries forward
+      # and creeps; the line below is how that stays readable rather than
+      # arriving as a surprise eviction at GitHub's 10 GB per-repo ceiling.
+      - name: How big a store we are carrying
+        run: du -sh /nix/store
       - run: nix build .#default .#nebelung-skill --print-build-logs
       # dist/ is committed for non-nix users; it must always equal what the
       # flake builds from palette + templates. Compare both directions:
@@ -110,4 +110,10 @@ jobs:
       # shellcheck is on the runner image already; apt-get update alone was
       # costing more than the check it installed.
       - name: shellcheck
-        run: shellcheck build.sh
+        run: |
+          # From the runner image, not apt — so print the version: an image
+          # change that drops it or moves it (24.04 ships 0.9.0, 26.04 ships
+          # 0.11.0, and they disagree about SC2015) must read as a version
+          # change here rather than as a line nobody touched.
+          shellcheck --version
+          shellcheck build.sh
