@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Let a branch be checked on demand (e.g. before opening a PR) without
+  # having to push to main first.
+  workflow_dispatch:
 
 # A second push to a PR branch makes the first run's answer worthless, and the
 # abandoned run still holds a runner — a runner the next PR then waits
@@ -38,11 +41,11 @@ jobs:
       # 404s, which costs nothing while this job is the only one that builds.
       #
       # Read-only and public: no account and no token. That is a different
-      # trade from the hosted cache workshop's docs/ci.md rules out, and the
-      # carve-out saying so is hausfold/workshop#581 — until it lands, this
-      # step is an exception to a rule that does not yet name it. The part that
-      # is not free: `trusted-public-keys` is not per-path, so catppuccin's key
-      # can supply ANY path in this job, not only whiskers.
+      # trade from the hosted cache workshop's docs/ci.md rules out, and that
+      # doc names the carve-out: reading someone else's public cache is
+      # allowed. The part that is not free: `trusted-public-keys` is not
+      # per-path, so catppuccin's key can supply ANY path in this job, not only
+      # whiskers.
       #
       # A substituter that is down is not a failure. Nix falls back to
       # building, which is what every run does today; an unreachable endpoint
@@ -70,8 +73,12 @@ jobs:
           # the default, every PR would upload its own multi-gigabyte copy
           # scoped to `refs/pull/N/merge`, two open PRs would push the repo past
           # GitHub's 10 GB budget, and its LRU eviction would take the main
-          # entry this whole thing exists for.
-          save: ${{ github.event_name != 'pull_request' }}
+          # entry this whole thing exists for. It reads the REF rather than the
+          # event because of `workflow_dispatch`: dispatched from a feature
+          # branch, an event test would save a 1.2 GiB entry scoped to that
+          # branch, which no run on main can purge and only that branch can
+          # restore.
+          save: ${{ github.ref == 'refs/heads/main' }}
           # One store entry per ref, not one per key we have ever had. The
           # sweep runs AFTER the save, not before: it takes every `nix-<os>-`
           # entry created before this job's post phase, which the one just
