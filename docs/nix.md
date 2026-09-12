@@ -28,8 +28,9 @@ inputs.nebelung.url = "github:hausfold/nebelung";
   `catppuccin-mocha.conf`); `dir` is its subdirectory, `""` for the default.
 
 - **`checks.<system>`** — `nix flake check` runs the palette unit tests +
-  `build.sh` shellcheck (the same as CI's `unit` job), so `nix flake check` == CI
-  without pushing.
+  `build.sh` shellcheck, which is CI's `unit` job. It is not all of CI: the
+  skill derivation and the `dist/` diff are `packages`, not `checks`, so flake
+  check evaluates them without building either.
 
 ## Inside a haus desktop
 

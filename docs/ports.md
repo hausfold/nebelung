@@ -190,8 +190,10 @@ say so in the issue and it can still happen.
 
 `./build.sh` renders every port for every variant — [building it
 yourself](install.md#build-it-yourself) has the flags and what it needs
-installed. CI keeps the committed `dist/` honest by rebuilding and diffing on
-every push.
+installed. CI keeps the committed `dist/` honest by rebuilding and diffing it on every
+push that touches anything the render reads; a diff confined to prose skips
+that rebuild (`.github/workflows/themes.yml` carries the list it ignores), and
+`node --test` still checks that every path the manifest advertises is there.
 
 The port manifest is [`ports.conf`](../ports.conf): `name | template | output
 subdir`, one line per rendered file (a port spans several lines when it emits

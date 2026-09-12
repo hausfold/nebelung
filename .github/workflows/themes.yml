@@ -1,0 +1,108 @@
+# Render every port and prove dist/ and preview/ still match what the flake
+# builds. This is the expensive half of the gate, and it is path-filtered.
+#
+# WHY IT IS PATH-FILTERED
+# -----------------------
+# `whiskers` is not in nixpkgs and not in cache.nixos.org, so this job is the
+# only one in the repo that can be made to compile a Rust CLI. Four in five PRs
+# here touch only markdown, where nothing under dist/ or preview/ can move —
+# and the guards that DO watch prose (README.md and docs/ports.md against
+# ports.conf, ai/SKILL.md's frontmatter) are in check.yml, which has no filter.
+#
+# `paths-ignore` rather than `paths`, deliberately: the default must be to run.
+# A directory added later is covered without anyone remembering to list it, and
+# the cost of the filter being wrong is a wasted three minutes rather than a
+# drift check that silently stopped running.
+#
+# `dist/**/README.md` is a RENDERED file, which is why this cannot be a blanket
+# '**.md' — a hand-edit to one of those is exactly what the drift check exists
+# to catch.
+name: themes
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+      - 'docs/**'
+      - 'ai/**'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+      - 'docs/**'
+      - 'ai/**'
+      - 'LICENSE'
+  workflow_dispatch:
+
+# A lane pushes a branch several times a minute, and the runs those pushes
+# supersede are answering a question nobody is asking any more.
+#
+# The key is the PR's head branch, which is stable across those pushes — and
+# EMPTY on a push, where it falls back to the commit sha so no two main runs
+# ever share a group. That fallback is load-bearing, not tidiness: a group
+# holds at most ONE pending run, so keying main on the ref would let a factory
+# pass landing three PRs cancel the middle commit's run outright, however
+# `cancel-in-progress` is set. `factory shift` reads main's most recent run to
+# decide the base is healthy (factory/libexec/factory-shift), and a commit
+# whose run was cancelled is neither green nor red.
+concurrency:
+  group: themes-${{ github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build + dist drift check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          # whiskers ships from the catppuccin flake, which publishes it to its
+          # own cachix for every system this repo builds on. Without the cache
+          # it is a from-source Rust build on every run — a full rustc toolchain
+          # closure and three minutes — to render text files. Catppuccin's key
+          # is read from https://app.cachix.org/api/v1/cache/catppuccin.
+          extra-conf: |
+            extra-substituters = https://catppuccin.cachix.org
+            extra-trusted-public-keys = catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU=
+      - run: nix build .#default --print-build-logs
+      # dist/ is committed for non-nix users; it must always equal what the
+      # flake builds from palette + templates. Compare both directions:
+      # every committed file matches, and nothing rendered is missing.
+      #
+      # The `find` filter below excludes the REFERENCE files the package ships
+      # alongside the rendered ports — the per-variant previews, the palette hex
+      # maps, variants.json (the render manifest), and ports.meta.json (install
+      # metadata). They live in the repo root rather than under dist/, so they're
+      # legitimately absent from it.
+      - name: dist/ matches the built output
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            cmp -s "dist/$f" "result/$f" || { echo "::error::dist/$f differs from the built output"; fail=1; }
+          done < <(cd dist && find . -type f)
+          while IFS= read -r f; do
+            [ -f "dist/$f" ] || { echo "::error::dist/$f is missing (rendered but not committed)"; fail=1; }
+          done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung*.json' -not -name 'variants.json' -not -name 'ports.meta.json')
+          [ "$fail" = 0 ] && echo "dist/ is in sync"
+          exit "$fail"
+      # The previews are what GitHub Pages publishes, so a template edit that
+      # never had ./build.sh run on it would put a stale page on the web.
+      # preview/index.html is hand-written and rendered by nothing — it has no
+      # counterpart in the build output, which is why this walks the output side.
+      - name: preview/ matches the built output
+        run: |
+          fail=0
+          for f in result/preview/*.html; do
+            b="$(basename "$f")"
+            cmp -s "preview/$b" "$f" || { echo "::error::preview/$b differs from the built output"; fail=1; }
+          done
+          [ "$fail" = 0 ] && echo "preview/ is in sync"
+          exit "$fail"

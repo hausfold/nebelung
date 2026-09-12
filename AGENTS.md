@@ -71,10 +71,17 @@ For an agent *using* the palette with no checkout, to the workshop's
 
 ## Verify
 
-`nix flake check` (`checks.<system>`) is CI's `unit` job: `node --test` plus
-shellcheck of `build.sh`. CI's `build` job diffs the committed `dist/` and
-`preview/*.html` against `nix build` — commit the rendered output with the
-edit.
+`nix flake check` (`checks.<system>`) is CI's `unit` job and only that: `node
+--test` plus shellcheck of `build.sh`. CI runs two more it cannot cover —
+`skill` (`nix build .#nebelung-skill`, the frontmatter guards in
+`nix/skill.nix`) and, in `themes.yml`, the diff of the committed `dist/` and
+`preview/*.html` against `nix build`. Commit the rendered output with the edit.
+
+⚠️ **`themes.yml` is path-filtered**, so a PR whose whole diff is `README.md`,
+`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `docs/`, `ai/` or `LICENSE` goes green
+*without* that diff having run. Nothing prose can reach the render, which is
+why it is safe — but a PR that moved a template or a palette file in the same
+breath should show a `themes` run, and a green tick alone will not tell you.
 
 ## Before you open a PR
 

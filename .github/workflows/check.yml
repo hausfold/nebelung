@@ -1,52 +1,46 @@
+# The gate every change clears, including a docs-only one.
+#
+# WHY THIS FILE IS THE CHEAP HALF
+# -------------------------------
+# Rendering the themes needs `whiskers`, and the heavy job that does it lives in
+# themes.yml behind a path filter, whose header says why. What is left here has
+# no filter, because both jobs below guard prose as much as code:
+#
+#   • `node --test` reads README.md and docs/ports.md and fails when either has
+#     drifted from ports.meta.json (test/ports.test.mjs; scripts/gen-ports-doc.mjs
+#     regenerates them). It also asserts every path the manifest advertises
+#     exists in dist/, so dist's SHAPE stays guarded here even on the changes
+#     that skip themes.yml's byte-for-byte diff.
+#   • `.#nebelung-skill` is where ai/SKILL.md's frontmatter is checked — a
+#     header that is missing, never closed, or folded onto a second line builds
+#     a skill that installs, lists, and is never loaded. That derivation is jq
+#     and nothing else, six paths and 518 KiB, which is what lets it be
+#     unconditional: nothing reachable from here can compile whiskers.
 name: check
 
 on:
   push:
     branches: [main]
   pull_request:
+  # Let a branch be checked on demand, without a PR and without pushing to main.
+  workflow_dispatch:
+
+# A lane pushes a branch several times a minute, and the runs those pushes
+# supersede are answering a question nobody is asking any more.
+#
+# The key is the PR's head branch, which is stable across those pushes — and
+# EMPTY on a push, where it falls back to the commit sha so no two main runs
+# ever share a group. That fallback is load-bearing, not tidiness: a group
+# holds at most ONE pending run, so keying main on the ref would let a factory
+# pass landing three PRs cancel the middle commit's run outright, however
+# `cancel-in-progress` is set. `factory shift` reads main's most recent run to
+# decide the base is healthy (factory/libexec/factory-shift), and a commit
+# whose run was cancelled is neither green nor red.
+concurrency:
+  group: check-${{ github.head_ref || github.sha }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    name: build + dist drift check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@main
-      - run: nix build .#default .#nebelung-skill --print-build-logs
-      # dist/ is committed for non-nix users; it must always equal what the
-      # flake builds from palette + templates. Compare both directions:
-      # every committed file matches, and nothing rendered is missing.
-      #
-      # The `find` filter below excludes the REFERENCE files the package ships
-      # alongside the rendered ports — the per-variant previews, the palette hex
-      # maps, variants.json (the render manifest), and ports.meta.json (install
-      # metadata). They live in the repo root rather than under dist/, so they're
-      # legitimately absent from it.
-      - name: dist/ matches the built output
-        run: |
-          fail=0
-          while IFS= read -r f; do
-            cmp -s "dist/$f" "result/$f" || { echo "::error::dist/$f differs from the built output"; fail=1; }
-          done < <(cd dist && find . -type f)
-          while IFS= read -r f; do
-            [ -f "dist/$f" ] || { echo "::error::dist/$f is missing (rendered but not committed)"; fail=1; }
-          done < <(cd result && find . -type f -not -path './preview/*' -not -name 'nebelung*.json' -not -name 'variants.json' -not -name 'ports.meta.json')
-          [ "$fail" = 0 ] && echo "dist/ is in sync"
-          exit "$fail"
-      # The previews are what GitHub Pages publishes, so a template edit that
-      # never had ./build.sh run on it would put a stale page on the web.
-      # preview/index.html is hand-written and rendered by nothing — it has no
-      # counterpart in the build output, which is why this walks the output side.
-      - name: preview/ matches the built output
-        run: |
-          fail=0
-          for f in result/preview/*.html; do
-            b="$(basename "$f")"
-            cmp -s "preview/$b" "$f" || { echo "::error::preview/$b differs from the built output"; fail=1; }
-          done
-          [ "$fail" = 0 ] && echo "preview/ is in sync"
-          exit "$fail"
-
   unit:
     name: palette unit tests + shellcheck
     runs-on: ubuntu-latest
@@ -55,11 +49,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      # Pure OKLCH math + drift guard; no nix needed, so this gives fast
-      # feedback on the palette logic ahead of the full build job above.
+      # Pure OKLCH math, the ports tables, and the drift guard on README.md and
+      # docs/ports.md. No nix needed, so this is the fastest feedback in the repo.
       - name: node --test
         run: node --test
+      # shellcheck comes from the runner image. Installing it costs more than
+      # running it, and `apt-get update` is the one step here that can stall on a
+      # slow Ubuntu mirror rather than fail.
       - name: shellcheck
         run: |
-          sudo apt-get update && sudo apt-get install -y shellcheck
+          shellcheck --version | head -2
           shellcheck build.sh
+
+  skill:
+    name: agent skill is well-formed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      # nix/skill.nix IS the check: it renders references/palette.md from
+      # palette/*.hex.json and then asserts the frontmatter, the `name:` key, a
+      # one-physical-line description long enough to route on, the 150-line cap,
+      # and that the rendered palette is not empty.
+      - run: nix build .#nebelung-skill --print-build-logs
