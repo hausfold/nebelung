@@ -29,12 +29,37 @@ jobs:
       actions: write
     steps:
       - uses: actions/checkout@v4
+      # whiskers, the Rust CLI that renders every port, is in neither nixpkgs
+      # nor cache.nixos.org, so a miss on the store cache below builds it from
+      # source: a rustc toolchain closure and 218 seconds to render text files.
+      # Catppuccin publishes it to its own cachix, signed, and the x86_64-linux
+      # path these runs need is there — so a miss downloads 2.2 MB of zstd
+      # (6.9 MB unpacked) instead. Coverage there is not total: x86_64-darwin
+      # 404s, which costs nothing while this job is the only one that builds.
+      #
+      # Read-only and public: no account and no token. That is a different
+      # trade from the hosted cache workshop's docs/ci.md rules out, and the
+      # carve-out saying so is hausfold/workshop#581 — until it lands, this
+      # step is an exception to a rule that does not yet name it. The part that
+      # is not free: `trusted-public-keys` is not per-path, so catppuccin's key
+      # can supply ANY path in this job, not only whiskers.
+      #
+      # A substituter that is down is not a failure. Nix falls back to
+      # building, which is what every run does today; an unreachable endpoint
+      # costs a connect timeout per query, not a red run. The key is published
+      # at https://app.cachix.org/api/v1/cache/catppuccin, `extra-` adds to
+      # cache.nixos.org rather than replacing it, and cachix answers Priority
+      # 41 against cache.nixos.org's 40, so nothing else moves cache.
       - uses: nixbuild/nix-quick-install-action@v35
-      # Without this the job spent ~3m40s of its ~4m30s compiling whiskers (a
-      # Rust CLI that is not in cache.nixos.org) from source on EVERY run, for
-      # a palette that changes underneath it and a compiler that doesn't. The
-      # key is the flake inputs, so a palette edit reuses that build and pays
-      # only for the render; a lock bump is the only thing that pays in full.
+        with:
+          nix_conf: |
+            extra-substituters = https://catppuccin.cachix.org
+            extra-trusted-public-keys = catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU=
+      # The two halves split the two cases: the substituter above makes a MISS
+      # cheap, this makes a HIT free — no download, and none of the render's
+      # own dependencies either. The key is the flake inputs, so a palette edit
+      # reuses that build and pays only for the render; a lock bump is the only
+      # thing that pays in full.
       - name: Restore the Nix store
         uses: nix-community/cache-nix-action@v7
         with:
