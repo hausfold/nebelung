@@ -24,6 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: nixbuild/nix-quick-install-action@v35
+        with:
+          # `nix store gc` before the save would otherwise evict the flake
+          # inputs and the intermediate derivations — everything the next run
+          # wants and only the final `result` is rooted — and the restored
+          # cache would be worth nothing. These two make what the build used
+          # reachable, which is what makes it survive.
+          nix_conf: |
+            keep-env-derivations = true
+            keep-outputs = true
       # Without this the job spent ~3m40s of its ~4m compiling whiskers (a Rust
       # CLI that is not in cache.nixos.org) from source on EVERY run, for a
       # palette that changes underneath it and a compiler that doesn't. The key
