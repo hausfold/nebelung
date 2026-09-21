@@ -71,10 +71,12 @@ For an agent *using* the palette with no checkout, to the workshop's
 
 ## Verify
 
-`nix flake check` (`checks.<system>`) is CI's `unit` job: `node --test` plus
-shellcheck of `build.sh`. CI's `build` job diffs the committed `dist/` and
-`preview/*.html` against `nix build` — commit the rendered output with the
-edit.
+`nix flake check` (`checks.<system>`) is `node --test` plus shellcheck of
+`build.sh` — CI's `unit` job, and nothing else. The `build` job is where the
+rest is: `nix build .#default .#nebelung-skill` renders every port and runs
+`nix/skill.nix`'s frontmatter guards, and two steps after it diff the
+committed `dist/` and `preview/*.html` against that result. Commit the
+rendered output with the edit.
 
 ## Before you open a PR
 
