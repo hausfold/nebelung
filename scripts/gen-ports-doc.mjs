@@ -13,8 +13,8 @@
 // docs are generated from it so the two can't drift.
 //
 // Two outputs, one source:
-//   README.md      the board — every port, grouped, each name linking straight
-//                  to its own row in the docs table
+//   README.md      the board — every port, one row per category, the category
+//                  linking to its table in the docs
 //   docs/ports.md  the rows — one table per category, output path + how to
 //                  install it, each row carrying the anchor the board links to
 //
@@ -128,8 +128,8 @@ export const headingAnchor = (label) =>
 export const portsIn = (key, meta = readMeta()) =>
   portOrder(meta).filter((n) => meta[n].category === key);
 
-// docs/ports.md — one table per category, each row anchored so the README board
-// can link a port name straight at its install line.
+// docs/ports.md — one table per category, each row anchored so a link
+// can land a port name straight on its install line.
 export const renderTable = (meta = readMeta()) => {
   const all = portOrder(meta);
   const sections = CATEGORIES.flatMap(({ key, label }) => {
@@ -172,33 +172,32 @@ export const renderTable = (meta = readMeta()) => {
   ].join("\n");
 };
 
-// README.md — the board. Every port, grouped, each name a link to its row in
-// the table above. Manual ports carry a marker so the one thing the reader has
-// to do by hand is visible before they click.
+// README.md — the board. One table row per category: the category links to
+// its install table in docs/ports.md, the ports sit beside it as plain text.
+// Only the category is a link so the board reads as a list, not a wall of
+// underlines. Manual ports carry a marker so the one thing the reader has to
+// do by hand is visible before they click.
 export const renderBoard = (meta = readMeta()) => {
   const all = portOrder(meta);
   const manualCount = all.filter((n) => meta[n].tier === "manual").length;
-  const lines = CATEGORIES.flatMap(({ key, label }) => {
+  const rows = CATEGORIES.map(({ key, label }) => {
     const names = portsIn(key, meta);
-    const links = names.map((n) => {
+    const titles = names.map((n) => {
       const mark = meta[n].tier === "manual" ? MANUAL_MARK : "";
-      return `[${meta[n].title}](docs/ports.md#${anchor(n)})${mark}`;
+      return cell(meta[n].title, n) + mark;
     });
-    return [
-      `**[${label}](docs/ports.md#${headingAnchor(label)})** · ${names.length}`,
-      "",
-      links.join(" · "),
-      "",
-    ];
+    return `| [${label}](docs/ports.md#${headingAnchor(label)}) | ${titles.join(" · ")} |`;
   });
   return [
     BEGIN,
     GENERATED,
     "",
-    ...lines,
-    `<sub>${MANUAL_MARK} the app has no file interface for picking a theme — ` +
-      `${manualCount} of ${all.length} ports end in a click or a paste. ` +
-      `Every link goes to that port's output path and the one line that turns it on.</sub>`,
+    "| category | ports |",
+    "| --- | --- |",
+    ...rows,
+    "",
+    `<sub>${MANUAL_MARK} no file interface for picking a theme, so it ends in a click or a paste ` +
+      `(${manualCount} of ${all.length} ports).</sub>`,
     "",
     END,
   ].join("\n");
