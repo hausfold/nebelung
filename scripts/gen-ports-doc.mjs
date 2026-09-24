@@ -186,14 +186,14 @@ export const renderBoard = (meta = readMeta()) => {
       const mark = meta[n].tier === "manual" ? MANUAL_MARK : "";
       return cell(meta[n].title, n) + mark;
     });
-    return `| [${label}](docs/ports.md#${headingAnchor(label)}) | ${names.length} | ${titles.join(" · ")} |`;
+    return `| [${label}](docs/ports.md#${headingAnchor(label)}) | ${titles.join(" · ")} |`;
   });
   return [
     BEGIN,
     GENERATED,
     "",
-    "| category | # | ports |",
-    "| --- | ---: | --- |",
+    "| category | ports |",
+    "| --- | --- |",
     ...rows,
     "",
     `<sub>${MANUAL_MARK} no file interface for picking a theme, so it ends in a click or a paste ` +
