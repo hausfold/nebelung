@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     # whiskers (the Catppuccin templating CLI) is not in nixpkgs; it ships from
-    # the catppuccin flake. This is the same input the consuming nix config
-    # already has, so `follows` there keeps a single whiskers in the closure.
+    # the catppuccin flake. haus carries the same input and points this one at
+    # it with `follows`, which keeps a single whiskers in the closure.
     catppuccin.url = "github:catppuccin/nix";
     # NOTE: the catppuccin userstyles export (import.json) is VENDORED at
     # vendor/catppuccin-userstyles-export.json instead of fetched. Upstream's
@@ -75,8 +75,8 @@
       # way it re-spells `path`: every one is written for the DEFAULT (mocha)
       # variant, and a mocha filename under a latte root resolves to nothing.
       # docs/ports.md and the README's port board are both generated from this
-      # file (scripts/gen-ports-doc.mjs) and
-      # a test asserts each stored tier matches the select/install rule, so the
+      # file (scripts/gen-ports-doc.mjs), and a test asserts each stored tier
+      # matches the select/install rule, so the
       # value read here can't drift from the rule that defines it.
       ports = builtins.fromJSON (builtins.readFile ./ports.meta.json);
 
@@ -151,8 +151,8 @@
           # The agent skill: `ai/SKILL.md` plus a `references/palette.md`
           # rendered from `palette/*.hex.json` at build time, so an agent
           # quoting a hex at the user is quoting THIS revision's palette
-          # rather than a number someone copied once. haus's AI room will
-          # install it into every agent client once its side lands. Its own derivation —
+          # rather than a number someone copied once. haus's AI room installs
+          # it into every agent client (modules/ai/tool-skills.nix). Its own derivation —
           # `nebelung-themes` runs whiskers over every port, and a sentence of
           # prose has no business paying for that. See nix/skill.nix.
           nebelung-skill = pkgs.callPackage ./nix/skill.nix { };
